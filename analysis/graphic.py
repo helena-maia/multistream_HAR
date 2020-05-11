@@ -11,8 +11,6 @@ def getArgs():
     parser.add_argument("csv_path", action='store', type=str, help="path to one CSV file or a directory with multiple CSV files", default=None)
     return parser.parse_args()
 
-threshold = 10.0
-
 def graphic(statistics_np):
 	fig, axs = plt.subplots(nrows=2, ncols=2, sharex=True)
 		
@@ -20,6 +18,8 @@ def graphic(statistics_np):
 	yerr = statistics_np[:,1]
 	x = np.arange(y.shape[0])
 	ax = axs[0,0]
+	ax.set_ylim(bottom=75., top=175.)
+	ax.vlines(np.arange(0,y.size,10), ymin=75., ymax=175., linestyles='dashed', color='lightgray')
 	ax.errorbar(x=x,y=y,yerr=yerr, fmt='o')
 	ax.set_title("Intensity average - X")
 
@@ -27,15 +27,19 @@ def graphic(statistics_np):
 	c5 = statistics_np[:,3]
 	c10 = statistics_np[:,4]
 	ax = axs[1,0]
+	ax.set_ylim(bottom=0., top=1.)
+	ax.vlines(np.arange(0,y.size,10), ymin=0., ymax=1, linestyles='dashed', color='lightgray')
 	ax.plot(c1,marker='o',linestyle="None")
 	ax.plot(c5,marker='o',linestyle="None")
 	ax.plot(c10,marker='o',linestyle="None")
-	ax.set_title("Ratio lower dev - X")
+	ax.set_title("Ratio lower std - X")
 
 	y = statistics_np[:,5]
 	yerr = statistics_np[:,6]
 	x = np.arange(y.shape[0])
 	ax = axs[0,1]
+	ax.set_ylim(bottom=75., top=175.)
+	ax.vlines(np.arange(0,y.size,10), ymin=75., ymax=175., linestyles='dashed', color='lightgray')
 	ax.errorbar(x=x,y=y,yerr=yerr, fmt='o')
 	ax.set_title("Intensity average - Y")
 
@@ -43,10 +47,12 @@ def graphic(statistics_np):
 	c5 = statistics_np[:,8]
 	c10 = statistics_np[:,9]
 	ax = axs[1,1]
+	ax.set_ylim(bottom=0., top=1.)
+	ax.vlines(np.arange(0,y.size,10), ymin=0., ymax=1, linestyles='dashed', color='lightgray')
 	ax.plot(c1, marker='o',linestyle="None")
 	ax.plot(c5, marker='o',linestyle="None")
 	ax.plot(c10, marker='o',linestyle="None")
-	ax.set_title("Ratio lower dev - Y")
+	ax.set_title("Ratio lower std - Y")
 
 	plt.show()
 
