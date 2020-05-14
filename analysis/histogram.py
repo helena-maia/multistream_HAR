@@ -8,8 +8,8 @@ import matplotlib.pyplot as plt
 parser = argparse.ArgumentParser(description='')
 parser.add_argument('npy_dir', type=str, help='path to npy files')
 parser.add_argument('val_dir', type=str, help='path to npy files')
-parser.add_argument('-s', '--split', default=1, type=int, metavar='S',
-          help='which split of data to work on (default: 1)')
+parser.add_argument('-s', '--split', default=-1, type=int, metavar='S',
+          help='which split of data to work on (default: -1)')
 parser.add_argument('-a', default="inception_v3", type=str,
                         help='architecture (default: inception_v3): inception_v3 | resnet152',
                         choices=["inception_v3","resnet152"])
@@ -48,28 +48,39 @@ def obtain_ground_truth(path_file, num_classes=101):
     return ground_truth
 
 
-def plot_acc(npy_path, val_path, num_classes):#, modalities, parameters, split, use_fuzzy=False, softmax_norm=False):
-    ground_truth = obtain_ground_truth(val_path, num_classes)
+def plot_acc(npy_path, val_path, num_classes, split):#, modalities, parameters, split, use_fuzzy=False, softmax_norm=False):
+	if split == -1:
+		acc_np_plot = np.zeros(num_classes)
 
-    data = np.load(npy_path)
-    acc_np = obtain_accuracies_per_class(data, ground_truth, num_classes)
+		for s in range(3):
+			ground_truth = obtain_ground_truth(val_path%(s+1), num_classes)
+			data = np.load(npy_path%(s+1))
+			acc_np = obtain_accuracies_per_class(data, ground_truth, num_classes)
+			acc_np_plot += acc_np
 
-    print(acc_np[30])
+		acc_np_plot /= 3
+	else:
+		ground_truth = obtain_ground_truth(val_path%(split), num_classes)
+		data = np.load(npy_path%(split))
+		acc_np_plot = obtain_accuracies_per_class(data, ground_truth, num_classes)
 
-    plt.xticks(np.arange(0, num_classes, 5))
-    plt.bar(np.arange(num_classes), acc_np)
-    plt.show()
+	plt.hlines(np.arange(0.2, 1.0, 0.2), xmin=-2, xmax=num_classes+1, linestyles='dashed', color='black')
+	plt.xlim(-2,num_classes+1)
+	plt.ylim(-0.02,1.02)
+	plt.xticks(np.arange(0, num_classes, 5))
+	plt.bar(np.arange(num_classes), acc_np_plot)
+	plt.show()
 
 
 def main():
     args = parser.parse_args()
 
     # dataset, modality, architecture, split
-    npy_path = os.path.join(args.npy_dir, "%s_%s_%s_s%s.npy") % (args.d, args.m, args.a, args.split)
-    val_path = os.path.join(args.val_dir, "%s/val_split%s.txt" % (args.d, args.split))
+    npy_path = os.path.join(args.npy_dir, "%s/%s_%s_%s_s%s.npy") % (args.d, args.d, args.m, args.a, "%s")
+    val_path = os.path.join(args.val_dir, "%s/val_split%s.txt" % (args.d, "%s"))
     num_classes = 101 if args.d == 'ucf101' else 51
 	
-    plot_acc(npy_path, val_path, num_classes) #, args.m, w, s, args.f, args.n)
+    plot_acc(npy_path, val_path, num_classes, args.split)
 
 
 if __name__ == '__main__':
