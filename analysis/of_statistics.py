@@ -4,10 +4,11 @@ import cv2
 from multiprocessing import Pool
 import argparse
 import numpy as np
+import itertools
 
 def getArgs():
-    parser = argparse.ArgumentParser(description='.')
-    parser.add_argument("dataset_path", action='store', type=str, help="directory that contains the optical flow images")
+    parser = argparse.ArgumentParser(description='Extracts statistics information from optical flow images from ucf or hmdb datasets')
+    parser.add_argument("dataset_path", action='store', type=str, help="Path to the main directory that contains the optical flow images. This dataset directory must include either the videos directories (ucf101: dataset_path/video_dir/flow_images) or the classes directories (hmdb: dataset_path/class_dir/video_dir/flow_images).")
     parser.add_argument('--num_worker', type=int, default=8, help='')
     return parser.parse_args()
 
@@ -64,18 +65,38 @@ def get_statistics(video_path):
 	return [accum_mean_x, accum_std_x, count_low_std_x_1, count_low_std_x_5, count_low_std_x_10, 
 			accum_mean_y, accum_std_y, count_low_std_y_1, count_low_std_y_5, count_low_std_y_10]
 
+def divide_into_classes(video_list):
+	get_class = lambda video_path: video_path.split("/")[-1].split("_")[1]
+	
+	videos_dict = {k:list(v) for k, v in itertools.groupby(video_list, key = get_class)}
+
+	return videos_dict
+
 if __name__ == "__main__":
 	args = getArgs()
 	dataset_path = args.dataset_path
-	classes = glob.glob(os.path.join(dataset_path, "*"))
+	second_level = glob.glob(os.path.join(dataset_path, "*"))
 	pool = Pool(args.num_worker)
 
-	for c in classes:
-		videos = glob.glob(os.path.join(c, "*"))
-		statistics = pool.map(get_statistics,videos)
-		statistics_np = np.array(statistics)
-		class_name = os.path.basename(c)
-		np.savetxt(class_name + ".csv", statistics_np, fmt="%s", delimiter=" ")
+	# Check directory organization
+	third_level = glob.glob(os.path.join(second_level[0], "flow_x_00001.jpg"))
+	if len(third_level) == 0: # Second level refers to classes (hmdb)
+		for c in second_level:
+			videos = sorted(glob.glob(os.path.join(c, "*")))
+			statistics = pool.map(get_statistics,videos)
+			statistics_np = np.array(statistics)
+			class_name = os.path.basename(c)
+			np.savetxt(class_name + ".csv", statistics_np, fmt="%s", delimiter=" ")
+	else: # Second level refers to videos (ucf)
+		videos = sorted(second_level)
+		videos_dict = divide_into_classes(videos)
+
+		for c in videos_dict:
+			statistics = pool.map(get_statistics, videos_dict[c])
+			statistics_np = np.array(statistics)
+			np.savetxt(c + ".csv", statistics_np, fmt="%s", delimiter=" ")
+
+			
 		
 		
 
