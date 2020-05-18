@@ -290,9 +290,9 @@ def train(train_loader, model, criterion, optimizer, epoch):
 
         # measure accuracy and record loss
         prec1, prec3 = accuracy(outputs_data, target, topk=(1, 3))
-        acc_mini_batch += prec1[0]
+        acc_mini_batch += prec1.item()
         loss = loss / args.iter_size
-        loss_mini_batch += loss.data[0]
+        loss_mini_batch += loss.item()
         loss.backward()
 
         if (i+1) % args.iter_size == 0:
