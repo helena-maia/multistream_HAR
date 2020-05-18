@@ -64,7 +64,7 @@ def read_single_segment(path, offsets, new_height, new_width, new_length, is_col
     else:
         cv_img = cv_img_origin
 
-    if modality == "rgb":
+    if modality == "rgb" or modality == "rgb2":
         cv_img = cv2.cvtColor(cv_img, cv2.COLOR_BGR2RGB)
         sampled_list.append(cv_img)
     else:    
@@ -145,7 +145,7 @@ class dataset(data.Dataset):
         if name_pattern:
             self.name_pattern = name_pattern
         else:
-            if self.modality == 'rgb':
+            if self.modality == 'rgb' or self.modality == 'rgb2':
                 self.name_pattern = 'img_%05d.jpg'
             elif self.modality == 'rhythm':
                 self.name_pattern = 'visual_rhythm_%05d.jpg'
@@ -189,7 +189,7 @@ class dataset(data.Dataset):
             else:
                 print('Only phase train and val are supported.')
 
-        if self.modality == 'rgb':
+        if self.modality == 'rgb' or self.modality == 'rgb2':
             clip_input = read_single_segment(path,
                                         offsets,
                                         self.new_height,
