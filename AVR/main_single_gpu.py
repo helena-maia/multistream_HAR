@@ -246,7 +246,7 @@ def build_model(resume_epoch):
     num_channels = 1 if args.modality == 'rhythm' else 20 if args.modality=='flow' else 3
     model = models.__dict__[args.arch](pretrained=is_new, channels=num_channels, num_classes=num_classes)
     if not is_new:
-        path = os.path.join(model_path,'{0:03d}_checkpoint.pth.tar'.format(resume_epoch))
+        path = os.path.join(model_path,'{0:03d}_checkpoint_{1}_split_{2}.pth.tar'.format(resume_epoch,args.modality,args.split))
         if os.path.isfile(path):    
             print('loading checkpoint {0:03d} ...'.format(resume_epoch))    
             params = torch.load(path)
@@ -292,7 +292,7 @@ def train(train_loader, model, criterion, optimizer, epoch):
         prec1, prec3 = accuracy(outputs_data, target, topk=(1, 3))
         acc_mini_batch += prec1.item()
         loss = loss / args.iter_size
-        loss_mini_batch += loss.item()
+        loss_mini_batch += loss.data.item()
         loss.backward()
 
         if (i+1) % args.iter_size == 0:
@@ -328,27 +328,28 @@ def validate(val_loader, model, criterion):
 
     end = time.time()
     for i, (input, target) in enumerate(val_loader):
-        input = input.float().cuda(async=True)
-        target = target.cuda(async=True)
-        input_var = torch.autograd.Variable(input, volatile=True)
-        target_var = torch.autograd.Variable(target, volatile=True)
+        with torch.no_grad():
+            input = input.float().cuda(async=True)
+            target = target.cuda(async=True)
+            input_var = torch.autograd.Variable(input)
+            target_var = torch.autograd.Variable(target)
 
-        # compute output
-        output = model(input_var)
-        loss = criterion(output, target_var)
+            # compute output
+            output = model(input_var)
+            loss = criterion(output, target_var)
 
-        # measure accuracy and record loss
-        prec1, prec3 = accuracy(output.data, target, topk=(1, 3))
-        losses.update(loss.data[0], input.size(0))
-        top1.update(prec1[0], input.size(0))
-        top3.update(prec3[0], input.size(0))
+            # measure accuracy and record loss
+            prec1, prec3 = accuracy(output.data, target, topk=(1, 3))
+            losses.update(loss.item(), input.size(0))
+            top1.update(prec1.item(), input.size(0))
+            top3.update(prec3.item(), input.size(0))
 
-        # measure elapsed time
-        batch_time.update(time.time() - end)
-        end = time.time()
+            # measure elapsed time
+            batch_time.update(time.time() - end)
+            end = time.time()
 
-        if i % args.print_freq == 0:
-            print('Test: [{0}/{1}]\t'
+            if i % args.print_freq == 0:
+                print('Test: [{0}/{1}]\t'
                   'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
                   'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
                   'Prec@1 {top1.val:.3f} ({top1.avg:.3f})\t'
