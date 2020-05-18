@@ -201,7 +201,6 @@ class dataset(data.Dataset):
                                         1 + offsets[0]  #duration if self.phase == 'train' else  1 + offsets[0] 
                                         )
         elif self.modality == 'rhythm' or self.modality == 'history':
-            print(self.visual_rhythm_approach)
             clip_input = read_single_segment(path,
                                         offsets,
                                         self.new_height,
