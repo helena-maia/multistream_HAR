@@ -7,3 +7,6 @@ python main_single_gpu.py DATA_PATH -m rgb2 -a rgb_inception_v3 --new_length=1 -
 python main_single_gpu.py DATA_PATH -m rhythm -a flow_inception_v3 --new_length=1 --epochs 350 --lr 0.001 --lr_steps 200 300
 
 python main_single_gpu.py DATA_PATH -m flow -a flow_inception_v3 --new_length=10 --epochs 350 --lr 0.001 --lr_steps 200 300
+
+
+python3 spatial_demo.py DATA_PATH ../checkpoints/model_best_rgb2_split_2.pth.tar -m rgb -d ucf101 -s 2 -a inception_v3 
