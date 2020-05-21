@@ -37,6 +37,8 @@ parser.add_argument('--architecture', '-a', metavar='MODALITY', default='incepti
                     choices=["resnet152", "inception_v3"])
 parser.add_argument('--vr_approach', '-vra', default=3, type=int,
                     metavar='N', help='visual rhythm approach (default: 3)')
+parser.add_argument('data_dir')
+parser.add_argument('model_path')
 
 def softmax(x):
     y = [math.exp(k) for k in x]
@@ -48,9 +50,11 @@ def softmax(x):
 def main():
     args = parser.parse_args()
 
-    model_path = '../../parameters/'+args.architecture+"/"+args.modality+'_s'+str(args.split)+'.pth.tar'
+    #model_path = '../../parameters/'+args.architecture+"/"+args.modality+'_s'+str(args.split)+'.pth.tar'
     #data_dir = '../datasets/'+args.dataset+'_frames'        
-    data_dir = '/home/Datasets/UCF-101-OF_CPU'
+    #data_dir = '/home/Datasets/UCF-101-OF_CPU'
+    model_path = args.model_path
+    data_dir = args.data_dir
     
     start_frame = 0
     if args.modality[:3]=='rgb':
