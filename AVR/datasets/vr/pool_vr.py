@@ -54,7 +54,6 @@ def getArgs():
     parser.add_argument("video_list", action='store', type=str, help="list of subclips (without path)")
     parser.add_argument("vr_dest", action='store', type=str, help="directory to save the visual rhythm images")
     parser.add_argument('--num_worker', type=int, default=8, help='')
-    parser.add_argument('--ext', type=str, default='avi', choices=['avi','mp4'], help='video file extensions')
     return parser.parse_args()
 
 if __name__ == "__main__":
