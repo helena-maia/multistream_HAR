@@ -61,7 +61,7 @@ if __name__ == "__main__":
 
     num_worker=args.num_worker
     vr_dest = args.vr_dest
-    videos = np.loadtxt(args.video_list, dtype='U100')
+    videos = np.loadtxt(args.video_list, dtype='U200')
     videos = [ os.path.join(args.video_dir,v) for v in videos ]
 
 
