@@ -7,11 +7,12 @@ import glob
 
 def run_vr(x):
     ind = x[0]
-    video_path = x[1][0]
-    dest = x[1][1]
+    video = x[1][0]
+    src = x[1][1]
+    dest = x[1][2]
 
-    video_name = video_path.split("/")[-1]
-    vr_dest = os.path.join(dest,video_name[:-4])
+    video_path = os.path.join(src, video)
+    vr_dest = os.path.join(dest,video[:-4])
 
     cap = cv2.VideoCapture(video_path)
     width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)   # float
@@ -33,7 +34,7 @@ def run_vr(x):
             break
 
     if hor_vr.size == 0 or ver_vr.size == 0: 
-        print("Error opening video file ", video_name)
+        print("Error opening video file ", video_path)
         return
 
     ver_vr = np.swapaxes(ver_vr, 0,1)
@@ -59,10 +60,10 @@ def getArgs():
 if __name__ == "__main__":
     args = getArgs()
 
-    num_worker=args.num_worker
+    num_worker = args.num_worker
+    video_dir = args.video_dir
     vr_dest = args.vr_dest
     videos = np.loadtxt(args.video_list, dtype='U200')
-    videos = [ os.path.join(args.video_dir,v) for v in videos ]
 
 
     if not os.path.isdir(vr_dest):
@@ -70,4 +71,4 @@ if __name__ == "__main__":
         os.makedirs(vr_dest)
 
     pool = Pool(num_worker)
-    pool.map(run_vr,enumerate(zip(videos, len(videos)*[vr_dest])))
+    pool.map(run_vr,enumerate(zip(videos, len(videos)*[video_dir], len(videos)*[vr_dest])))
