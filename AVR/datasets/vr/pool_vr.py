@@ -11,6 +11,8 @@ def run_vr(x):
     src = x[1][1]
     dest = x[1][2]
 
+    print(ind, video)
+
     video_path = os.path.join(src, video)
     vr_dest = os.path.join(dest,video[:-4])
 
