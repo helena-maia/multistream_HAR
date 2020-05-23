@@ -56,6 +56,7 @@ def getArgs():
     parser.add_argument("video_dir", action='store', type=str, help="directory that contains the subclips")
     parser.add_argument("video_list", action='store', type=str, help="list of subclips (without path)")
     parser.add_argument("vr_dest", action='store', type=str, help="directory to save the visual rhythm images")
+    parser.add_argument("-ext", type=str, default='avi', help="Video extension (default=avi)")
     parser.add_argument('--num_worker', type=int, default=8, help='')
     return parser.parse_args()
 
@@ -65,8 +66,8 @@ if __name__ == "__main__":
     num_worker = args.num_worker
     video_dir = args.video_dir
     vr_dest = args.vr_dest
-    videos = np.loadtxt(args.video_list, dtype='U200')
-
+    videos = np.loadtxt(args.video_list, dtype='U200', comments="|")
+    videos = [v + "." + args.ext for v in videos]
 
     if not os.path.isdir(vr_dest):
         print("creating folder: "+vr_dest)
