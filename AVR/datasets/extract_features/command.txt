@@ -1,0 +1,2 @@
+python3 pool_vr.py VIDEO_PATH dataset_list_ucf.txt DST_PATH
+python3 denseflow.py VIDEO_PATH dataset_list_ucf.txt DST_PATH POSITIONS_FILE
