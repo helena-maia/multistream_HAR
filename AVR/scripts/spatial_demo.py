@@ -86,8 +86,8 @@ def main():
     print("Action recognition model is loaded in %4.4f seconds." % (model_time))
 
 
-    #val_file = "./splits/"+args.dataset+"/val_split%d.txt"%(args.split)
-    val_file = 'spatial_testlist01_with_labels.txt'
+    val_file = "./splits/"+args.dataset+"/val_split%d.txt"%(args.split)
+    #val_file = 'spatial_testlist01_with_labels.txt'
     f_val = open(val_file, "r")
     val_list = f_val.readlines()
     print("we got %d test videos" % len(val_list))

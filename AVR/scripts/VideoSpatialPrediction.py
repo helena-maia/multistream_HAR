@@ -72,7 +72,8 @@ def VideoSpatialPrediction(
    
     for i in range(num_samples):
         if mode == 'rhythm':
-            img_file = os.path.join(vid_name, 'visual_rhythm_{0:05d}.jpg'.format(index))
+            img_file = os.path.join(vid_name, 'visual_rhythm_{0:05d}.png'.format(index))
+            print(img_file)
             img = cv2.imread(img_file, cv2.IMREAD_GRAYSCALE)   
             img = cv2.resize(img, dims[1::-1])
             rgb[:,:,0,i] = img
