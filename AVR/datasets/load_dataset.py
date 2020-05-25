@@ -148,7 +148,7 @@ class dataset(data.Dataset):
             if self.modality == 'rgb' or self.modality == 'rgb2':
                 self.name_pattern = 'img_%05d.jpg'
             elif self.modality == 'rhythm':
-                self.name_pattern = 'visual_rhythm_%05d.jpg'
+                self.name_pattern = 'visual_rhythm_%05d.png'
                 # recover the direction by class
                 self.direction = [int(line.rstrip('\n')) for line in open('./datasets/settings/'+self.dataset+'/direction.txt')]
             elif self.modality == 'flow':
