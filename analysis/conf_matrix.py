@@ -27,7 +27,7 @@ def main():
     topk = top_k_conf(conf_matrix, k = args.k)
 
     class_ind = np.loadtxt(args.class_index_path, dtype = "U200")
-    class_dict = {int(l[0]): l[1] for l in class_ind}
+    class_dict = {int(l[0])-1: l[1] for l in class_ind}
 
     print("Top", args.k)
     for pair in topk:
