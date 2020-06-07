@@ -7,16 +7,17 @@ def crop(list_path, src_path, dst_path):
 
     with open(list_path, "r") as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=' ')
+
         src_img_fmt = os.path.join(src_path[0], "%s/%s_%06d.jpg")
         src_flow_fmt = os.path.join(src_path[1], "%s/%s_%06d%s.jpg")
+
         dst_dir_fmt = os.path.join(dst_path, "%s/%s_%s_%s/")
         dst_img_fmt = "img_%05d.jpg"
         dst_flow_fmt = "flow_%s_%05d.jpg"
 
         for i, line in enumerate(csv_reader):
-            if i > 10: break
             video_id, class_id, frame_start, frame_end, segm_ind = line
-            frame_start, frame_end = int(frame_start)+1, int(frame_end)+1
+            frame_start, frame_end = int(frame_start) + 1, int(frame_end) + 1
             dst_dir = dst_dir_fmt%(class_id, video_id, class_id, segm_ind)
 
             if not os.path.isdir(dst_dir):
@@ -27,15 +28,15 @@ def crop(list_path, src_path, dst_path):
             for j in range(frame_start, frame_end+1):
                 src_img = src_img_fmt%(video_id, video_id, j)
                 dst_img = os.path.join(dst_dir, dst_img_fmt%count)
-                #shutil.copy(src_img, dst_img)
+                shutil.copy(src_img, dst_img)
 
                 src_flow_x = src_flow_fmt%(video_id, video_id, j, "x")
                 dst_flow_x = os.path.join(dst_dir, dst_flow_fmt%("x", count))
-                #shutil.copy(src_flow_x, dst_flow_x)
+                shutil.copy(src_flow_x, dst_flow_x)
 
                 src_flow_y = src_flow_fmt%(video_id, video_id, j, "y")
                 dst_flow_y = os.path.join(dst_dir, dst_flow_fmt%("y", count))
-                #shutil.copy(src_flow_y, dst_flow_y)
+                shutil.copy(src_flow_y, dst_flow_y)
 
                 #print(src_img, dst_img)
                 #print(src_flow_x, dst_flow_x)
@@ -43,8 +44,8 @@ def crop(list_path, src_path, dst_path):
 
                 count += 1
 
-            label = int(class_id[1:])
             relative_path = "%s/%s_%s_%s"%(class_id, video_id, class_id, segm_ind)
+            label = int(class_id[1:])
             final_list.append([relative_path, count, label])
 
     return final_list
