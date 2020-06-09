@@ -57,7 +57,7 @@ def run_vr_images(x):
     src = x[1][1]
     dest = x[1][2]
 
-    print(ind, video)
+    print(ind, video_dir)
 
     video_imgs = os.path.join(src, video_dir, "img*")
     vr_dest = os.path.join(dest, video_dir)
@@ -113,7 +113,7 @@ if __name__ == "__main__":
     video_dir = args.video_dir
     vr_dest = args.vr_dest
     videos = np.loadtxt(args.video_list, dtype='U200', comments="|")
-    videos = [v + "." + args.ext for v in videos]
+    if args.type == 'video': videos = [v + "." + args.ext for v in videos]
 
     if not os.path.isdir(vr_dest):
         print("creating folder: "+vr_dest)
