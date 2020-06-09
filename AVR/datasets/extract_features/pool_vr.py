@@ -5,7 +5,7 @@ import os
 import argparse
 import glob
 
-def run_vr(x):
+def run_vr_video(x):
     ind = x[0]
     video = x[1][0]
     src = x[1][1]
@@ -51,6 +51,51 @@ def run_vr(x):
     cv2.imwrite(os.path.join(vr_dest,"visual_rhythm_00001.png"), ver_vr)
     cv2.imwrite(os.path.join(vr_dest,"visual_rhythm_00002.png"), hor_vr)
 
+def run_vr_images(x):
+    ind = x[0]
+    video_dir = x[1][0]
+    src = x[1][1]
+    dest = x[1][2]
+
+    print(ind, video)
+
+    video_imgs = os.path.join(src, video_dir, "img*")
+    vr_dest = os.path.join(dest, video_dir)
+
+    images = glob.glob(video_imgs)
+    img0 = cv2.imread(images[0])
+    width = img0.shape[1]   # float
+    height = img0.shape[0] # float
+
+    hor_vr = np.array([]).reshape(0,int(width),3)
+    ver_vr = np.array([]).reshape(0,int(height),3)
+
+    for img_path in images:
+        img = cv2.imread(img_path)
+
+        hor = np.mean(img, axis=0)
+        ver = np.mean(img, axis=1)
+    
+        hor_vr = np.vstack([hor_vr,[hor]])
+        ver_vr = np.vstack([ver_vr,[ver]])
+
+    if hor_vr.size == 0 or ver_vr.size == 0: 
+        print("Error opening video file ", video_dir)
+        return
+
+    ver_vr = np.swapaxes(ver_vr, 0,1)
+    
+    if not os.path.isdir(vr_dest):
+        print("creating folder: "+vr_dest)
+        os.makedirs(vr_dest)
+
+    hor_vr = cv2.resize(hor_vr, (320,240))
+    ver_vr = cv2.resize(ver_vr, (320,240))
+
+    cv2.imwrite(os.path.join(vr_dest,"visual_rhythm_00001.png"), ver_vr)
+    cv2.imwrite(os.path.join(vr_dest,"visual_rhythm_00002.png"), hor_vr)
+
+
 def getArgs():
     parser = argparse.ArgumentParser(description='Compute visual rhythm (mean).')
     parser.add_argument("video_dir", action='store', type=str, help="directory that contains the subclips")
@@ -58,6 +103,7 @@ def getArgs():
     parser.add_argument("vr_dest", action='store', type=str, help="directory to save the visual rhythm images")
     parser.add_argument("-ext", type=str, default='avi', help="Video extension (default=avi)")
     parser.add_argument('--num_worker', type=int, default=8, help='')
+    parser.add_argument('--type', type=str, default="video", help='image sequence (image) or video (video) (default:video)', choices=['video','image'])
     return parser.parse_args()
 
 if __name__ == "__main__":
@@ -74,4 +120,7 @@ if __name__ == "__main__":
         os.makedirs(vr_dest)
 
     pool = Pool(num_worker)
-    pool.map(run_vr,enumerate(zip(videos, len(videos)*[video_dir], len(videos)*[vr_dest])))
+    if args.type == 'video':
+        pool.map(run_vr_video,enumerate(zip(videos, len(videos)*[video_dir], len(videos)*[vr_dest])))
+    else:
+        pool.map(run_vr_images,enumerate(zip(videos, len(videos)*[video_dir], len(videos)*[vr_dest])))
