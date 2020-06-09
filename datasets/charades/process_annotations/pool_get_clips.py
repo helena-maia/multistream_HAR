@@ -4,7 +4,7 @@ import os
 import numpy as np
 import shutil
 
-src_img_fmt, src_flow_fmt, dst_dir, dst_img_fmt, dst_flow_fmt = "", "", "", "", ""
+src_img_fmt, src_flow_fmt, dst_dir_fmt, dst_img_fmt, dst_flow_fmt = "", "", "", "", ""
 
 def copy_video(info):
     video_id, class_id, frame_start, frame_end, segm_ind = info
@@ -20,9 +20,9 @@ def copy_video(info):
     count = 1
 
     for i in range(frame_start, frame_end + 1):
-        src_img = src_img_fmt%(video_id, video_id, j)
-        src_flow_x = src_flow_fmt%(video_id, video_id, j, "x")
-        src_flow_y = src_flow_fmt%(video_id, video_id, j, "y")
+        src_img = src_img_fmt%(video_id, video_id, i)
+        src_flow_x = src_flow_fmt%(video_id, video_id, i, "x")
+        src_flow_y = src_flow_fmt%(video_id, video_id, i, "y")
 
         if not (os.path.isfile(src_img) and os.path.isfile(src_flow_x) and os.path.isfile(src_flow_y)):
             continue
@@ -43,7 +43,7 @@ def copy_video(info):
 
 
 def crop(list_path, src_path, dst_path, num_worker):
-    global src_img_fmt, src_flow_fmt, dst_dir, dst_img_fmt, dst_flow_fmt
+    global src_img_fmt, src_flow_fmt, dst_dir_fmt, dst_img_fmt, dst_flow_fmt
 
     with open(list_path, "r") as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=' ')
