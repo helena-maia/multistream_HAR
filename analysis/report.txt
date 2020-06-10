@@ -1,0 +1,155 @@
+flow rgb
+REPORT
+Accuracy 1 (flow): 0.8602
+Accuracy 2 (rgb2): 0.8670
+
+-------------------------------
+
+Hit and miss table:
+	  H1	  M1
+H2	0.7846	0.0825
+M2	0.0756	0.0574
+
+-------------------------------
+
+Diversity measures:
+(The lower, the better):
+COR(c1,c2) = 0.3292
+DFM(c1,c2) = 0.0574
+QSTAT(c1,c2) = 0.7566
+IA(c1,c2) = 0.4634
+
+(The greater, the better):
+DM(c1,c2) = 0.1581
+
+-------------------------------
+
+Complementarity:
+(The greater, the better):
+Comp(c1,c2) = 0.5898
+Comp(c2,c1) = 0.5686
+
+flow rhytm1
+REPORT
+Accuracy 1 (flow): 0.8602
+Accuracy 2 (rhythm1): 0.8097
+
+-------------------------------
+
+Hit and miss table:
+	  H1	  M1
+H2	0.7396	0.0701
+M2	0.1205	0.0698
+
+-------------------------------
+
+Diversity measures:
+(The lower, the better):
+COR(c1,c2) = 0.3171
+DFM(c1,c2) = 0.0698
+QSTAT(c1,c2) = 0.7188
+IA(c1,c2) = 0.6142
+
+(The greater, the better):
+DM(c1,c2) = 0.1906
+
+-------------------------------
+
+Complementarity:
+(The greater, the better):
+Comp(c1,c2) = 0.5009
+Comp(c2,c1) = 0.6333
+
+flow avr
+REPORT
+Accuracy 1 (flow): 0.8602
+Accuracy 2 (avr): 0.6439
+
+-------------------------------
+
+Hit and miss table:
+	  H1	  M1
+H2	0.6051	0.0389
+M2	0.2551	0.1010
+
+-------------------------------
+
+Diversity measures:
+(The lower, the better):
+COR(c1,c2) = 0.3082
+DFM(c1,c2) = 0.1010
+QSTAT(c1,c2) = 0.7208
+IA(c1,c2) = 0.8606
+
+(The greater, the better):
+DM(c1,c2) = 0.2939
+
+-------------------------------
+
+Complementarity:
+(The greater, the better):
+Comp(c1,c2) = 0.2779
+Comp(c2,c1) = 0.7164
+
+rgb rhythm1
+REPORT
+Accuracy 1 (rgb2): 0.8670
+Accuracy 2 (rhythm1): 0.8097
+
+-------------------------------
+
+Hit and miss table:
+	  H1	  M1
+H2	0.7661	0.0436
+M2	0.1010	0.0893
+
+-------------------------------
+
+Diversity measures:
+(The lower, the better):
+COR(c1,c2) = 0.4805
+DFM(c1,c2) = 0.0893
+QSTAT(c1,c2) = 0.8791
+IA(c1,c2) = 0.5454
+
+(The greater, the better):
+DM(c1,c2) = 0.1446
+
+-------------------------------
+
+Complementarity:
+(The greater, the better):
+Comp(c1,c2) = 0.3280
+Comp(c2,c1) = 0.5306
+
+rgb avr
+REPORT
+Accuracy 1 (rgb2): 0.8670
+Accuracy 2 (avr): 0.6439
+
+-------------------------------
+
+Hit and miss table:
+	  H1	  M1
+H2	0.5929	0.0510
+M2	0.2741	0.0819
+
+-------------------------------
+
+Diversity measures:
+(The lower, the better):
+COR(c1,c2) = 0.2128
+DFM(c1,c2) = 0.0819
+QSTAT(c1,c2) = 0.5530
+IA(c1,c2) = 0.9191
+
+(The greater, the better):
+DM(c1,c2) = 0.3251
+
+-------------------------------
+
+Complementarity:
+(The greater, the better):
+Comp(c1,c2) = 0.3837
+Comp(c2,c1) = 0.7699
+
