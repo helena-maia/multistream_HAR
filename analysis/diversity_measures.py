@@ -98,20 +98,23 @@ def div_measure(npy_path_1, npy_path_2, val_path, modality1, modality2):
     report = "REPORT\n"
     report += "Accuracy 1 ({0}): {1:.4f}\n".format(modality1, acc1)
     report += "Accuracy 2 ({0}): {1:.4f}\n".format(modality2, acc2)
-    report += "-------------------------------\n"
+    report += "\n-------------------------------\n\n"
     report += "Hit and miss table:\n"
     report += "\t  H1\t  M1\n"
     report += "H2\t{:0.4f}\t{:0.4f}\n".format(hm[0][0], hm[0][1])
     report += "M2\t{:0.4f}\t{:0.4f}\n".format(hm[1][0], hm[1][1])
-    report += "-------------------------------\n"
+    report += "\n-------------------------------\n\n"
     report += "Diversity measures:\n"
+    report += "(The lower, the better):\n"
     report += "COR(c1,c2) = {:0.4f}\n".format(cor)
     report += "DFM(c1,c2) = {:0.4f}\n".format(dfm)
-    report += "DM(c1,c2) = {:0.4f}\n".format(dm)
     report += "QSTAT(c1,c2) = {:0.4f}\n".format(qstat)
     report += "IA(c1,c2) = {:0.4f}\n".format(ia)
-    report += "-------------------------------\n"
+    report += "\n(The greater, the better):\n"
+    report += "DM(c1,c2) = {:0.4f}\n".format(dm)
+    report += "\n-------------------------------\n\n"
     report += "Complementarity:\n"
+    report += "(The greater, the better):\n"
     report += "Comp(c1,c2) = {:0.4f}\n".format(comp12)
     report += "Comp(c2,c1) = {:0.4f}\n".format(comp21)
 
