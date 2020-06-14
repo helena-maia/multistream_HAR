@@ -1,0 +1,13 @@
+NPYS/: directory that contains the npy files for each modality and dataset
+splits/: directory that contains the training/test lists 
+
+
+diversity_measures.py: computes the diversity measures and complementarity for a pair of modalities
+    python3 diversity_measures.py NPYS/ splits/ -s 1 -m1 rgb2 -m2 flow
+oneVSone.sh: runs one diversity measure or complementarity for every pair of a set of modalities
+    ./oneVSone.sh rgb2,flow,avr,rhythm0,rhythm1,rhythm-inception 1 ucf101 DFM
+topK_complementarity.py: list the top k complementarities (single modality combined with a multi-stream network)
+    python3 topK_complementarity.py NPYS/ splits/ -m rgb2 flow avr -k 3 
+topK_confusions.py: list the k most confused classes
+    python3 topK_confusions.py output/conf_matrix_hmdb51_inception_v3_rgb2_s1.npy -k 10
+
