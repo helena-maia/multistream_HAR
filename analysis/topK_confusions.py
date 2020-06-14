@@ -19,7 +19,7 @@ def top_k_conf(cm, k = 10):
     topk = {key: pair_dict[key] for key in pair_sorted[-k:][::-1]}
 
     return topk
-    
+
 
 def main():
     args = parser.parse_args()
@@ -34,9 +34,5 @@ def main():
     	print(class_dict[pair[0]], class_dict[pair[1]], topk[pair])
 
     
-
-
-
-
 if __name__ == '__main__':
     main()
