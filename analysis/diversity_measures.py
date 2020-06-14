@@ -10,7 +10,6 @@
 ##
 ##
 
-
 import argparse
 import itertools
 import operator
@@ -94,6 +93,7 @@ def div_measure(npy_path_1, npy_path_2, val_path, modality1, modality2):
     # Complementarity
     comp12 = 1. - (d / (b+d))
     comp21 = 1. - (d / (c+d))
+    harm_mean = (2*comp12*comp21) / (comp12+comp21)
 
     report = "REPORT\n"
     report += "Accuracy 1 ({0}): {1:.4f}\n".format(modality1, acc1)
@@ -117,6 +117,7 @@ def div_measure(npy_path_1, npy_path_2, val_path, modality1, modality2):
     report += "(The greater, the better):\n"
     report += "Comp(c1,c2) = {:0.4f}\n".format(comp12)
     report += "Comp(c2,c1) = {:0.4f}\n".format(comp21)
+    report += "Harmonic mean(c1,c2) = {:0.4f}\n".format(harm_mean)
 
     print(report)
 
