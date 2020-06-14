@@ -1,13 +1,7 @@
 ##
-## Diversity measures: http://repositorio.unicamp.br/jspui/bitstream/REPOSIP/275503/1/Faria_FabioAugusto_D.pdf
-##      H1   M1
-##  H2  a     b
-##  M2  c     d
-##
-##
 ## Classifier combination: https://www.aclweb.org/anthology/P98-1029.pdf
 ## Complementarity Comp(A,B): frequency that B is correct when A is incorrect (Comp(A,B) != Comp(B,A))
-##
+## Every combination of n modalities (n-streams)
 ##
 
 
@@ -32,6 +26,8 @@ parser.add_argument('-d', default="ucf101", type=str,
                         choices=["hmdb51","ucf101"])
 parser.add_argument('-m', default=["rgb2","flow"], type=str, nargs='+',
                         help='Modalities (default: rgb2, flow)')
+parser.add_argument('-k', default=10, type=int, metavar='K',
+          help='Top k (default: 10) (0 for printing every combination)')
 
 def complementarity(data, ground_truth, combinations):
     n_mod = len(data)
@@ -64,10 +60,11 @@ def complementarity(data, ground_truth, combinations):
             common[j][1] += int(commonB)
             common[j][2] += int(commonA and commonB)
 
-    comp = np.zeros((len(combinations), 2))
-    for i, com in enumerate(common):
-        comp[i][0] = 1 - (common[i][2] /common[i][0]) # Comp(A,B)
-        comp[i][1] = 1 - (common[i][2] /common[i][1]) # Comp(B,A)
+    comp = np.zeros((len(combinations), 3))
+    for i in range(len(common)):
+        comp[i][0] = 1 - (common[i][2] / common[i][0]) # Comp(A,B)
+        comp[i][1] = 1 - (common[i][2] / common[i][1]) # Comp(B,A)
+        comp[i][2] = (2*comp[i][0]*comp[i][1]) / (comp[i][0] + comp[i][1]) # Harmonic mean
 
     return comp
 
@@ -86,7 +83,7 @@ def obtain_ground_truth(path_file):
     return ground_truth
 
 
-def div_measure(npy_paths, val_path, modalities):
+def all_combinations(npy_paths, val_path, modalities, k):
     ground_truth = obtain_ground_truth(val_path)
     data = []
     for npy_path in npy_paths:
@@ -97,14 +94,14 @@ def div_measure(npy_paths, val_path, modalities):
     combinations = []
     indices = list(range(0,n))
 
-    all_comb = itertools.combinations(indices, 2)
+    all_comb = itertools.combinations(indices, 2) # All pairs
     for c in all_comb:
         comb = list(c)
         combinations.append([[comb[0]],[comb[1]]])
 
     for r in range(2, n):
-        for i in range(n):
-            combined = indices[:i]+indices[i+1:]
+        for i in range(n): # For each modality...
+            combined = indices[:i]+indices[i+1:] # ...make combinations using all the others
             all_comb = itertools.combinations(combined, r)
 
             for c in all_comb:
@@ -112,15 +109,18 @@ def div_measure(npy_paths, val_path, modalities):
 
     comp = complementarity(data, ground_truth, combinations)
 
-    comp_combined = np.zeros(len(combinations))
-    for i, (A,B) in enumerate(combinations):
-        comp_combined[i] = min(comp[i][0],comp[i][1])
-
-    indices = np.argsort(comp_combined)
-    topk = indices[-10:]
-    for ind in topk:
-        print(combinations[ind], comp[ind][0], comp[ind][1], comp_combined[ind])
-
+    indices = np.argsort(comp[:,2]) # Harmonic mean
+    topk = indices[-k:]
+    print("[HC] Single -> {Multistream} (CompAB, CompBA)")
+    for ind in topk:        
+        compAB = comp[ind][0]*100
+        compBA = comp[ind][1]*100
+        harm_mean = comp[ind][2]*100
+        single = modalities[combinations[ind][0][0]]
+        multistream = [modalities[i] for i in combinations[ind][1]]
+        multistream = " + ".join(multistream)
+        print("[{:0.2f}%] {} -> {{{}}}  ({:0.2f}%, {:0.2f}%)"
+              .format(harm_mean, single, multistream, compAB, compBA))
 
 
 def main():
@@ -135,7 +135,7 @@ def main():
         val_path = os.path.join(args.val_dir, "%s/val_split%d.txt" % (args.d, args.split))
         num_classes = 101 if args.d == 'ucf101' else 51
 
-        div_measure(npy_paths, val_path, args.m)
+        all_combinations(npy_paths, val_path, args.m, args.k)
 
 
     
