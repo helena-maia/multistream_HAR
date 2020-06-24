@@ -16,7 +16,7 @@ import video_transforms
 import models
 import datasets
 
-from early-stopping-pytorch.pytorchtools import EarlyStopping
+from earlyStopping.pytorchtools import EarlyStopping
 
 model_path = './checkpoints'
 model_names = sorted(name for name in models.__dict__
