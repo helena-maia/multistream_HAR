@@ -89,7 +89,7 @@ def createNewDataset(fileNameRead, fileNameWrite, modality_):
         half respectively
     '''
     newPathFile = os.path.join(args.settings, args.dataset, fileNameWrite)
-    train_setting_file = fileNameRead % (modality_, args.split)
+    train_setting_file = fileNameRead % (args.split)
     pathFile = os.path.join(args.settings, args.dataset, train_setting_file)    
 
     file_ = open(pathFile,'r')
@@ -167,13 +167,13 @@ def main():
     modality_ = "rgb" if (args.modality == "rhythm" or args.modality[:3] == "rgb") else "flow"
  
     if args.modality == "rgb2":
-        createNewDataset("train_%s_split%d.txt" , "new_train.txt",modality_)
+        createNewDataset("train_split%d.txt" , "new_train.txt",modality_)
         #createNewDataset("val_%s_split%d.txt", "new_val.txt",modality_)
 
     # data loading  
-    train_setting_file = "new_train.txt" if args.modality == "rgb2" else "train_%s_split%d.txt" % (modality_, args.split)
+    train_setting_file = "new_train.txt" if args.modality == "rgb2" else "train_split%d.txt" % (args.split)
     train_split_file = os.path.join(args.settings, args.dataset, train_setting_file)
-    val_setting_file = "val_%s_split%d.txt" % (modality_, args.split) 
+    val_setting_file = "val_split%d.txt" % (args.split) 
     val_split_file = os.path.join(args.settings, args.dataset, val_setting_file)
 
     if not os.path.exists(train_split_file) or not os.path.exists(val_split_file):
@@ -217,7 +217,6 @@ def main():
         return
 
     early_stop = EarlyStopping()
-    exit()
 
     for epoch in range(args.start_epoch, args.epochs):
         adjust_learning_rate(optimizer, epoch)
@@ -226,7 +225,12 @@ def main():
         train(train_loader, model, criterion, optimizer, epoch)
 
         # evaluate on validation set
-        validate(val_loader, model, criterion)
+        losses = validate(val_loader, model, criterion)
+
+        early_stop(losses.avg, model)
+
+        if early_stop.early_stop:
+            break
 
     
 def build_model(resume_epoch):
@@ -349,6 +353,8 @@ def validate(val_loader, model, criterion):
 
     print(' * Prec@1 {top1.avg:.3f} Prec@3 {top3.avg:.3f}'
           .format(top1=top1, top3=top3))
+
+    return losses
 
 
 def save_checkpoint(state, is_best, filename, resume_path):
