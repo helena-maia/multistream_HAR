@@ -135,7 +135,8 @@ class dataset(data.Dataset):
         self.source = source
         self.phase = phase
         self.modality = modality
-        self.dataset = source.split('/')[3]
+        print(source)
+        self.dataset = source.split('/')[2]
         self.visual_rhythm_approach = approach_VR
 
         self.classes = classes
@@ -148,9 +149,10 @@ class dataset(data.Dataset):
             if self.modality == 'rgb' or self.modality == 'rgb2':
                 self.name_pattern = 'img_%05d.jpg'
             elif self.modality == 'rhythm':
-                self.name_pattern = 'visual_rhythm_%05d.png'
+                self.name_pattern = 'visual_rhythm_%05d.jpg'
                 # recover the direction by class
-                self.direction = [int(line.rstrip('\n')) for line in open('./datasets/settings/'+self.dataset+'/direction.txt')]
+                print('./datasets/settings_earlystop/'+self.dataset+'/direction.txt')
+                self.direction = [int(line.rstrip('\n')) for line in open('./datasets/settings_earlystop/'+self.dataset+'/direction.txt')]
             elif self.modality == 'flow':
                 self.name_pattern = 'flow_%s_%05d.jpg'
             elif self.modality == 'hog':

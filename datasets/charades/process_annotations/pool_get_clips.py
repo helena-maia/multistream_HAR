@@ -61,8 +61,9 @@ def crop(list_path, src_path, dst_path, num_worker):
 
 src_path = ["/home/helena.maia/Documentos/Datasets/Charades_v1_rgb/",
             "/home/helena.maia/Documentos/Datasets/Charades_v1_flow/"]
-train_subclips = "Charades_v1_train_clips.csv"
-test_subclips = "Charades_v1_test_clips.csv"
+#train_subclips = "Charades_v1_train_clips.csv"
+#test_subclips = "Charades_v1_test_clips.csv"
+missing = "missing_videos.csv"
 dst_path = "/home/helena.maia/Documentos/Datasets/Charades_v1_subclips/"
 num_worker = 8
 
@@ -70,5 +71,5 @@ if not os.path.isdir(dst_path):
     print("Creating output directory: ", dst_path)
     os.makedirs(dst_path)
 
-crop(train_subclips, src_path, dst_path, num_worker)
-crop(test_subclips, src_path, dst_path, num_worker)
+crop(missing, src_path, dst_path, num_worker)
+#crop(test_subclips, src_path, dst_path, num_worker)
