@@ -395,12 +395,19 @@ def validate(val_loader, model, criterion):
             end = time.time()
 
             if i % args.print_freq == 0:
-                print('Test: [{0}/{1}]\t'
+                print('Validation: [{0}/{1}]\t'
                   'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
                   'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
                   'Prec@1 {top1.val:.3f} ({top1.avg:.3f})\t'
                   'Prec@3 {top3.val:.3f} ({top3.avg:.3f})'.format(
                    i, len(val_loader), batch_time=batch_time, loss=losses,
+                   top1=top1, top3=top3))
+                prec_list.append('Validation: [{0}][{1}/{2}]\t'
+                  'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
+                  'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
+                  'Prec@1 {top1.val:.3f} ({top1.avg:.3f})\t'
+                  'Prec@3 {top3.val:.3f} ({top3.avg:.3f})'.format(   
+                   i, len(val_loader), batch_time=batch_time, loss=losses, 
                    top1=top1, top3=top3))
 
     print(' * Prec@1 {top1.avg:.3f} Prec@3 {top3.avg:.3f}'
