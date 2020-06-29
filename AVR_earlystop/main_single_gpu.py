@@ -69,16 +69,15 @@ parser.add_argument('--weight-decay', '--wd', default=5e-4, type=float,
                     metavar='W', help='weight decay (default: 5e-4)')
 parser.add_argument('-pf','--print-freq', default=50,  type=int,
                     metavar='N', help='print frequency (default: 50)')
-#parser.add_argument('-sf','--save-freq', default=25, type=int,
-#                    metavar='N', help='save frequency (default: 25)')
+parser.add_argument('-sf','--save-freq', default=25, type=int,
+                    metavar='N', help='save frequency (default: 25)')
 parser.add_argument('--vr_approach', '-vra', default=3, type=int,
                     metavar='N', help='visual rhythm approach (default: 3)')
-parser.add_argument('--resume', default='./checkpoints', type=str, metavar='PATH',
-                    help='path to latest checkpoint (default: none)')
-parser.add_argument('-e', '--evaluate', dest='evaluate', action='store_true',
-                    help='evaluate model on validation set')
+parser.add_argument('--log', metavar='PATH', default='./log', type=str, 
+                    help='path to log (default: ./log)')
+parser.add_argument('--resume_log', metavar='PATH', default=None, type=str, 
+                    help='path to an existing log for non-zero start-epoch (default: None)')
 
-best_prec1 = 0
 os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"   
 os.environ["CUDA_VISIBLE_DEVICES"]="0"
 
@@ -104,10 +103,12 @@ def createNewDataset(fileNameRead, fileNameWrite, modality_):
     open(newPathFile,'w').writelines(detallLines)
 
 def main():
-    global args, best_prec1
+    global args, prec_list
+    prec_list = []
     args = parser.parse_args()
+    full_path = logging(args)
 
-    print(args.modality+" network trained whith the split "+str(args.split)+".")
+    print(args.modality+" network trained with the split "+str(args.split)+".")
 
     # create model
     print("Building model ... ")
@@ -124,10 +125,6 @@ def main():
                                 momentum=args.momentum,
                                 weight_decay=args.weight_decay)
 
-    # create file where we allocate the models by each args.save_freq epochs
-    if not os.path.exists(args.resume):
-        os.makedirs(args.resume)
-    print("Saving everything to directory %s." % (args.resume))
 
     cudnn.benchmark = True
 
@@ -179,10 +176,15 @@ def main():
     if not os.path.exists(train_split_file) or not os.path.exists(val_split_file):
         print("No split file exists in %s directory. Preprocess the dataset first" % (args.settings))
 
+    name_pattern = None
+    if args.modality == 'rhythm':
+    	name_pattern = "visual_rhythm_%05d.png" if args.dataset == "hmdb51" else "visual_rhythm_%05d.jpg"
+
     train_dataset = datasets.__dict__['dataset'](root=args.data,
                                                     source=train_split_file,
                                                     phase="train",
                                                     modality=args.modality,
+                                                    name_pattern = name_pattern,
                                                     is_color=is_color,
                                                     new_length=args.new_length,
                                                     new_width=args.new_width,
@@ -193,6 +195,7 @@ def main():
                                                   source=val_split_file,
                                                   phase="val",
                                                   modality=args.modality,
+                                                  name_pattern = name_pattern,
                                                   is_color=is_color,
                                                   new_length=args.new_length,
                                                   new_width=args.new_width,
@@ -200,7 +203,7 @@ def main():
                                                   video_transform=val_transform,
                                                   approach_VR = args.vr_approach)
 
-    print('{} samples found, {} train samples and {} test samples.'.format(len(val_dataset)+len(train_dataset),
+    print('{} samples found, {} train samples and {} validation samples.'.format(len(val_dataset)+len(train_dataset),
                                                                            len(train_dataset),
                                                                            len(val_dataset)))
     train_loader = torch.utils.data.DataLoader(
@@ -212,10 +215,6 @@ def main():
         batch_size=args.batch_size, shuffle=True,
         num_workers=args.workers, pin_memory=True)
     
-    if args.evaluate:
-        validate(val_loader, model, criterion)
-        return
-
     early_stop = EarlyStopping()
 
     for epoch in range(args.start_epoch, args.epochs):
@@ -227,10 +226,57 @@ def main():
         # evaluate on validation set
         losses = validate(val_loader, model, criterion)
 
-        early_stop(losses.avg, model)
+        is_best = early_stop(losses.avg, model)
+
+        if (epoch + 1) % args.save_freq == 0 or is_best:
+            checkpoint_name = "%03d_%s" % (epoch + 1, "checkpoint_"+args.modality+"_split_"+str(args.split)+".pth.tar")
+            prec_name =  "%03d_%s" % (epoch + 1, "prec_split_"+str(args.split)+".txt")
+            save_checkpoint({
+                'epoch': epoch + 1,
+                'arch': args.arch,
+                'state_dict': model.state_dict(),
+                'optimizer' : optimizer.state_dict(),
+                'val_loss_min': early_stop.val_loss_min,
+            }, is_best, checkpoint_name, prec_name, os.path.join(full_path,"checkpoints"))
 
         if early_stop.early_stop:
             break
+
+def logging(args):
+    args_dict = vars(args)
+    args_dict['hostname'] = os.uname()[1]
+    if 'VIRTUAL_ENV' in os.environ.keys(): args_dict['virtual_env'] = os.environ['VIRTUAL_ENV']
+    else: 
+        print("WARNING: No virtualenv activated")
+        args_dict['virtual_env'] = None
+   
+    if args.start_epoch != 0 and args.resume_log: #resume
+        with open(os.path.join(args.resume_log,'args.json'), 'r') as json_file:
+            args_dict2 = json.load(json_file)
+            if args_dict != args_dict2: 
+            	print("WARNING: args differ")
+            	diff_items1 = [ (k,args_dict[k],args_dict2[k]) for k in args_dict if k in args_dict2 and args_dict[k] != args_dict2[k]]
+            	if(diff_items1): print("Different items: ", diff_items1)
+            	diff_items2 = [ k for k in args_dict if k not in args_dict2 ]
+            	diff_items3 = [ k for k in args_dict2 if k not in args_dict ]
+            	if(diff_items2 or diff_items3): print("Missing items: ", diff_items2, diff_items3)
+        return args.resume_log
+    else: #new training
+        timestamp = time.time() 
+ 
+        full_path = os.path.join(args.log,str(timestamp))
+        os.makedirs(full_path)
+
+        with open(os.path.join(full_path,'args.json'), 'w') as json_file:
+            json.dump(args_dict, json_file)
+
+        os.system('pip freeze > '+os.path.join(full_path,'requirements.txt'))
+
+        os.makedirs(os.path.join(full_path,"checkpoints"))
+
+        print("Saving everything to directory %s." % (full_path))
+
+        return full_path
 
     
 def build_model(resume_epoch):
@@ -310,6 +356,11 @@ def train(train_loader, model, criterion, optimizer, epoch):
                       'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
                       'Prec@1 {top1.val:.3f} ({top1.avg:.3f})'.format(
                        epoch, i+1, len(train_loader)+1, batch_time=batch_time, loss=losses, top1=top1))
+                prec_list.append('Epoch: [{0}][{1}/{2}]\t'
+                      'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
+                      'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
+                      'Prec@1 {top1.val:.3f} ({top1.avg:.3f})'.format(   
+                       epoch, i+1, len(train_loader)+1, batch_time=batch_time, loss=losses, top1=top1))
 
 def validate(val_loader, model, criterion):
     batch_time = AverageMeter()
@@ -357,12 +408,19 @@ def validate(val_loader, model, criterion):
     return losses
 
 
-def save_checkpoint(state, is_best, filename, resume_path):
+def save_checkpoint(state, is_best, filename, prec_filename, resume_path):
     cur_path = os.path.join(resume_path, filename)
     best_path = os.path.join(resume_path, 'model_best_'+args.modality+'_split_'+str(args.split)+'.pth.tar')
     torch.save(state, cur_path)
+
     if is_best:
         shutil.copyfile(cur_path, best_path)
+
+    global prec_list
+    prec_path = os.path.join(resume_path, prec_filename)
+    np.savetxt(prec_path, prec_list, fmt="%s", delimiter="\n")
+    prec_list = []
+
 
 class AverageMeter(object):
     """Computes and stores the average and current value"""
