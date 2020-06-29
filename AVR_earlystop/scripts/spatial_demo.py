@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 
-import os, sys
+import os
+import sys
+import argparse
 import collections
 import numpy as np
-import argparse
 import cv2
 import math
 import random
@@ -30,13 +31,19 @@ parser.add_argument('--modality', '-m', metavar='MODALITY', default='rgb',
                     choices=["rgb", "rhythm"],
                     help='modality: rgb | rhythm ')
 parser.add_argument('--dataset', '-d', metavar='MODALITY', default='ucf101',
-                    choices=["ucf101", "hmdb51"])
-parser.add_argument('-s', '--split', default=2, type=int, metavar='S',
+                    choices=["ucf101", "hmdb51"],
+                    help='modality: ucf101 | hmdb51 ')
+parser.add_argument('-s', '--split', default=1, type=int, metavar='S',
                     help='which split of data to work on (default: 1)')
 parser.add_argument('--architecture', '-a', metavar='MODALITY', default='inception_v3',
                     choices=["resnet152", "inception_v3"])
 parser.add_argument('--vr_approach', '-vra', default=3, type=int,
                     metavar='N', help='visual rhythm approach (default: 3)')
+parser.add_argument('--settings', metavar='DIR', default='../datasets/settings',
+                    help='path to dataset setting files (default: ../datasets/settings)')
+parser.add_argument('-w', action='store_true', help="Compute features for the whole dataset, if the flag is found")
+parser.add_argument('-o', metavar='DIR', default='NPYS/',
+                    help='path to save npy and log files (default: NPYS/)')
 parser.add_argument('data_dir')
 parser.add_argument('model_path')
 
@@ -47,26 +54,45 @@ def softmax(x):
 
     return z
 
+def logging(args):
+    args_dict = vars(args)
+    args_dict['hostname'] = os.uname()[1]
+
+    if 'VIRTUAL_ENV' in os.environ.keys(): 
+        args_dict['virtual_env'] = os.environ['VIRTUAL_ENV']
+    else: 
+        print("WARNING: No virtualenv activated")
+        args_dict['virtual_env'] = None
+
+    timestamp = time.time() 
+    full_path = os.path.join(args.o, str(timestamp))
+    if not os.isdir(full_path):
+        os.makedirs(full_path)
+
+    log_path = os.path.join(full_path, "args.json")
+    with open(log_path, 'w') as json_file:
+        json.dump(args_dict, json_file)
+
+    os.system('pip freeze > ' + os.path.join(full_path,'requirements.txt'))
+
+    print("Saving everything to directory %s." % (full_path))
+
+    return full_path
+
 def main():
     args = parser.parse_args()
-
-    #model_path = '../../parameters/'+args.architecture+"/"+args.modality+'_s'+str(args.split)+'.pth.tar'
-    #data_dir = '../datasets/'+args.dataset+'_frames'        
-    #data_dir = '/home/Datasets/UCF-101-OF_CPU'
+    output_path = logging(args)
     model_path = args.model_path
     data_dir = args.data_dir
     
     start_frame = 0
-    if args.modality[:3]=='rgb':
-        num_samples = 25
-    else:
-        num_samples = 1
+    num_samples = 25 if args.modality[:3]=='rgb' else 1
     num_categories = 51 if args.dataset=='hmdb51' else 101
+    new_size = 224
     
     model_start_time = time.time()
     params = torch.load(model_path)
 
-    new_size= 224
     if args.architecture == "inception_v3":
         new_size=299
         if args.modality == "rhythm":
@@ -78,30 +104,32 @@ def main():
             spatial_net = models.flow_resnet152(pretrained=False, channels = 1, num_classes=num_categories)
         else:
             spatial_net = models.rgb_resnet152(pretrained=False, channels = 3, num_classes=num_categories)
+
     spatial_net.load_state_dict(params['state_dict'])
     spatial_net.cuda()
     spatial_net.eval()
     model_end_time = time.time()
     model_time = model_end_time - model_start_time
-    print("Action recognition model is loaded in %4.4f seconds." % (model_time))
+    print("Action recognition spatial model is loaded in %4.4f seconds." % (model_time))
 
-
-    val_file = "./splits/"+args.dataset+"/val_split%d.txt"%(args.split)
-    #val_file = 'spatial_testlist01_with_labels.txt'
-    f_val = open(val_file, "r")
-    val_list = f_val.readlines()
-    print("we got %d test videos" % len(val_list))
+    test_path = os.path.join(args.settings, args.dataset)
+    test_file = os.path.join(test_path, "test_split%d.txt"%(args.split)) if args.w else os.path.join(test_path, "dataset_list.txt")
+    f_test = open(test_file, "r")
+    test_list = f_test.readlines()
+    print("we got %d videos" % len(test_list))
 
     line_id = 1
     match_count = 0
+    result_list = []
+    direction_path = os.path.join(args.settings, args.dataset, "direction.txt")
+    lines = [int(line.rstrip('\n')) for line in open(direction_path)]
 
-    result = []
-    lines = [int(line.rstrip('\n')) for line in open('../datasets/settings/'+args.dataset+'/direction.txt')]
-    for line in val_list:
+    for line in test_list:
         line_info = line.split(" ")
-        clip_path = os.path.join(data_dir,line_info[0])
+        clip_path = os.path.join(data_dir, line_info[0])
         num_frames = int(line_info[1])
         input_video_label = int(line_info[2])
+
         spatial_prediction = VideoSpatialPrediction(
                 args.modality,
                 clip_path,
@@ -111,24 +139,25 @@ def main():
                 num_frames,
                 num_samples,
                 args.vr_approach if args.vr_approach!=3 else lines[input_video_label],
-                new_size
-                )
+                new_size = new_size)
         avg_spatial_pred_fc8 = np.mean(spatial_prediction, axis=1)
-        result.append(avg_spatial_pred_fc8)
-        # avg_spatial_pred = softmax(avg_spatial_pred_fc8)
+        result_list.append(avg_spatial_pred_fc8)
 
         pred_index = np.argmax(avg_spatial_pred_fc8)
-        
-        print(args.modality+" split "+str(args.split)+", sample %d/%d: GT: %d, Prediction: %d ==> correct: %d" % (line_id, len(val_list), input_video_label, pred_index, match_count))
+        print(args.modality+" split "+str(args.split)+", sample %d/%d: GT: %d, Prediction: %d ==> correct: %d" % 
+            (line_id, len(test_list), input_video_label, pred_index, match_count))
 
         if pred_index == input_video_label:
             match_count += 1
         line_id += 1
 
     print(match_count)
-    print(len(val_list))
-    print("Accuracy is : %4.4f" % ((float(match_count)/len(val_list))))
-    np.save(args.dataset+"_"+args.modality+"_"+args.architecture+"_s"+str(args.split)+".npy", np.array(result))
+    print(len(test_list))
+    print("Accuracy is: %4.4f" % (float(match_count)/len(test_list)))
+
+    npy_name = args.dataset+"_"+args.modality+"_"+args.architecture+"_s"+str(args.split)+".npy"
+    npy_path = os.path.join(output_path, npy_name)
+    np.save(npy_path, np.array(result_list))
 
 if __name__ == "__main__":
     main()
