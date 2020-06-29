@@ -4,6 +4,7 @@ import random
 import argparse
 import shutil
 import numpy as np
+import json
 
 import torch
 import torch.nn as nn
@@ -16,7 +17,7 @@ import video_transforms
 import models
 import datasets
 
-from earlyStopping.pytorchtools import EarlyStopping
+from early_stopping.pytorchtools import EarlyStopping
 
 model_path = './checkpoints'
 model_names = sorted(name for name in models.__dict__
@@ -176,32 +177,33 @@ def main():
     if not os.path.exists(train_split_file) or not os.path.exists(val_split_file):
         print("No split file exists in %s directory. Preprocess the dataset first" % (args.settings))
 
-    name_pattern = None
-    if args.modality == 'rhythm':
-    	name_pattern = "visual_rhythm_%05d.png" if args.dataset == "hmdb51" else "visual_rhythm_%05d.jpg"
+    extension = ".png" if args.dataset == "hmdb51" and args.modality == "rhythm" else ".jpg"
+    direction_path = os.path.join(args.settings, args.dataset, "direction.txt")
 
     train_dataset = datasets.__dict__['dataset'](root=args.data,
-                                                    source=train_split_file,
-                                                    phase="train",
-                                                    modality=args.modality,
-                                                    name_pattern = name_pattern,
-                                                    is_color=is_color,
-                                                    new_length=args.new_length,
-                                                    new_width=args.new_width,
-                                                    new_height=args.new_height,
-                                                    video_transform=train_transform,
-                                                    approach_VR = args.vr_approach)
+                                                  source=train_split_file,
+                                                  phase="train",
+                                                  modality=args.modality,
+                                                  is_color=is_color,
+                                                  new_length=args.new_length,
+                                                  new_width=args.new_width,
+                                                  new_height=args.new_height,
+                                                  video_transform=train_transform,
+                                                  approach_VR = args.vr_approach,
+                                                  extension = extension,
+                                                  direction_path = direction_path)
     val_dataset = datasets.__dict__['dataset'](root=args.data,
                                                   source=val_split_file,
                                                   phase="val",
                                                   modality=args.modality,
-                                                  name_pattern = name_pattern,
                                                   is_color=is_color,
                                                   new_length=args.new_length,
                                                   new_width=args.new_width,
                                                   new_height=args.new_height,
                                                   video_transform=val_transform,
-                                                  approach_VR = args.vr_approach)
+                                                  approach_VR = args.vr_approach,
+                                                  extension = extension, 
+                                                  direction_path = direction_path)
 
     print('{} samples found, {} train samples and {} validation samples.'.format(len(val_dataset)+len(train_dataset),
                                                                            len(train_dataset),
@@ -312,7 +314,6 @@ def train(train_loader, model, criterion, optimizer, epoch):
     acc_mini_batch = 0.0
 
     for i, (input, target) in enumerate(train_loader):
-
         input = input.float().cuda(async=True)
         target = target.cuda(async=True)
         input_var = torch.autograd.Variable(input)

@@ -123,7 +123,9 @@ class dataset(data.Dataset):
                  transform=None,
                  target_transform=None,
                  video_transform=None,
-                 approach_VR = 3):
+                 approach_VR = 3,
+                 extension = ".jpg", 
+                 direction_path = None):
         classes, class_to_idx = find_classes(root) 
         clips = make_dataset(root, source)
         
@@ -135,7 +137,6 @@ class dataset(data.Dataset):
         self.source = source
         self.phase = phase
         self.modality = modality
-        print(source)
         self.dataset = source.split('/')[2]
         self.visual_rhythm_approach = approach_VR
 
@@ -147,18 +148,17 @@ class dataset(data.Dataset):
             self.name_pattern = name_pattern
         else:
             if self.modality == 'rgb' or self.modality == 'rgb2':
-                self.name_pattern = 'img_%05d.jpg'
+                self.name_pattern = 'img_%05d'+extension
             elif self.modality == 'rhythm':
-                self.name_pattern = 'visual_rhythm_%05d.jpg'
+                self.name_pattern = 'visual_rhythm_%05d'+extension
                 # recover the direction by class
-                print('./datasets/settings_earlystop/'+self.dataset+'/direction.txt')
-                self.direction = [int(line.rstrip('\n')) for line in open('./datasets/settings_earlystop/'+self.dataset+'/direction.txt')]
+                self.direction = [int(line.rstrip('\n')) for line in open(direction_path)]
             elif self.modality == 'flow':
-                self.name_pattern = 'flow_%s_%05d.jpg'
+                self.name_pattern = 'flow_%s_%05d'+extension
             elif self.modality == 'hog':
-                self.name_pattern = 'hog_%s_%05d.jpg'
+                self.name_pattern = 'hog_%s_%05d'+extension
             elif self.modality == 'history':
-                self.name_pattern = 'history_motion_%05d.jpg'
+                self.name_pattern = 'history_motion_%05d'+extension
 
         self.is_color = is_color
         self.num_segments = num_segments
