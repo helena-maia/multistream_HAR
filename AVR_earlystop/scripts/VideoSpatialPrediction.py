@@ -21,7 +21,7 @@ import torchvision.transforms as transforms
 import torchvision.datasets as datasets
 import torchvision.models as models
 
-sys.path.insert(0, "../../")
+sys.path.insert(0, "../")
 import video_transforms
 
 
@@ -34,16 +34,15 @@ def VideoSpatialPrediction(
         num_frames=0,
         num_samples=25,
         index =1,
-        new_size = 299
+        new_size = 299,
+        ext = ".jpg"
         ):
 
     if num_frames == 0:
         imglist = os.listdir(vid_name)
-        #imglist = list(filter(lambda x: x[:3]=='img',imglist))
         duration = len(imglist)
-        # print(duration)
     else:
-        duration = num_frames  
+        duration = num_frames
 
     # selection
     if mode == 'rgb':
@@ -56,30 +55,28 @@ def VideoSpatialPrediction(
 
     normalize = video_transforms.Normalize(mean=clip_mean,
                                      std=clip_std)
-    val_transform = video_transforms.Compose([
+    test_transform = video_transforms.Compose([
             video_transforms.ToTensor(),
             normalize,
         ])
 
-    deep = 1 if mode == 'rhythm' else 3
-
     # inception = 320,360, resnet = 240, 320
     width = 320 if new_size==299 else 240
     height = 360 if new_size==299 else 320
+    deep = 1 if mode == 'rhythm' else 3
     dims = (width,height,deep,num_samples)
     rgb = np.zeros(shape=dims, dtype=np.float64)
     rgb_flip = np.zeros(shape=dims, dtype=np.float64)
    
     for i in range(num_samples):
         if mode == 'rhythm':
-            img_file = os.path.join(vid_name, 'visual_rhythm_{0:05d}.png'.format(index))
-            print(img_file)
+            img_file = os.path.join(vid_name, 'visual_rhythm_{0:05d}{}'.format(index, ext))
             img = cv2.imread(img_file, cv2.IMREAD_GRAYSCALE)   
             img = cv2.resize(img, dims[1::-1])
             rgb[:,:,0,i] = img
             rgb_flip[:,:,0,i] = img[:,::-1]    
         else:        
-            img_file = os.path.join(vid_name, 'img_{0:05d}.jpg'.format(i*step+1))
+            img_file = os.path.join(vid_name, 'img_{0:05d}{}'.format(i*step+1, ext))
             img = cv2.imread(img_file, cv2.IMREAD_UNCHANGED)
             img = cv2.resize(img, dims[1::-1])
             img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -107,7 +104,7 @@ def VideoSpatialPrediction(
     rgb_list = []
     for c_index in range(c):
         cur_img = rgb[:,:,:,c_index]
-        cur_img_tensor = val_transform(cur_img)
+        cur_img_tensor = test_transform(cur_img)
         rgb_list.append(np.expand_dims(cur_img_tensor.numpy(), 0))
         
     rgb_np = np.concatenate(rgb_list,axis=0)
@@ -117,6 +114,7 @@ def VideoSpatialPrediction(
 
     for bb in range(num_batches):
         span = range(batch_size*bb, min(rgb.shape[3],batch_size*(bb+1)))
+        
         input_data = rgb_np[span,:,:,:]
         imgDataTensor = torch.from_numpy(input_data).type(torch.FloatTensor).cuda()
         imgDataVar = torch.autograd.Variable(imgDataTensor)
