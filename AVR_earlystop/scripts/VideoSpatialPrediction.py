@@ -70,13 +70,14 @@ def VideoSpatialPrediction(
    
     for i in range(num_samples):
         if mode == 'rhythm':
-            img_file = os.path.join(vid_name, 'visual_rhythm_{0:05d}{}'.format(index, ext))
+            img_file = os.path.join(vid_name, 'visual_rhythm_{0:05d}{1}'.format(index, ext))
+            #print(img_file)
             img = cv2.imread(img_file, cv2.IMREAD_GRAYSCALE)   
             img = cv2.resize(img, dims[1::-1])
             rgb[:,:,0,i] = img
             rgb_flip[:,:,0,i] = img[:,::-1]    
         else:        
-            img_file = os.path.join(vid_name, 'img_{0:05d}{}'.format(i*step+1, ext))
+            img_file = os.path.join(vid_name, 'img_{0:05d}{1}'.format(i*step+1, ext))
             img = cv2.imread(img_file, cv2.IMREAD_UNCHANGED)
             img = cv2.resize(img, dims[1::-1])
             img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)

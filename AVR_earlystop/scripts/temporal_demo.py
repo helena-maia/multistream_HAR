@@ -9,6 +9,7 @@ import cv2
 import math
 import random
 import time
+import json
 
 import torch
 import torch.nn as nn
@@ -64,7 +65,7 @@ def logging(args):
 
     timestamp = time.time() 
     full_path = os.path.join(args.o, str(timestamp))
-    if not os.isdir(full_path):
+    if not os.path.isdir(full_path):
         os.makedirs(full_path)
 
     log_path = os.path.join(full_path, "args.json")
@@ -104,7 +105,8 @@ def main():
     print("Action recognition temporal model is loaded in %4.4f seconds." % (model_time))
 
     test_path = os.path.join(args.settings, args.dataset)
-    test_file = os.path.join(test_path, "test_split%d.txt"%(args.split)) if args.w else os.path.join(test_path, "dataset_list.txt")
+    test_file = os.path.join(test_path, "dataset_list.txt") if args.w else os.path.join(test_path, "test_split%d.txt"%(args.split))
+    print(test_file)
     f_test = open(test_file, "r")
     test_list = f_test.readlines()
     print("we got %d videos" % len(test_list))

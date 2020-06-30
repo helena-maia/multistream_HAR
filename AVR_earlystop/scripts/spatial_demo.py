@@ -9,6 +9,7 @@ import cv2
 import math
 import random
 import time
+import json
 
 import torch
 import torch.nn as nn
@@ -66,7 +67,7 @@ def logging(args):
 
     timestamp = time.time() 
     full_path = os.path.join(args.o, str(timestamp))
-    if not os.isdir(full_path):
+    if not os.path.isdir(full_path):
         os.makedirs(full_path)
 
     log_path = os.path.join(full_path, "args.json")
@@ -87,6 +88,7 @@ def main():
     
     start_frame = 0
     num_samples = 25 if args.modality[:3]=='rgb' else 1
+    ext = ".png" if args.modality == "rhythm" and args.dataset == "hmdb51" else ".jpg"
     num_categories = 51 if args.dataset=='hmdb51' else 101
     new_size = 224
     
@@ -113,7 +115,8 @@ def main():
     print("Action recognition spatial model is loaded in %4.4f seconds." % (model_time))
 
     test_path = os.path.join(args.settings, args.dataset)
-    test_file = os.path.join(test_path, "test_split%d.txt"%(args.split)) if args.w else os.path.join(test_path, "dataset_list.txt")
+    test_file = os.path.join(test_path, "dataset_list.txt") if args.w else os.path.join(test_path, "test_split%d.txt"%(args.split))
+    print(test_file)
     f_test = open(test_file, "r")
     test_list = f_test.readlines()
     print("we got %d videos" % len(test_list))
@@ -139,7 +142,8 @@ def main():
                 num_frames,
                 num_samples,
                 args.vr_approach if args.vr_approach!=3 else lines[input_video_label],
-                new_size = new_size)
+                new_size = new_size,
+                ext = ext)
         avg_spatial_pred_fc8 = np.mean(spatial_prediction, axis=1)
         result_list.append(avg_spatial_pred_fc8)
 
