@@ -217,7 +217,8 @@ def main():
         batch_size=args.batch_size, shuffle=True,
         num_workers=args.workers, pin_memory=True)
     
-    early_stop = EarlyStopping()
+    early_stop = EarlyStopping(verbose=True, 
+                               log_path=os.path.join(full_path, "early_stopping.json"))
 
     for epoch in range(args.start_epoch, args.epochs):
         adjust_learning_rate(optimizer, epoch)
@@ -228,18 +229,20 @@ def main():
         # evaluate on validation set
         losses = validate(val_loader, model, criterion)
 
-        is_best = early_stop(losses.avg, model)
+        is_best = early_stop(losses.avg, epoch)
 
         if (epoch + 1) % args.save_freq == 0 or is_best:
             checkpoint_name = "%03d_%s" % (epoch + 1, "checkpoint_"+args.modality+"_split_"+str(args.split)+".pth.tar")
-            prec_name =  "%03d_%s" % (epoch + 1, "prec_split_"+str(args.split)+".txt")
             save_checkpoint({
                 'epoch': epoch + 1,
                 'arch': args.arch,
                 'state_dict': model.state_dict(),
                 'optimizer' : optimizer.state_dict(),
                 'val_loss_min': early_stop.val_loss_min,
-            }, is_best, checkpoint_name, prec_name, os.path.join(full_path,"checkpoints"))
+            }, is_best, checkpoint_name, os.path.join(full_path,"checkpoints"))
+
+        prec_name =  "%03d_%s" % (epoch + 1, "prec_split_"+str(args.split)+".txt")
+        save_precision(prec_name, os.path.join(full_path,"precision"))
 
         if early_stop.early_stop:
             break
@@ -275,6 +278,7 @@ def logging(args):
         os.system('pip freeze > '+os.path.join(full_path,'requirements.txt'))
 
         os.makedirs(os.path.join(full_path,"checkpoints"))
+        os.makedirs(os.path.join(full_path,"precision"))
 
         print("Saving everything to directory %s." % (full_path))
 
@@ -416,7 +420,7 @@ def validate(val_loader, model, criterion):
     return losses
 
 
-def save_checkpoint(state, is_best, filename, prec_filename, resume_path):
+def save_checkpoint(state, is_best, filename, resume_path):
     cur_path = os.path.join(resume_path, filename)
     best_path = os.path.join(resume_path, 'model_best_'+args.modality+'_split_'+str(args.split)+'.pth.tar')
     torch.save(state, cur_path)
@@ -424,6 +428,8 @@ def save_checkpoint(state, is_best, filename, prec_filename, resume_path):
     if is_best:
         shutil.copyfile(cur_path, best_path)
 
+
+def save_precision(prec_filename, resume_path):
     global prec_list
     prec_path = os.path.join(resume_path, prec_filename)
     np.savetxt(prec_path, prec_list, fmt="%s", delimiter="\n")
