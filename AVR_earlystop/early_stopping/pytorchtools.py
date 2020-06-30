@@ -59,8 +59,8 @@ class EarlyStopping:
             self.counter = 0
 
         if self.log_path:
-        		entry = {"counter": self.counter, "val_loss_min": self.val_loss_min, "val_loss": val_loss}
-        		self.log_entries["{:03d}".format(epoch)] = entry
+                entry = {"counter": self.counter, "val_loss_min": self.val_loss_min, "val_loss": val_loss}
+                self.log_entries["{:03d}".format(epoch)] = entry
 
                 with open(self.log_path, 'w') as json_file:
                     json.dump(self.log_entries, json_file)
