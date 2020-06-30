@@ -67,8 +67,8 @@ def VideoTemporalPrediction(
 
     for i in range(num_samples):
         for j in range(optical_flow_frames):
-            flow_x_file = os.path.join(vid_name, mode+'_x_{0:05d}{}'.format(i*step+j+1 + start_frame, ext))
-            flow_y_file = os.path.join(vid_name, mode+'_y_{0:05d}{}'.format(i*step+j+1 + start_frame, ext))
+            flow_x_file = os.path.join(vid_name, mode+'_x_{0:05d}{1}'.format(i*step+j+1 + start_frame, ext))
+            flow_y_file = os.path.join(vid_name, mode+'_y_{0:05d}{1}'.format(i*step+j+1 + start_frame, ext))
             img_x = cv2.imread(flow_x_file, cv2.IMREAD_GRAYSCALE)
             img_y = cv2.imread(flow_y_file, cv2.IMREAD_GRAYSCALE)
             img_x = cv2.resize(img_x, dims[1::-1])
