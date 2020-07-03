@@ -109,7 +109,7 @@ def VideoSpatialPrediction(
         rgb_list.append(np.expand_dims(cur_img_tensor.numpy(), 0))
         
     rgb_np = np.concatenate(rgb_list,axis=0)
-    batch_size = 25
+    batch_size = 10
     prediction = np.zeros((num_categories,rgb.shape[3]))
     num_batches = int(math.ceil(float(rgb.shape[3])/batch_size))
 
