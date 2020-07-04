@@ -27,7 +27,7 @@ for ll in log_list:
     timestamp = ll.split("/")[1]
     data = [args_dict[k] for k in header[1:-2]]
     best_epoch = sorted([k for k in early_dict.keys() if k != "config"])[-7]
-    best_data = early_dict["%03d".best_epoch]
+    best_data = early_dict[best_epoch]
     data = [timestamp] + data + [best_epoch, best_data["val_loss"]]
 
     print(data)
