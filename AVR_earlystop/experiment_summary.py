@@ -22,10 +22,17 @@ for ll in log_list:
         header = sorted(args_dict.keys())
         header+= ["best_epoch", "best_val"]
 
+    data = [args_dict[k] for k in header]
+    best_epoch = sorted[k for k in early_dict.keys() if k != "config"][-7]
+    best_data = early_dict["%03d".best_epoch]
+    data += [best_epoch, best_data["val_loss"]]
+
+    print(header, data)
+
+    break
+
     #print(args_dict.keys())
     #print(early_dict.keys())
-
-print(header)
 
 
 
