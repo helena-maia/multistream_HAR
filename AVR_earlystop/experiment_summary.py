@@ -38,7 +38,7 @@ for ll in log_list:
         data = [timestamp] + data + [best_epoch, best_data["val_loss"]]
         summary += data
 
-summary = np.savetxt("summary.txt", fmt="%s")
+summary = np.savetxt("summary.txt", summary, fmt="%s")
 
 
 
