@@ -3,6 +3,7 @@ import json
 import os
 
 log_list = glob.glob("log/*")
+header = []
 
 for ll in log_list:
     args = os.path.join(ll, "args.json")
@@ -17,8 +18,16 @@ for ll in log_list:
     with open(early_stop) as f:
         early_dict = json.load(f)
 
-    print(args_dict.keys())
-    print(early_dict.keys())
+    if header == []:
+        header = sorted(args_dict.keys())
+        header+= ["best_epoch", "best_val"]
+
+    #print(args_dict.keys())
+    #print(early_dict.keys())
+
+print(header)
+
+
 
 
 
