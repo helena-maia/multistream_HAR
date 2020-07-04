@@ -24,7 +24,7 @@ for ll in log_list:
         header = ["timestamp"]
         header += sorted(args_dict.keys())
         header += ["best_epoch", "best_val"]
-        summary += header
+        summary += [header]
 
     timestamp = ll.split("/")[1]
     data = [args_dict[k] for k in header[1:-2]]
@@ -36,7 +36,7 @@ for ll in log_list:
     else:
         best_data = early_dict[best_epoch]
         data = [timestamp] + data + [best_epoch, best_data["val_loss"]]
-        summary += data
+        summary += [data]
 
 summary = np.savetxt("summary.txt", summary, fmt="%s")
 
