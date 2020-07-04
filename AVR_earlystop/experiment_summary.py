@@ -22,7 +22,7 @@ for ll in log_list:
         header = sorted(args_dict.keys())
         header+= ["best_epoch", "best_val"]
 
-    data = [args_dict[k] for k in header[-2]]
+    data = [args_dict[k] for k in header[:-2]]
     best_epoch = sorted([k for k in early_dict.keys() if k != "config"])[-7]
     best_data = early_dict["%03d".best_epoch]
     data += [best_epoch, best_data["val_loss"]]
