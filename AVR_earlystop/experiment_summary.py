@@ -31,6 +31,8 @@ for ll in log_list:
 
     try:
         best_epoch = sorted([k for k in early_dict.keys() if k != "config"])[-8]
+    except:
+        pass
     else:
         best_data = early_dict[best_epoch]
         data = [timestamp] + data + [best_epoch, best_data["val_loss"]]
