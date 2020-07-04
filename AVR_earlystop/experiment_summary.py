@@ -19,17 +19,18 @@ for ll in log_list:
         early_dict = json.load(f)
 
     if header == []:
-        header = sorted(args_dict.keys())
-        header+= ["best_epoch", "best_val"]
+        header = ["timestamp"]
+        header += sorted(args_dict.keys())
+        header += ["best_epoch", "best_val"]
+        print(header)
 
-    data = [args_dict[k] for k in header[:-2]]
+    timestamp = ll.split("/")[1]
+    data = [args_dict[k] for k in header[1:-2]]
     best_epoch = sorted([k for k in early_dict.keys() if k != "config"])[-7]
     best_data = early_dict["%03d".best_epoch]
-    data += [best_epoch, best_data["val_loss"]]
+    data = [timestamp] + data + [best_epoch, best_data["val_loss"]]
 
-    print(header, data)
-
-    break
+    print(data)
 
     #print(args_dict.keys())
     #print(early_dict.keys())
