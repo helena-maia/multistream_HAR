@@ -8,6 +8,8 @@ import time
 import numpy as np
 import random
 from sklearn.preprocessing import StandardScaler
+import sys
+import os
 
 sys.path.insert(0, "../")
 from early_stopping.pytorchtools import EarlyStopping
@@ -194,7 +196,7 @@ def fc_fusion(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts, arq = [('L',303,101)], n_epoch
         num_workers=4, pin_memory=True)
 
     early_stop = EarlyStopping(verbose=True, 
-                               log_path=os.path.join(full_path, "early_stopping.json"))
+                               log_path="early_stopping.json")
 
     best_model = None
 

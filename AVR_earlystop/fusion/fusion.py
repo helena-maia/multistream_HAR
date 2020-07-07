@@ -6,6 +6,7 @@ import itertools
 from sklearn.svm import SVC
 from sklearn.model_selection import GridSearchCV
 from fuzzy_fusion import fuzzy_fusion
+from fc_fusion import fc_fusion
 #import operator
 #from fuzzy_fusion import fuzzy_fusion
 
@@ -104,7 +105,7 @@ def choquet_fuzzy(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
             max_prec = prec
             best_weight = w
 
-    prec = choquet_fuzzy_step(X_ts_, y_ts_, best_weight)
+    prec = choquet_fuzzy_step(X_ts, y_ts, best_weight)
 
     return prec
 
@@ -112,13 +113,16 @@ def sugeno_fuzzy(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
     return
 
 def FC(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
-    X_tr_ = np.array(X_tr)
+    X_tr_ = np.concatenate((X_tr), axis=1)
+    X_vl_ = np.concatenate((X_vl), axis=1)
+    X_ts_ = np.concatenate((X_ts), axis=1)
 
     n_modalities, n_samples, n_classes = X_tr.shape
-    arq = [('L', n_modalities*n_classes, n_classes)]
+    arq = [('L', n_modalities*n_classes, n_classes), ('R'), ('D',0.9)]
 
-    prec = fc_fusion(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts, arq = arq):
-    return prec
+    prec = fc_fusion(X_tr_, X_vl_, X_ts_, y_tr, y_vl, y_ts, arq = arq)
+    #return prec
+    return 0
 
 def SVM(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
     X_tr_ = np.array([np.concatenate((X1,X2),axis=0) for X1, X2 in zip(X_tr, X_vl)])
@@ -135,7 +139,7 @@ def SVM(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
         'decision_function_shape': ['ovr', 'ovo']
     }
 
-    gs = GridSearchCV(clf, parameters, n_jobs=3, verbose=1, scoring='accuracy', cv=3)
+    gs = GridSearchCV(clf, parameters, n_jobs=8, verbose=1, scoring='accuracy', cv=3)
     gs.fit(X_tr_, y_tr_)
 
     best_clf = gs.best_estimator_
@@ -198,7 +202,7 @@ if __name__ == '__main__':
 
     fusion_call = args.m + "(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts)"
     prec = eval(fusion_call)
-    print(f"{prec:.04f}")
+    print("{:.04f}".format(prec))
 
 
     
