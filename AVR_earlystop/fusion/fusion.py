@@ -5,6 +5,7 @@ from sklearn.metrics import precision_score
 import itertools
 from sklearn.svm import SVC
 from sklearn.model_selection import GridSearchCV
+from fuzzy_fusion import fuzzy_fusion
 #import operator
 #from fuzzy_fusion import fuzzy_fusion
 
@@ -29,10 +30,8 @@ def get_labels(path_file):
 methods = ["simple_avg", "weighted_avg", "FC", "SVM", "choquet_fuzzy", "sugeno_fuzzy"]
 
 def simple_avg(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
-    X_ts_ = np.array(X_ts) # n_modalities X n_samples X n_classes
-    y_ts_ = np.array(y_ts) # n_samples
-    n_samples = y_ts_.shape[0]
-    X_comb = np.mean(X_ts_, axis=0) # n_samples X n_classes
+    n_samples = y_ts.shape[0]
+    X_comb = np.mean(X_ts, axis=0) # n_samples X n_classes
 
     y_pred = np.argmax(X_comb, axis=1) # n_samples
 
@@ -41,12 +40,20 @@ def simple_avg(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
 
     return prec
 
+def iter_weights(n_modalities):
+    linear = [i+1 for i in range(n_modalities)]
+    linear_weights = itertools.permutations(linear, n_modalities)
+    exp = [2**i for i in range(n_modalities)]
+    exp_weights = itertools.permutations(exp, n_modalities)
+
+    weights = itertools.chain(linear_weights, exp_weights)
+
+    return weights
+
 def weighted_avg(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
     X_tr_ = np.array([np.concatenate((X1,X2),axis=0) for X1, X2 in zip(X_tr, X_vl)])
     y_tr_ = np.concatenate((y_tr, y_vl), axis=0)
     n_modalities = len(X_tr)
-    X_ts_ = np.array(X_ts)
-    y_ts_ = np.array(y_ts)
 
     def weighted_avg_step(X, y, w):
         X_w = [X[i] * w[i] for i in range(n_modalities)]
@@ -59,12 +66,7 @@ def weighted_avg(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
     max_prec = 0
     best_weight = None
 
-    linear = [i+1 for i in range(n_modalities)]
-    linear_weights = itertools.permutations(linear, n_modalities)
-    exp = [2**i for i in range(n_modalities)]
-    exp_weights = itertools.permutations(exp, n_modalities)
-
-    weights = itertools.chain(linear_weights, exp_weights)
+    weights = iter_weights(n_modalities)
     
     for w in weights:
         prec = weighted_avg_step(X_tr_, y_tr_, w)
@@ -73,12 +75,50 @@ def weighted_avg(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
             max_prec = prec
             best_weight = w
 
-    prec = weighted_avg_step(X_ts, y_ts_, best_weight)
+    prec = weighted_avg_step(X_ts, y_ts, best_weight)
 
     return prec
 
-def FC(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
+def choquet_fuzzy(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
+    X_tr_ = np.array([np.concatenate((X1,X2),axis=0) for X1, X2 in zip(X_tr, X_vl)])
+    y_tr_ = np.concatenate((y_tr, y_vl), axis=0)
+    n_modalities = len(X_tr)
+
+    def choquet_fuzzy_step(X, y, w):
+        X_comb = fuzzy_fusion(X, w)
+        y_pred = np.argmax(X_comb, axis=1) # n_samples
+        prec = precision_score(y, y_pred, average ='micro')
+
+        return prec
+
+    weights = iter_weights(n_modalities)
+
+    max_prec = 0
+    best_weight = None
+
+    for w in weights:
+        prec = choquet_fuzzy_step(X_tr_, y_tr_, w)
+
+        if prec > max_prec:
+            print("Update:", w, prec)
+            max_prec = prec
+            best_weight = w
+
+    prec = choquet_fuzzy_step(X_ts_, y_ts_, best_weight)
+
+    return prec
+
+def sugeno_fuzzy(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
     return
+
+def FC(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
+    X_tr_ = np.array(X_tr)
+
+    n_modalities, n_samples, n_classes = X_tr.shape
+    arq = [('L', n_modalities*n_classes, n_classes)]
+
+    prec = fc_fusion(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts, arq = arq):
+    return prec
 
 def SVM(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
     X_tr_ = np.array([np.concatenate((X1,X2),axis=0) for X1, X2 in zip(X_tr, X_vl)])
@@ -86,7 +126,6 @@ def SVM(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
     y_tr_ = np.concatenate((y_tr, y_vl), axis=0)
 
     X_ts_ = np.concatenate((X_ts), axis=1)
-    y_ts_ = np.array(y_ts)
 
     clf = SVC(random_state=42)
     parameters = {
@@ -95,19 +134,16 @@ def SVM(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
         'kernel': ['rbf', 'linear'],
         'decision_function_shape': ['ovr', 'ovo']
     }
+
     gs = GridSearchCV(clf, parameters, n_jobs=3, verbose=1, scoring='accuracy', cv=3)
     gs.fit(X_tr_, y_tr_)
 
     best_clf = gs.best_estimator_
-    print (gs.best_estimator_.get_params())
+    print(gs.best_estimator_.get_params())
     best_clf.fit(X_tr_, y_tr_)
-    return best_clf.score(X_ts_, y_ts_)
+    return best_clf.score(X_ts_, y_ts)
 
-def choquet_fuzzy(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
-    return
 
-def sugeno_fuzzy(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
-    return
 
 def get_args():
     parser = argparse.ArgumentParser(description='PyTorch Three-Stream Action Recognition - Fusion')
@@ -145,11 +181,6 @@ if __name__ == '__main__':
     vl_keys, vl_labels = get_labels(val_path)
     ts_keys, ts_labels = get_labels(test_path)
 
-    for i, key in enumerate(tr_keys):
-        ind = ds_keys.index(key)
-        if ds_labels[ind] != tr_labels[i]:
-            print(key)
-
     tr_ind = [ds_keys.index(key) for ind, key in enumerate(tr_keys)]
     vl_ind = [ds_keys.index(key) for ind, key in enumerate(vl_keys)]
     ts_ind = [ds_keys.index(key) for ind, key in enumerate(ts_keys)]
@@ -163,11 +194,13 @@ if __name__ == '__main__':
         X_ts.append(ts)
 
     X_tr, X_vl, X_ts = np.array(X_tr), np.array(X_vl), np.array(X_ts)
+    y_tr, y_vl, y_ts = np.array(tr_labels), np.array(vl_labels), np.array(ts_labels)
 
-    fusion_call = args.m + "(X_tr, X_vl, X_ts, tr_labels, vl_labels, ts_labels)"
+    fusion_call = args.m + "(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts)"
     prec = eval(fusion_call)
     print(f"{prec:.04f}")
 
 
     
     
+
