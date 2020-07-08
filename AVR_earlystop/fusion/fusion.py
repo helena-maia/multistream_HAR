@@ -118,11 +118,12 @@ def FC(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
     X_ts_ = np.concatenate((X_ts), axis=1)
 
     n_modalities, n_samples, n_classes = X_tr.shape
-    arq = [('L', n_modalities*n_classes, n_classes), ('R'), ('D',0.9)]
+    #arq = [('L', n_modalities*n_classes, n_classes), ('R'), ('D',0.9)]
+    arq = [('L', n_modalities*n_classes, n_classes), ('R')]
 
     prec = fc_fusion(X_tr_, X_vl_, X_ts_, y_tr, y_vl, y_ts, arq = arq)
-    #return prec
-    return 0
+
+    return prec
 
 def SVM(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
     X_tr_ = np.array([np.concatenate((X1,X2),axis=0) for X1, X2 in zip(X_tr, X_vl)])
@@ -133,8 +134,8 @@ def SVM(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
 
     clf = SVC(random_state=42)
     parameters = {
-        'C': list(10.**np.arange(-10,11)),
-        'gamma': list(10.**np.arange(-10,11)),
+        'C': list(10.**np.arange(-4,5)),
+        'gamma': list(10.**np.arange(-4,5)),
         'kernel': ['rbf', 'linear'],
         'decision_function_shape': ['ovr', 'ovo']
     }
@@ -167,9 +168,7 @@ def get_args():
     
     return parser.parse_args()
 
-if __name__ == '__main__':
-    args = get_args()
-
+def fusion(args):
     split_path = os.path.join(args.settings, "%s/%s_split%s.txt" % (args.d, "%s", args.s))
     train_path = split_path%("train")
     val_path = split_path%("val")
@@ -202,9 +201,14 @@ if __name__ == '__main__':
 
     fusion_call = args.m + "(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts)"
     prec = eval(fusion_call)
-    print("{:.04f}".format(prec))
+    #print("{:.04f}".format(prec))
+    return prec
 
 
-    
+if __name__ == '__main__':
+    args = get_args()
+    print(args)
+    print(type(args))
+#    main(args)
     
 
