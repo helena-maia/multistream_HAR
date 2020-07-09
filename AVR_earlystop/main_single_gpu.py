@@ -78,6 +78,8 @@ parser.add_argument('--log', metavar='PATH', default='./log', type=str,
                     help='path to log (default: ./log)')
 parser.add_argument('--resume_log', metavar='PATH', default=None, type=str, 
                     help='path to an existing log for non-zero start-epoch (default: None)')
+parser.add_argument('-es', action='store_true', 
+                    help='Activate early stopping')
 
 os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"   
 os.environ["CUDA_VISIBLE_DEVICES"]="0"
@@ -155,12 +157,13 @@ def main():
             normalize,
         ])
 
-    val_transform = video_transforms.Compose([
-            # video_transforms.Scale((256)),
-            video_transforms.CenterCrop((new_size)),
-            video_transforms.ToTensor(),
-            normalize,
-        ])
+    if args.es:
+        val_transform = video_transforms.Compose([
+                # video_transforms.Scale((256)),
+                video_transforms.CenterCrop((new_size)),
+                video_transforms.ToTensor(),
+                normalize,
+            ])
     
     modality_ = "rgb" if (args.modality == "rhythm" or args.modality[:3] == "rgb") else "flow"
  
@@ -171,10 +174,8 @@ def main():
     # data loading  
     train_setting_file = "new_train.txt" if args.modality == "rgb2" else "train_split%d.txt" % (args.split)
     train_split_file = os.path.join(args.settings, args.dataset, train_setting_file)
-    val_setting_file = "val_split%d.txt" % (args.split) 
-    val_split_file = os.path.join(args.settings, args.dataset, val_setting_file)
 
-    if not os.path.exists(train_split_file) or not os.path.exists(val_split_file):
+    if not os.path.exists(train_split_file):# or not os.path.exists(val_split_file):
         print("No split file exists in %s directory. Preprocess the dataset first" % (args.settings))
 
     extension = ".png" if args.dataset == "hmdb51" and args.modality == "rhythm" else ".jpg"
@@ -192,33 +193,50 @@ def main():
                                                   approach_VR = args.vr_approach,
                                                   extension = extension,
                                                   direction_path = direction_path)
-    val_dataset = datasets.__dict__['dataset'](root=args.data,
-                                                  source=val_split_file,
-                                                  phase="val",
-                                                  modality=args.modality,
-                                                  is_color=is_color,
-                                                  new_length=args.new_length,
-                                                  new_width=args.new_width,
-                                                  new_height=args.new_height,
-                                                  video_transform=val_transform,
-                                                  approach_VR = args.vr_approach,
-                                                  extension = extension, 
-                                                  direction_path = direction_path)
 
-    print('{} samples found, {} train samples and {} validation samples.'.format(len(val_dataset)+len(train_dataset),
+
+
+    if args.es:
+        val_setting_file = "val_split%d.txt" % (args.split) 
+        val_split_file = os.path.join(args.settings, args.dataset, val_setting_file)
+        
+        if not os.path.exists(val_split_file):
+            print("No split file exists in %s directory. Preprocess the dataset first" % (args.settings))
+
+        val_dataset = datasets.__dict__['dataset'](root=args.data,
+                                                      source=val_split_file,
+                                                      phase="val",
+                                                      modality=args.modality,
+                                                      is_color=is_color,
+                                                      new_length=args.new_length,
+                                                      new_width=args.new_width,
+                                                      new_height=args.new_height,
+                                                      video_transform=val_transform,
+                                                      approach_VR = args.vr_approach,
+                                                      extension = extension, 
+                                                      direction_path = direction_path)
+    
+        print('{} samples found, {} train samples and {} validation samples.'.format(len(val_dataset)+len(train_dataset),
                                                                            len(train_dataset),
                                                                            len(val_dataset)))
+    else:
+        print('{} train samples found.'.format(len(train_dataset)))
+
     train_loader = torch.utils.data.DataLoader(
         train_dataset,
         batch_size=args.batch_size, shuffle=True,
         num_workers=args.workers, pin_memory=True)
-    val_loader = torch.utils.data.DataLoader(
-        val_dataset,
-        batch_size=args.batch_size, shuffle=True,
-        num_workers=args.workers, pin_memory=True)
-    
-    early_stop = EarlyStopping(verbose=True, 
-                               log_path=os.path.join(full_path, "early_stopping.json"))
+
+    if args.es:
+        val_loader = torch.utils.data.DataLoader(
+            val_dataset,
+            batch_size=args.batch_size, shuffle=True,
+            num_workers=args.workers, pin_memory=True)
+        
+        early_stop = EarlyStopping(verbose=True, 
+                                   log_path=os.path.join(full_path, "early_stopping.json"))
+
+    is_best = False
 
     for epoch in range(args.start_epoch, args.epochs):
         adjust_learning_rate(optimizer, epoch)
@@ -226,10 +244,11 @@ def main():
         # train for one epoch
         train(train_loader, model, criterion, optimizer, epoch)
 
-        # evaluate on validation set
-        losses = validate(val_loader, model, criterion)
+        if args.es:
+            # evaluate on validation set
+            losses = validate(val_loader, model, criterion)
 
-        is_best = early_stop(losses.avg, epoch)
+            is_best = early_stop(losses.avg, epoch)
 
         if (epoch + 1) % args.save_freq == 0 or is_best:
             checkpoint_name = "%03d_%s" % (epoch + 1, "checkpoint_"+args.modality+"_split_"+str(args.split)+".pth.tar")
@@ -244,8 +263,19 @@ def main():
         prec_name =  "%03d_%s" % (epoch + 1, "prec_split_"+str(args.split)+".txt")
         save_precision(prec_name, os.path.join(full_path,"precision"))
 
-        if early_stop.early_stop:
+        if args.es and early_stop.early_stop:
             break
+
+    if not args.es: # Final model
+            checkpoint_name = "%03d_%s" % (epoch + 1, "checkpoint_"+args.modality+"_split_"+str(args.split)+".pth.tar")
+            save_checkpoint({
+                'epoch': epoch + 1,
+                'arch': args.arch,
+                'state_dict': model.state_dict(),
+                'optimizer' : optimizer.state_dict(),
+                'val_loss_min': early_stop.val_loss_min,
+            }, True, checkpoint_name, os.path.join(full_path,"checkpoints"))
+
 
 def logging(args):
     args_dict = vars(args)
