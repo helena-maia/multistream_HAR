@@ -252,13 +252,13 @@ def main():
 
         if (epoch + 1) % args.save_freq == 0 or is_best:
             checkpoint_name = "%03d_%s" % (epoch + 1, "checkpoint_"+args.modality+"_split_"+str(args.split)+".pth.tar")
-            es_val = inf if not args.es else early_stop.val_loss_min
+            es_val = float('inf') if not args.es else early_stop.val_loss_min
             save_checkpoint({
                 'epoch': epoch + 1,
                 'arch': args.arch,
                 'state_dict': model.state_dict(),
                 'optimizer' : optimizer.state_dict(),
-                'val_loss_min': es_val,
+                'val_loss_min': es_val
             }, is_best, checkpoint_name, os.path.join(full_path,"checkpoints"))
 
         prec_name =  "%03d_%s" % (epoch + 1, "prec_split_"+str(args.split)+".txt")
@@ -274,7 +274,7 @@ def main():
                 'arch': args.arch,
                 'state_dict': model.state_dict(),
                 'optimizer' : optimizer.state_dict(),
-                'val_loss_min': early_stop.val_loss_min,
+                'val_loss_min': float('inf')
             }, True, checkpoint_name, os.path.join(full_path,"checkpoints"))
 
 
