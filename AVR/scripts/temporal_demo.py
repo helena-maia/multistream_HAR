@@ -36,6 +36,8 @@ parser.add_argument('-s', '--split', default=2, type=int, metavar='S',
                     help='which split of data to work on (default: 1)')
 parser.add_argument('--architecture', '-a', metavar='MODALITY', default='inception_v3',
                     choices=["resnet152", "inception_v3"])
+parser.add_argument('data_dir')
+parser.add_argument('model_path')
 
 def softmax(x):
     y = [math.exp(k) for k in x]
@@ -47,8 +49,11 @@ def softmax(x):
 def main():
     args = parser.parse_args()
 
-    model_path = '../../parameters/'+args.architecture+'/'+args.modality+'_s'+str(args.split)+'.pth.tar'
-    data_path = '/home/Datasets/UCF-101-OF_CPU'
+    #model_path = '../../parameters/'+args.architecture+'/'+args.modality+'_s'+str(args.split)+'.pth.tar'
+    #data_path = '/home/Datasets/UCF-101-OF_CPU'
+    model_path = args.model_path
+    data_dir = args.data_dir
+
     start_frame = 0
     num_categories = 51 if args.dataset=='hmdb51' else 101
     new_size= 224
