@@ -52,7 +52,7 @@ def main():
     #model_path = '../../parameters/'+args.architecture+'/'+args.modality+'_s'+str(args.split)+'.pth.tar'
     #data_path = '/home/Datasets/UCF-101-OF_CPU'
     model_path = args.model_path
-    data_dir = args.data_dir
+    data_path = args.data_dir
 
     start_frame = 0
     num_categories = 51 if args.dataset=='hmdb51' else 101
