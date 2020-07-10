@@ -71,8 +71,8 @@ def main():
     model_time = model_end_time - model_start_time
     print("Action recognition temporal model is loaded in %4.4f seconds." % (model_time))
 
-    #val_file = "./splits/"+args.dataset+"/val_split%d.txt"%(args.split)
-    val_file = 'spatial_testlist01_with_labels.txt'
+    val_file = "./splits/"+args.dataset+"/val_split%d.txt"%(args.split)
+    #val_file = 'spatial_testlist01_with_labels.txt'
     f_val = open(val_file, "r")
     val_list = f_val.readlines()
     print("we got %d test videos" % len(val_list))
