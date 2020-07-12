@@ -16,9 +16,15 @@ for ll in log_list:
 
     with open(args) as f:
         args_dict = json.load(f)
+        if 'es' not in args_dict:
+            args_dict["es"] = True
 
-    with open(early_stop) as f:
-        early_dict = json.load(f)
+    try:
+        with open(early_stop) as f:
+            early_dict = json.load(f)
+    except:
+        early_dict = {}
+        
 
     if header == []:
         header = ["timestamp"]
@@ -32,11 +38,12 @@ for ll in log_list:
     try:
         best_epoch = sorted([k for k in early_dict.keys() if k != "config"])[-8]
     except:
-        pass
+        data = [timestamp] + data + [-1, -1]
     else:
         best_data = early_dict[best_epoch]
         data = [timestamp] + data + [best_epoch, best_data["val_loss"]]
-        summary += [data]
+
+    summary += [data]
 
 summary = np.savetxt("summary.txt", summary, fmt="%s")
 
