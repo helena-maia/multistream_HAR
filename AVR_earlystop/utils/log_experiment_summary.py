@@ -32,7 +32,7 @@ for ll in log_list:
         header += ["best_epoch", "best_val"]
         summary += [header]
 
-    timestamp = ll.split("/")[1]
+    timestamp = ll.split("/")[-1]
     data = [args_dict[k] for k in header[1:-2]]
 
     try:
