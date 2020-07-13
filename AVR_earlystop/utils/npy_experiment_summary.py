@@ -24,7 +24,7 @@ for npy_item in npy_list:
         header += ["npy_file"]
         summary += [header]
 
-    timestamp = npy_item.split("/")[1]
+    timestamp = npy_item.split("/")[-1]
     data = [args_dict[k] for k in header[1:-1]]
     data = [timestamp] + data + [npy]
 
