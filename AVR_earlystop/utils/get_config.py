@@ -35,7 +35,7 @@ for k in data_dict:
 
     config_dict[k] = aux_dict
 
-with open("config2.json", 'w') as json_file:
+with open("config.json", 'w') as json_file:
     json.dump(config_dict, json_file, sort_keys=True, indent=4, separators=(',', ': '))
 
 

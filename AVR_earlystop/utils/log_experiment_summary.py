@@ -3,7 +3,7 @@ import json
 import os
 import numpy as np
 
-log_list = glob.glob("log/*")
+log_list = glob.glob("../log/*")
 header = []
 summary = []
 
