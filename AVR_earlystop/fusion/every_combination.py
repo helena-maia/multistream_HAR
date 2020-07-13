@@ -34,8 +34,11 @@ splits = args.s
 settings = args.settings
 modalities = args.modalities
 output = args.o
-methods.remove("individual")
-methods.remove("SVM")
+#methods.remove("individual")
+#methods.remove("SVM")
+#methods.remove("FC")
+#methods.remove("sugeno_fuzzy")
+methods = ["SVM"]
 
 npy_dict = npy_dict[train_type]
 
@@ -74,5 +77,3 @@ for d, s, m, c in it:
             param, _, prec = ret
             with open(output, "a") as f:
                 f.write("{}\t{}\t{}\t{}\t{}\t{:.04f}\n".format(d, s, m, c, param, prec))
-
-

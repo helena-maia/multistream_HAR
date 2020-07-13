@@ -53,12 +53,14 @@ def simple_avg(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
     return (None, None, prec)
 
 def iter_weights(n_modalities):
-    linear = [i+1 for i in range(n_modalities)]
-    linear_weights = itertools.permutations(linear, n_modalities)
-    exp = [2**i for i in range(n_modalities)]
-    exp_weights = itertools.permutations(exp, n_modalities)
+    #linear = [i+1 for i in range(n_modalities)]
+    #linear_weights = itertools.permutations(linear, n_modalities)
+    #exp = [2**i for i in range(n_modalities)]
+    #exp_weights = itertools.permutations(exp, n_modalities)
 
-    weights = itertools.chain(linear_weights, exp_weights)
+    #weights = itertools.chain(linear_weights, exp_weights)
+
+    weights = itertools.product(range(5,100,5),repeat=n_modalities)
 
     return weights
 
