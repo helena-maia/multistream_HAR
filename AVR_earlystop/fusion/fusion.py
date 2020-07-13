@@ -7,8 +7,6 @@ from sklearn.svm import SVC
 from sklearn.model_selection import GridSearchCV
 from fuzzy_fusion import fuzzy_fusion
 from fc_fusion import fc_fusion
-#import operator
-#from fuzzy_fusion import fuzzy_fusion
 
 
 def get_labels(path_file):
@@ -28,7 +26,20 @@ def get_labels(path_file):
 
     return name_list, label_list
 
-methods = ["simple_avg", "weighted_avg", "FC", "SVM", "choquet_fuzzy", "sugeno_fuzzy"]
+methods = ["individual", "simple_avg", "weighted_avg", "choquet_fuzzy", "sugeno_fuzzy", "FC", "SVM"]
+
+def individual(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
+    prec_list = []
+    n_modalities = len(X_ts)
+
+    for i in range(n_modalities):
+        y_pred = np.argmax(X_ts[i], axis=1)
+
+        # Multiclass precision: calculate metrics globally by counting the total true positives
+        prec = precision_score(y_ts, y_pred, average ='micro')
+        prec_list.append(prec)
+
+    return (None, None, prec_list)
 
 def simple_avg(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
     n_samples = y_ts.shape[0]
@@ -39,7 +50,7 @@ def simple_avg(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
     # Multiclass precision: calculate metrics globally by counting the total true positives
     prec = precision_score(y_ts, y_pred, average ='micro')
 
-    return prec
+    return (None, None, prec)
 
 def iter_weights(n_modalities):
     linear = [i+1 for i in range(n_modalities)]
@@ -68,17 +79,16 @@ def weighted_avg(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
     best_weight = None
 
     weights = iter_weights(n_modalities)
-    
+
     for w in weights:
         prec = weighted_avg_step(X_tr_, y_tr_, w)
         if prec > max_prec:
-            print("Update:", w, prec)
             max_prec = prec
             best_weight = w
 
     prec = weighted_avg_step(X_ts, y_ts, best_weight)
 
-    return prec
+    return (best_weight, max_prec, prec)
 
 def choquet_fuzzy(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
     X_tr_ = np.array([np.concatenate((X1,X2),axis=0) for X1, X2 in zip(X_tr, X_vl)])
@@ -101,13 +111,12 @@ def choquet_fuzzy(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
         prec = choquet_fuzzy_step(X_tr_, y_tr_, w)
 
         if prec > max_prec:
-            print("Update:", w, prec)
             max_prec = prec
             best_weight = w
 
     prec = choquet_fuzzy_step(X_ts, y_ts, best_weight)
 
-    return prec
+    return (best_weight, max_prec, prec)
 
 def sugeno_fuzzy(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
     return
@@ -121,9 +130,9 @@ def FC(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
     #arq = [('L', n_modalities*n_classes, n_classes), ('R'), ('D',0.9)]
     arq = [('L', n_modalities*n_classes, n_classes), ('R')]
 
-    prec = fc_fusion(X_tr_, X_vl_, X_ts_, y_tr, y_vl, y_ts, arq = arq)
+    prec = fc_fusion(X_tr_, X_vl_, X_ts_, y_tr, y_vl, y_ts, arq = arq)/100.
 
-    return prec
+    return (None, None, prec)
 
 def SVM(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
     X_tr_ = np.array([np.concatenate((X1,X2),axis=0) for X1, X2 in zip(X_tr, X_vl)])
@@ -134,8 +143,8 @@ def SVM(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
 
     clf = SVC(random_state=42)
     parameters = {
-        'C': list(10.**np.arange(-4,5)),
-        'gamma': list(10.**np.arange(-4,5)),
+        'C': list(10.**np.arange(-10,11)),
+        'gamma': list(10.**np.arange(-10,11)),
         'kernel': ['rbf', 'linear'],
         'decision_function_shape': ['ovr', 'ovo']
     }
@@ -144,10 +153,13 @@ def SVM(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
     gs.fit(X_tr_, y_tr_)
 
     best_clf = gs.best_estimator_
-    print(gs.best_estimator_.get_params())
-    best_clf.fit(X_tr_, y_tr_)
-    return best_clf.score(X_ts_, y_ts)
+    best_param = gs.best_params_
+    best_score = gs.best_score_
 
+    y_pred = best_clf.predict(X_ts_)
+    prec = precision_score(y_ts, y_pred, average ='micro')
+
+    return (best_param, best_score, prec)
 
 
 def get_args():
@@ -163,9 +175,9 @@ def get_args():
     parser.add_argument('-m', metavar='METHOD', default='simple_avg', 
                         help='fusion method:'+' | '.join(methods) +' (default: '+ methods[0] +') ',
                         choices=methods)
-    parser.add_argument('--settings', metavar='DIR', default='../datasets/settings',
+    parser.add_argument('--settings', metavar='DIR', default='../datasets/settings_earlystop',
                         help='path to dataset setting files')
-    
+
     return parser.parse_args()
 
 def fusion(args):
@@ -178,7 +190,9 @@ def fusion(args):
     npy_data = []
     for npy_path in args.npy_paths:
         npy_data.append(np.load(npy_path))
-    
+
+    if len(npy_data) < 2: return None
+
     ds_keys, ds_labels = get_labels(dataset_path)
     tr_keys, tr_labels = get_labels(train_path)
     vl_keys, vl_labels = get_labels(val_path)
@@ -200,15 +214,25 @@ def fusion(args):
     y_tr, y_vl, y_ts = np.array(tr_labels), np.array(vl_labels), np.array(ts_labels)
 
     fusion_call = args.m + "(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts)"
-    prec = eval(fusion_call)
-    #print("{:.04f}".format(prec))
-    return prec
+    ret = eval(fusion_call)
+
+    return ret
 
 
 if __name__ == '__main__':
     args = get_args()
-    print(args)
-    print(type(args))
-#    main(args)
-    
+    ret = fusion(args)
+
+    if ret:
+        best_param, best_score, prec = ret
+
+        if best_param: print("Best parameters:", best_param)
+        if best_score: print("Best precision:", best_score)
+        if isinstance(prec, list):
+            print("Prec:")
+            for n,p in zip(args.npy_paths, prec):
+                print("\t{}: {:.04f}".format(n,p))
+        elif isinstance(prec, float): print("Prec: {:.04f}".format(prec))
+    else: print("Missing npy file")
+
 
