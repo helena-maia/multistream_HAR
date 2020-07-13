@@ -45,7 +45,7 @@ for ll in log_list:
 
     summary += [data]
 
-summary = np.savetxt("summary.csv", summary, fmt="%s", delimiter="\t")
+summary = np.savetxt("log_summary.csv", summary, fmt="%s", delimiter="\t")
 
 
 

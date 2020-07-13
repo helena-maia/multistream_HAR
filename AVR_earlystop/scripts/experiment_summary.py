@@ -30,7 +30,7 @@ for npy_item in npy_list:
 
     summary += [data]
 
-summary = np.savetxt("summary.csv", summary, fmt="%s", delimiter="\t")
+summary = np.savetxt("npy_summary.csv", summary, fmt="%s", delimiter="\t")
 
 
 
