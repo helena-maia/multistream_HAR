@@ -5,8 +5,8 @@ from sklearn.metrics import precision_score
 import itertools
 from sklearn.svm import SVC
 from sklearn.model_selection import GridSearchCV
-from fuzzy_fusion import fuzzy_fusion
-from fc_fusion2 import fc_fusion, fc_fusion_sugeno
+from fuzzy_fusion_2 import fuzzy_fusion, fuzzy_fusion_sugeno
+from fc_fusion import fc_fusion
 
 
 def get_labels(path_file):
@@ -53,14 +53,14 @@ def simple_avg(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
     return (None, None, prec)
 
 def iter_weights(n_modalities):
-    #linear = [i+1 for i in range(n_modalities)]
-    #linear_weights = itertools.permutations(linear, n_modalities)
-    #exp = [2**i for i in range(n_modalities)]
-    #exp_weights = itertools.permutations(exp, n_modalities)
+    linear = [i+1 for i in range(n_modalities)]
+    linear_weights = itertools.permutations(linear, n_modalities)
+    exp = [2**i for i in range(n_modalities)]
+    exp_weights = itertools.permutations(exp, n_modalities)
 
-    #weights = itertools.chain(linear_weights, exp_weights)
+    weights = itertools.chain(linear_weights, exp_weights)
 
-    weights = itertools.product(range(5,100,5),repeat=n_modalities)
+    #weights = itertools.product(range(5,100,5),repeat=n_modalities)
 
     return weights
 
@@ -126,7 +126,7 @@ def sugeno_fuzzy(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
     n_modalities = len(X_tr)
 
     def sugeno_fuzzy_step(X, y, w):
-        X_comb = fc_fusion_sugeno(X, w)
+        X_comb = fuzzy_fusion_sugeno(X, w)
         y_pred = np.argmax(X_comb, axis=1) # n_samples
         prec = precision_score(y, y_pred, average ='micro')
 
@@ -139,11 +139,13 @@ def sugeno_fuzzy(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
 
     for w in weights:
         prec = sugeno_fuzzy_step(X_tr_, y_tr_, w)
+        continue
 
         if prec > max_prec:
             max_prec = prec
             best_weight = w
 
+    return None
     prec = sugeno_fuzzy_step(X_ts, y_ts, best_weight)
 
     return (best_weight, max_prec, prec)

@@ -38,7 +38,7 @@ output = args.o
 #methods.remove("SVM")
 #methods.remove("FC")
 #methods.remove("sugeno_fuzzy")
-methods = ["SVM"]
+methods = ["sugeno_fuzzy"]
 
 npy_dict = npy_dict[train_type]
 
