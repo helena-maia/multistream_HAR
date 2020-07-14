@@ -6,7 +6,7 @@ import itertools
 from sklearn.svm import SVC
 from sklearn.model_selection import GridSearchCV
 from fuzzy_fusion import fuzzy_fusion
-from fc_fusion import fc_fusion
+from fc_fusion2 import fc_fusion, fc_fusion_sugeno
 
 
 def get_labels(path_file):
@@ -121,7 +121,32 @@ def choquet_fuzzy(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
     return (best_weight, max_prec, prec)
 
 def sugeno_fuzzy(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
-    return
+    X_tr_ = np.array([np.concatenate((X1,X2),axis=0) for X1, X2 in zip(X_tr, X_vl)])
+    y_tr_ = np.concatenate((y_tr, y_vl), axis=0)
+    n_modalities = len(X_tr)
+
+    def sugeno_fuzzy_step(X, y, w):
+        X_comb = fc_fusion_sugeno(X, w)
+        y_pred = np.argmax(X_comb, axis=1) # n_samples
+        prec = precision_score(y, y_pred, average ='micro')
+
+        return prec
+
+    weights = iter_weights(n_modalities)
+
+    max_prec = 0
+    best_weight = None
+
+    for w in weights:
+        prec = sugeno_fuzzy_step(X_tr_, y_tr_, w)
+
+        if prec > max_prec:
+            max_prec = prec
+            best_weight = w
+
+    prec = sugeno_fuzzy_step(X_ts, y_ts, best_weight)
+
+    return (best_weight, max_prec, prec)
 
 def FC(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
     X_tr_ = np.concatenate((X_tr), axis=1)
