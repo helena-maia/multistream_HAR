@@ -6,11 +6,14 @@ import os
 
 json_file = open("../utils/config.json", "r")
 npy_dict = json.load(json_file)
+methods.remove("individual")
 
 def get_args():
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('-s', default=[1,2,3], type=int, nargs='+', metavar='S',
                         help='which split of data to work on (default: 1 2 3)')
+    parser.add_argument('-m', default=methods, type=str, nargs='+', metavar='METHOD',
+                        help='fusion methods (default: ' + ",".join(methods) + ")")
     parser.add_argument('-d', nargs='+', default=["ucf101", "hmdb51"], type=str, metavar='DATASET',
                         help='datasets (default: ucf101 hmdb51)')
     parser.add_argument('-o', default="fusion.csv", type=str, metavar='OUTPUT',
@@ -34,11 +37,6 @@ splits = args.s
 settings = args.settings
 modalities = args.modalities
 output = args.o
-#methods.remove("individual")
-#methods.remove("SVM")
-#methods.remove("FC")
-#methods.remove("sugeno_fuzzy")
-methods = ["sugeno_fuzzy"]
 
 npy_dict = npy_dict[train_type]
 
