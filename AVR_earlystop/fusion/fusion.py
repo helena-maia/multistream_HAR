@@ -26,7 +26,7 @@ def get_labels(path_file):
 
     return name_list, label_list
 
-methods = ["individual", "simple_avg", "weighted_avg", "choquet_fuzzy", "sugeno_fuzzy", "FC", "SVM"]
+methods = ["individual", "simple_avg", "fixed_weighted_avg", "weighted_avg", "choquet_fuzzy", "sugeno_fuzzy", "FC", "SVM"]
 
 def individual(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
     prec_list = []
@@ -51,6 +51,20 @@ def simple_avg(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
     prec = precision_score(y_ts, y_pred, average ='micro')
 
     return (None, None, prec)
+
+def fixed_weighted_avg(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
+    n_samples = y_ts.shape[0]
+    w = [1.,2.]
+    X_w = [X_ts[i] * w[i] for i in range(2)]
+    X_comb = np.mean(X_w, axis=0) # n_samples X n_classes
+
+    y_pred = np.argmax(X_comb, axis=1) # n_samples
+
+    # Multiclass precision: calculate metrics globally by counting the total true positives
+    prec = precision_score(y_ts, y_pred, average ='micro')
+
+    return (None, None, prec)
+
 
 def iter_weights(n_modalities):
     # Linear and exponential weights
