@@ -37,6 +37,7 @@ splits = args.s
 settings = args.settings
 modalities = args.modalities
 output = args.o
+methods = args.m
 
 npy_dict = npy_dict[train_type]
 

@@ -104,7 +104,7 @@ def VideoTemporalPrediction(
         flow_list.append(np.expand_dims(cur_img_tensor.numpy(), 0))
         
     flow_np = np.concatenate(flow_list,axis=0)
-    batch_size = 15
+    batch_size = 45
     prediction = np.zeros((num_categories,flow.shape[3]))
     num_batches = int(math.ceil(float(flow.shape[3])/batch_size))
 
