@@ -55,8 +55,10 @@ def simple_avg(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
 def fixed_weighted_avg(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
     n_samples = y_ts.shape[0]
     w = [1.,2.]
-    X_w = [X_ts[i] * w[i] for i in range(2)]
-    X_comb = np.mean(X_w, axis=0) # n_samples X n_classes
+    X_comb = fuzzy_fusion(X_ts, w)
+    #X_w = [X_ts[i] * w[i] for i in range(2)]
+    #X_comb = np.mean(X_w, axis=0) # n_samples X n_classes
+
 
     y_pred = np.argmax(X_comb, axis=1) # n_samples
 
