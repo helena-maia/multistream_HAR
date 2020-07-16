@@ -197,13 +197,13 @@ def SVM(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
 
     clf = SVC(random_state=42)
     parameters = {
-        'C': list(10.**np.arange(-10,11)),
+        'C': list(10.**np.arange(-5,6)),
         'gamma': list(10.**np.arange(-10,11)),
         'kernel': ['rbf', 'linear'],
         'decision_function_shape': ['ovr', 'ovo']
     }
 
-    gs = GridSearchCV(clf, parameters, n_jobs=8, verbose=1, scoring='accuracy', cv=3)
+    gs = GridSearchCV(clf, parameters, n_jobs=48, verbose=1, scoring='accuracy', cv=3)
     gs.fit(X_tr_, y_tr_)
 
     best_clf = gs.best_estimator_
