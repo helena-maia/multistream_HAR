@@ -121,7 +121,6 @@ def choquet_fuzzy(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
     n_modalities = len(X_tr)
 
     def choquet_fuzzy_step(X, y, w):
-        w = [x/10. for x in w]
         X_comb = fuzzy_fusion(X, w)
         y_pred = np.argmax(X_comb, axis=1) # n_samples
         prec = precision_score(y, y_pred, average ='micro')
@@ -134,6 +133,7 @@ def choquet_fuzzy(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
     best_weight = None
 
     for w in weights:
+        w = [x/10. for x in w]
         prec = choquet_fuzzy_step(X_tr_, y_tr_, w)
 
         if prec > max_prec:
