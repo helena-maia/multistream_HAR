@@ -79,8 +79,11 @@ def iter_weights(n_modalities):
     weights = itertools.chain(linear_weights, exp_weights)
     '''
 
-    # GridSearch
-    weights = itertools.product(range(5,100,5),repeat=n_modalities)
+    # GridSearch - v1
+    #weights = itertools.product(range(5,100,5),repeat=n_modalities)
+
+    # GridSearch - v2
+    weights = itertools.product(range(1,10,1),repeat=n_modalities)
 
     return weights
 
@@ -118,6 +121,7 @@ def choquet_fuzzy(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
     n_modalities = len(X_tr)
 
     def choquet_fuzzy_step(X, y, w):
+        w = [x/10. for x in w]
         X_comb = fuzzy_fusion(X, w)
         y_pred = np.argmax(X_comb, axis=1) # n_samples
         prec = precision_score(y, y_pred, average ='micro')
@@ -146,6 +150,7 @@ def sugeno_fuzzy(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
     n_modalities = len(X_tr)
 
     def sugeno_fuzzy_step(X, y, w):
+        w = [x/10. for x in w]
         X_comb = fuzzy_fusion_sugeno(X, w)
         y_pred = np.argmax(X_comb, axis=1) # n_samples
         prec = precision_score(y, y_pred, average ='micro')
