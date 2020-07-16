@@ -7,7 +7,7 @@ from sklearn.svm import SVC
 from sklearn.model_selection import GridSearchCV
 from fuzzy_fusion_2 import fuzzy_fusion, fuzzy_fusion_sugeno
 from fc_fusion import fc_fusion
-
+from sklearn.preprocessing import StandardScaler
 
 def get_labels(path_file):
     file_ = open(path_file, "r")
@@ -203,7 +203,11 @@ def SVM(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
         'decision_function_shape': ['ovr', 'ovo']
     }
 
-    gs = GridSearchCV(clf, parameters, n_jobs=48, verbose=1, scoring='accuracy', cv=3)
+    scaler = StandardScaler()
+    X_tr_ = scaler.fit_transform(X_tr_)
+    X_ts_ = scaler.transform(X_ts_)
+
+    gs = GridSearchCV(clf, parameters, n_jobs=30, verbose=1, scoring='accuracy', cv=3)
     gs.fit(X_tr_, y_tr_)
 
     best_clf = gs.best_estimator_
