@@ -121,6 +121,8 @@ def choquet_fuzzy(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
     n_modalities = len(X_tr)
 
     def choquet_fuzzy_step(X, y, w):
+        w = np.array(w)
+        w = w/(sum(w)*2)
         X_comb = fuzzy_fusion_choquet(X, w)
         y_pred = np.argmax(X_comb, axis=1) # n_samples
         prec = precision_score(y, y_pred, average ='micro')
@@ -133,7 +135,6 @@ def choquet_fuzzy(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
     best_weight = None
 
     for w in weights:
-        w = [x/10. for x in w]
         prec = choquet_fuzzy_step(X_tr_, y_tr_, w)
 
         if prec > max_prec:
@@ -150,7 +151,7 @@ def sugeno_fuzzy(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
     n_modalities = len(X_tr)
 
     def sugeno_fuzzy_step(X, y, w):
-        w = [x/10. for x in w]
+        #w = [x/10. for x in w]
         X_comb = fuzzy_fusion_sugeno(X, w)
         y_pred = np.argmax(X_comb, axis=1) # n_samples
         prec = precision_score(y, y_pred, average ='micro')
@@ -164,13 +165,11 @@ def sugeno_fuzzy(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
 
     for w in weights:
         prec = sugeno_fuzzy_step(X_tr_, y_tr_, w)
-        continue
 
         if prec > max_prec:
             max_prec = prec
             best_weight = w
 
-    return None
     prec = sugeno_fuzzy_step(X_ts, y_ts, best_weight)
 
     return (best_weight, max_prec, prec)
