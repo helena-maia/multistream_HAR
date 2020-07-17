@@ -28,25 +28,17 @@ def min_max(x):
 
 
 def get_lambda(fm):
-    """Computes the lambda necessary for lambda fuzzy measures given the singletons."""
 
-    x = Symbol('x', real=True)
-    eqn = (1 + x*fm[0])
-    for i in range(1, fm.shape[0]):
-        eqn = eqn * (1 + x*fm[i])
-    eqn = eqn - x - 1
-    #print(eqn)
-
-    # eqn = (1 + x*fm[0])*(1 + x*fm[1])*(1 + x*fm[2]) - x - 1
+    x = Symbol('x')
+    eqn = (1 + x*fm[0])*(1 + x*fm[1])*(1 + x*fm[2]) - x - 1
     sol = solve(eqn, x)
-    #print(sol)
+
     sol_lambda = sol[-1]
     return sol_lambda
 
+
 def fuzzyFusion_3(mix, fm, lambda_value):
-    """Computes the fusion of 3 different sources given an array of diferent predictions
-        mix = [source, samples, confidences for each class],
-        an array of sigletion fuzzy measures fm (weights) and the lambda"""
+
     idx = np.argsort(mix, axis=0)[::-1, ...]
     h = np.sort(mix, axis=0)[::-1, ...]
 
@@ -67,10 +59,7 @@ def fuzzyFusion_3(mix, fm, lambda_value):
     return ff
 
 
-def fuzzyFusion_2(mix, fm, lambda_value):
-    """Computes the fusion of 2 different sources given an array of diferent predictions
-        mix = [source, samples, confidences for each class],
-        an array of sigletion fuzzy measures fm (weights) and the lambda"""
+def fuzzyFusion_2(mix, fm):
 
     idx = np.argsort(mix, axis=0)[::-1, ...]
     h = np.sort(mix, axis=0)[::-1, ...]
@@ -91,7 +80,7 @@ def fuzzyFusion_2(mix, fm, lambda_value):
 
 def get_acc_ff(w, pred, y):
     w = np.array(w)
-    fm = w/10  # (sum(w)*2)
+    fm = w/(sum(w)*2)
 
     lambda_v = None
     if fm.shape[0] > 2:
@@ -101,11 +90,14 @@ def get_acc_ff(w, pred, y):
     streams = np.array(pred)
     ff = np.zeros_like(pred[0])
 
-    ff = fuzzyFusion_3(streams, fm, lambda_v)
+    if len(pred) == 3:
+        ff = fuzzyFusion_3(streams, fm, lambda_v)
+    else:
+        ff = fuzzyFusion_2(streams, fm)
 
     y_pred = np.argmax(ff, -1)
     acc = accuracy_score(y, y_pred)
-    return acc
+    return acc, y_pred
 
 
 def get_acc(w, pred, y):
@@ -120,18 +112,34 @@ def get_acc(w, pred, y):
 
     y_pred = np.argmax(avg_predictions, -1)
     acc = accuracy_score(y, y_pred)
-    return acc
+    return acc, y_pred
 
 
-def fuzzy_fusion(data, w):
-    data = np.array(data) # num_classifiers (modalities) x num_samples x num_classes
+def get_acc_gm(w, pred, y):
+    avg_predictions = np.ones_like(pred[0])
+
+    for i in range(len(w)):
+        w_i = w[i]
+        avg_predictions *= pred[i]**w_i
+
+    avg_predictions**(1/sum(w))
+
+    y_pred = np.argmax(avg_predictions, -1)
+    acc = accuracy_score(y, y_pred)
+    return acc, y_pred
+
+
+def fuzzy_fusion_sugeno(data, w):
+    data = np.array(data)
     w = np.array(w)
-    fm = w / (sum(w)*2)
+    fm = w /10 #(sum(w)*2)
 
     n = w.shape[0]
-    lambda_v = float(get_lambda(fm))
+    lambda_v = None
+    if fm.shape[0] > 2:
+        lambda_v = float(get_lambda(fm))
 
-    # Sort classifiers scores for each fixed pair of sample and class
+
     idx = np.argsort(data, axis=0)[::-1, ...]
     h = np.sort(data, axis=0)[::-1, ...]
 
@@ -143,12 +151,24 @@ def fuzzy_fusion(data, w):
     ind = np.unravel_index(idx, idx.shape, order='F')
     FM = FM[ind]
 
-    ff = h[0, ...] * FM[0, ...]
-    A0 = FM[0, ...]
+    A = FM[0, ...]
 
-    for i in range(1, n-1):
-        A = A0 + FM[i, ...] + lambda_v*A0*FM[i, ...]
-        ff = ff + h[i, ...] * (A - A0)
+    aux = np.zeros_like(FM)
+
+    for i in range(n):
+        aux[i, ...] = np.minimum(h[i, ...], A)
         A0 = A
-    ff = ff + h[n-1, ...] * (1 - A0)
+        # A = A0 + FM[i, ...] + lambda_v*A0*FM[i, ...]
+        A = 1
+    ff = np.max(aux, axis=0)
+
     return ff
+
+
+def get_acc_ff_su(w, pred, y):
+
+    ff = fuzzy_fusion_sugeno(pred, w)
+
+    y_pred = np.argmax(ff, -1)
+    acc = accuracy_score(y, y_pred)
+    return acc, y_pred
