@@ -27,14 +27,21 @@ def min_max(x):
     return (x - np.min(x, axis=1)[:, None]) / (np.max(x, axis=1) - np.min(x, axis=1))[:, None]
 
 
-def get_lambda(fm):
-
+def get_lambda3(fm):
     x = Symbol('x')
     eqn = (1 + x*fm[0])*(1 + x*fm[1])*(1 + x*fm[2]) - x - 1
     sol = solve(eqn, x)
 
     sol_lambda = sol[-1]
     return sol_lambda
+
+def get_lambda2(fm):
+    x = Symbol('x')
+    eqn = (1 + x*fm[0])*(1 + x*fm[1]) - x - 1
+    sol = solve(eqn, x)
+
+    sol_lambda = sol[-1]
+    return sol_lambda    
 
 
 def fuzzyFusion_3(mix, fm, lambda_value):
@@ -135,9 +142,12 @@ def fuzzy_fusion_sugeno(data, w):
     fm = w /10 #(sum(w)*2)
 
     n = w.shape[0]
-    lambda_v = None
+    
     if fm.shape[0] > 2:
-        lambda_v = float(get_lambda(fm))
+        lambda_v = float(get_lambda3(fm))
+    else:
+        lambda_v = float(get_lambda2(fm))
+
 
 
     idx = np.argsort(data, axis=0)[::-1, ...]
