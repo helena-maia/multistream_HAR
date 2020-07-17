@@ -5,7 +5,7 @@ from sklearn.metrics import precision_score
 import itertools
 from sklearn.svm import SVC
 from sklearn.model_selection import GridSearchCV
-from fuzzy_fusion import fuzzy_fusion, fuzzy_fusion_sugeno
+from fuzzy_fusion import fuzzyFusion_2 as fuzzy_fusion_choquet, fuzzy_fusion_sugeno
 from fc_fusion import fc_fusion
 from sklearn.preprocessing import StandardScaler
 
@@ -121,7 +121,7 @@ def choquet_fuzzy(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
     n_modalities = len(X_tr)
 
     def choquet_fuzzy_step(X, y, w):
-        X_comb = fuzzy_fusion(X, w)
+        X_comb = fuzzy_fusion_choquet(X, w)
         y_pred = np.argmax(X_comb, axis=1) # n_samples
         prec = precision_score(y, y_pred, average ='micro')
 
