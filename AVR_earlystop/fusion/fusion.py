@@ -5,7 +5,7 @@ from sklearn.metrics import precision_score
 import itertools
 from sklearn.svm import SVC
 from sklearn.model_selection import GridSearchCV
-from fuzzy_fusion_2 import fuzzy_fusion, fuzzy_fusion_sugeno
+from fuzzy_fusion import fuzzy_fusion, fuzzy_fusion_sugeno
 from fc_fusion import fc_fusion
 from sklearn.preprocessing import StandardScaler
 
