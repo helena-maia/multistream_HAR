@@ -158,8 +158,8 @@ def fuzzy_fusion_sugeno(data, w):
     for i in range(n):
         aux[i, ...] = np.minimum(h[i, ...], A)
         A0 = A
-        # A = A0 + FM[i, ...] + lambda_v*A0*FM[i, ...]
-        A = 1
+        A = A0 + FM[i, ...] + lambda_v*A0*FM[i, ...]
+        #A = 1
     ff = np.max(aux, axis=0)
 
     return ff
