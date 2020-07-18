@@ -44,6 +44,8 @@ plt.xlim(left=-1, right=len(X)+1)
 plt.hlines(np.arange(0,top,step), xmin=0, xmax=len(X), linestyles='dashed', color='lightgray')
 plt.vlines([len(X)-7], ymin=0, ymax=top, linestyles='dashed', color='red')
 
+plt.ylabel('Precision', fontsize=12)
+plt.xlabel('Number of epochs', fontsize=12)
 plt.xticks(np.arange(0, len(X), 5))
 plt.plot(X, y)
 plt.show()
