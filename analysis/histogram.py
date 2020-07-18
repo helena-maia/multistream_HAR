@@ -71,14 +71,20 @@ def plot_acc(npy_path, val_path, num_classes, split, output_path, cm_path):#, mo
         np.save(cm_path%split, conf_matrix)
         print("Confusion matrix saved: ", cm_path%split)
 
+    print(np.where(acc_np_plot < 0.2))
     
-    plt.hlines(np.arange(0.2, 1.0, 0.2), xmin=-2, xmax=num_classes+1, linestyles='dashed', color='black')
+    plt.hlines(np.arange(20, 100, 20), xmin=-2, xmax=num_classes+1, linestyles='dashed', color='black')
     plt.xlim(-2,num_classes+1)
-    plt.ylim(-0.02,1.02)
+    plt.ylim(-2,102)
     plt.xticks(np.arange(0, num_classes, 5))
-    plt.bar(np.arange(num_classes), acc_np_plot)
+    plt.xlabel("Class", fontsize=12)
+    plt.ylabel("Accuracy", fontsize=12)
+    plt.bar(np.arange(num_classes), acc_np_plot*100.)
 
-    plt.savefig(output_path)
+    fig = plt.gcf()
+    fig.set_size_inches(10, 5)
+    fig.savefig(output_path, dpi=100)
+
     print("Histogram saved:", output_path)
 
 
@@ -92,7 +98,7 @@ def main():
     num_classes = 101 if args.d == 'ucf101' else 51
 
     split = "_s%d" % args.split if args.split != -1 else ""
-    output_path = os.path.join(args.o, "%s_%s_%s%s.png" % (args.d, args.a, args.m, split))
+    output_path = os.path.join(args.o, "%s_%s_%s%s.eps" % (args.d, args.a, args.m, split))
     cm_path = os.path.join(args.o, "conf_matrix_%s_%s_%s_s%s.npy" % (args.d, args.a, args.m, "%d"))
 
     if not os.path.isdir(args.o):
