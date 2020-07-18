@@ -1,3 +1,0 @@
-dataset	split	method	combination	param	prec
-ucf101	3	FC	('rgb', 'flow')	None	0.8874
-hmdb51	3	FC	('rgb', 'flow')	None	0.6059

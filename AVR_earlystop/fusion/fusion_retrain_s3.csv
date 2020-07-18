@@ -1,4 +1,0 @@
-dataset	split	method	combination	param	prec
-ucf101	3	simple_avg	('rgb', 'flow')	None	0.9226
-ucf101	3	weighted_avg	('rgb', 'flow')	(5, 5)	0.9226
-ucf101	3	choquet_fuzzy	('rgb', 'flow')	(5, 5)	0.9226
