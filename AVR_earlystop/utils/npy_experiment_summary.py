@@ -3,7 +3,7 @@ import json
 import os
 import numpy as np
 
-npy_list = glob.glob("../scripts/NPYS/*")
+npy_list = glob.glob("../scripts/NPYS100/*")
 header = []
 summary = []
 
@@ -25,12 +25,12 @@ for npy_item in npy_list:
         summary += [header]
 
     timestamp = npy_item.split("/")[-1]
-    data = [args_dict[k] for k in header[1:-1]]
+    data = [args_dict.get(k,"ND") for k in header[1:-1]]
     data = [timestamp] + data + [npy]
 
     summary += [data]
 
-summary = np.savetxt("npy_summary.csv", summary, fmt="%s", delimiter="\t")
+summary = np.savetxt("npy100_summary.csv", summary, fmt="%s", delimiter="\t")
 
 
 
