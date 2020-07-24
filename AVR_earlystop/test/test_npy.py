@@ -40,12 +40,12 @@ def get_args():
 if __name__ == '__main__':
     args = get_args()
     test_path = os.path.join(args.settings, "%s/test_split%s.txt" % (args.d, args.s))
-    ts_keys, ts_labels = get_labels(test_path)
+    _, ts_labels = get_labels(test_path)
     npy_data = np.load(args.npy_path)
-    y_pred = np.argmax(X_ts, axis=1)
+    y_pred = np.argmax(npy_data, axis=1)
 
     # Multiclass precision: calculate metrics globally by counting the total true positives
-    prec = precision_score(y_ts, y_pred, average ='micro')
+    prec = precision_score(ts_labels, y_pred, average ='micro')
 
     print("Prec: {:.04f}".format(prec))
 
