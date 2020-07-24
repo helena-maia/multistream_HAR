@@ -19,7 +19,6 @@ import datasets
 
 from early_stopping.pytorchtools import EarlyStopping
 
-model_path = './checkpoints'
 model_names = sorted(name for name in models.__dict__
     if name.islower() and not name.startswith("__")
     and callable(models.__dict__[name]))
@@ -323,7 +322,8 @@ def build_model(resume_epoch):
     num_channels = 1 if args.modality == 'rhythm' else 20 if args.modality=='flow' else 3
     model = models.__dict__[args.arch](pretrained=is_new, channels=num_channels, num_classes=num_classes)
     if not is_new:
-        path = os.path.join(model_path,'{0:03d}_checkpoint_{1}_split_{2}.pth.tar'.format(resume_epoch,args.modality,args.split))
+        path = os.path.join(args.resume_log,'checkpoints', '{0:03d}_checkpoint_{1}_split_{2}.pth.tar'.format(resume_epoch,args.modality,args.split))
+        print(path)
         if os.path.isfile(path):    
             print('loading checkpoint {0:03d} ...'.format(resume_epoch))    
             params = torch.load(path)
