@@ -77,7 +77,6 @@ parser.add_argument('--resume_log', metavar='PATH', default=None, type=str,
 parser.add_argument('-es', action='store_true', 
                     help='Activate early stopping')
 
-best_prec1 = 0
 os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"   
 os.environ["CUDA_VISIBLE_DEVICES"]="0"
 
@@ -339,6 +338,12 @@ def train(train_loader, model, criterion, optimizer, epoch):
                       'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
                       'Prec@1 {top1.val:.3f} ({top1.avg:.3f})'.format(
                        epoch, i+1, len(train_loader)+1, batch_time=batch_time, loss=losses, top1=top1))
+                prec_list.append('Epoch: [{0}][{1}/{2}]\t'
+                      'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
+                      'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
+                      'Prec@1 {top1.val:.3f} ({top1.avg:.3f})'.format(   
+                       epoch, i+1, len(train_loader)+1, batch_time=batch_time, loss=losses, top1=top1))
+
 
 def validate(val_loader, model, criterion):
     batch_time = AverageMeter()
