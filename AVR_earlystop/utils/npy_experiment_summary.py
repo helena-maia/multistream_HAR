@@ -3,7 +3,7 @@ import json
 import os
 import numpy as np
 
-npy_list = glob.glob("../scripts/NPYS100/*")
+npy_list = glob.glob("../test/NPYS100/*")
 header = []
 summary = []
 
