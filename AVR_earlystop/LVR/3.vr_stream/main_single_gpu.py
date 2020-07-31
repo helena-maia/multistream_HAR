@@ -12,10 +12,14 @@ import torch.backends.cudnn as cudnn
 import torch.optim
 import torch.utils.data
 
+import json
+
 import video_transforms
 import models
 import dataset
-from ../../early_stopping.pytorchtools import EarlyStopping
+import sys
+sys.path.append("../../")
+from early_stopping.pytorchtools import EarlyStopping
 
 model_names = sorted(name for name in models.__dict__
     if name.islower() and not name.startswith("__")
@@ -66,10 +70,12 @@ parser.add_argument('-pf','--print-freq', default=50,  type=int,
                     metavar='N', help='print frequency (default: 50)')
 parser.add_argument('-sf','--save-freq', default=25, type=int,
                     metavar='N', help='save frequency (default: 25)')
-parser.add_argument('--resume', default='./checkpoints', type=str, metavar='PATH',
-                    help='path to latest checkpoint (default: none)')
-parser.add_argument('-e', '--evaluate', dest='evaluate', action='store_true',
-                    help='evaluate model on validation set')
+parser.add_argument('--log', metavar='PATH', default='./log', type=str, 
+                    help='path to log (default: ./log)')
+parser.add_argument('--resume_log', metavar='PATH', default=None, type=str, 
+                    help='path to an existing log for non-zero start-epoch (default: None)')
+parser.add_argument('-es', action='store_true', 
+                    help='Activate early stopping')
 
 best_prec1 = 0
 os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"   
