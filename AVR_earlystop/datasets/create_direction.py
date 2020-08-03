@@ -1,6 +1,6 @@
-#import os
+import os
 #import sys
-#import glob
+import glob
 import argparse
 #import numpy as np
 #import cv2
@@ -101,19 +101,9 @@ if __name__ == '__main__':
     output = args.o
     grouped = args.g
 
-    full_path = os.path.join(src_dir, "*")
-    video_list = glob.glob(full_path + "." + ext)
-    repeated = 0
-    
-    while len(video_list) == 0 and repeated < 5: # max_level = 5
-        full_path = os.path.join(full_path, "*")
-        video_list = glob.glob(full_path + "." + ext)
-
-
-    if len(video_list) == 0 and repeated == 5:
-        print("No video with extension "+ext+" were found in "+src_dir)
-    else:
-        vid_list = sorted(vid_list)
+    full_path = os.path.join(src_dir, "*/*."+ext)
+    video_list = glob.glob(full_path)
+    print(str(len(video_list))+" videos were found")
 
     '''
     for i, vid in enumerate(vid_list):
