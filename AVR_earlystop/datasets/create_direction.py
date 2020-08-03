@@ -124,7 +124,7 @@ if __name__ == '__main__':
             else:
                 class_counter_y[video_class] = class_counter_y.get(video_class, 0) + 1
 
-        classes = set(map_class.values())
+        classes = sorted(set(map_class.values()))
 
         for cl in classes:
             idx = '2' if class_counter_x.get(cl, 0) > class_counter_y.get(cl,0) else '1'
