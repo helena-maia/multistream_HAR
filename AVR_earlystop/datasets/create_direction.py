@@ -19,6 +19,7 @@ def run(enum, video):
 
     vid_name = video.split('/')[-1].split('.')[0]
     vid_class = video.split('/')[3]
+    '''
     # map each video with its respective video class
     first_data[vid_name]=vid_class
 
@@ -83,11 +84,12 @@ def run(enum, video):
     
     dir_ = 'x' if ejex > ejey else 'y'
     print(str(enum)+' : name vide: '+vid_name+' => direction '+dir_)
+    '''
 
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='Determine the direction of movement by class of a given dataset')
-    parser.add_argument('src_dir', type=str, help='path to the video data')
+    parser.add_argument('src_dir', type=str, help='path to the video data (structure: src_dir/class/video)')
     parser.add_argument('--num_worker', type=int, default=8)
     parser.add_argument('--ext', type=str, default='avi', choices=['avi','mp4'],
                         help='video file extensions')
@@ -105,10 +107,10 @@ if __name__ == '__main__':
     video_list = glob.glob(full_path)
     print(str(len(video_list))+" videos were found")
 
-    '''
     for i, vid in enumerate(vid_list):
         run(i, vid)
-    
+
+    '''    
     #np.save("direction_video_class.npy", first_data)
     #np.save("direction_video_rhythm.npy", second_data)
 
