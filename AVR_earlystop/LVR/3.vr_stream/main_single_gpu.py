@@ -211,7 +211,7 @@ def main():
             break
     
     if not args.es: # Final model
-        checkpoint_name = "%03d_%s" % (epoch + 1, "checkpoint_"+args.modality+"_split_"+str(args.split)+".pth.tar")
+        checkpoint_name = "%03d_%s" % (epoch + 1, "checkpoint_rhythm_split_"+str(args.split)+".pth.tar")
         save_checkpoint({
             'epoch': epoch + 1,
             'arch': args.arch,
