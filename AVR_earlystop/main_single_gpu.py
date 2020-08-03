@@ -72,7 +72,7 @@ parser.add_argument('-pf','--print-freq', default=50,  type=int,
 parser.add_argument('-sf','--save-freq', default=25, type=int,
                     metavar='N', help='save frequency (default: 25)')
 parser.add_argument('--vr_approach', '-vra', default=3, type=int,
-                    metavar='N', help='visual rhythm approach (default: 3)')
+                    metavar='N', help='visual rhythm approach (choices: 1 - vertical, 2 - horizontal, 3 - AVR per class, 4 - AVR per video)(default: 3)')
 parser.add_argument('--log', metavar='PATH', default='./log', type=str, 
                     help='path to log (default: ./log)')
 parser.add_argument('--resume_log', metavar='PATH', default=None, type=str, 
@@ -178,7 +178,8 @@ def main():
         print("No split file exists in %s directory. Preprocess the dataset first" % (args.settings))
 
     extension = ".png" if args.dataset == "hmdb51" and args.modality == "rhythm" else ".jpg"
-    direction_path = os.path.join(args.settings, args.dataset, "direction.txt")
+    direction_file = "direction.txt" if args.vr_approach == 3 else "direction_video.txt"
+    direction_path = os.path.join(args.settings, args.dataset, direction_file)
 
     train_dataset = datasets.__dict__['dataset'](root=args.data,
                                                   source=train_split_file,
