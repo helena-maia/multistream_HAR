@@ -1,20 +1,20 @@
-import os
-import sys
-import glob
+#import os
+#import sys
+#import glob
 import argparse
-import numpy as np
-import cv2
-from multiprocessing import Pool, current_process
-from skimage.feature import hog
-from skimage import data, color, exposure
-from itertools import product
+#import numpy as np
+#import cv2
+#from multiprocessing import Pool, current_process
+#from skimage.feature import hog
+#from skimage import data, color, exposure
+#from itertools import product
 list_class = []
 first_data ={}
 second_data = {}
 
 def run(enum, video):
     '''
-    Determines the direction of movement of a given video.
+    Determines the predominant direction of movement of a given video.
     '''
 
     vid_name = video.split('/')[-1].split('.')[0]
@@ -87,22 +87,35 @@ def run(enum, video):
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='Determine the direction of movement by class of a given dataset')
-    parser.add_argument('--src_dir', type=str, default='./UCF-101',
-                        help='path to the video data')
-
+    parser.add_argument('src_dir', type=str, help='path to the video data')
     parser.add_argument('--num_worker', type=int, default=8)
-    parser.add_argument('--num_gpu', type=int, default=2, help='number of GPU')
     parser.add_argument('--ext', type=str, default='avi', choices=['avi','mp4'],
                         help='video file extensions')
+    parser.add_argument('--o', type=str, default='direction.txt', help='output: path to direction file')
+    parser.add_argument('-g', action='store_true', help='group by class')
 
     args = parser.parse_args()
-    src_path = args.src_dir
-    num_worker = args.num_w orker
+    src_dir = args.src_dir
+    num_worker = args.num_worker
     ext = args.ext
-    NUM_GPU = args.num_gpu
+    output = args.o
+    grouped = args.g
 
-    vid_list = sorted(glob.glob(src_path+'/*/*.'+ext))
+    full_path = os.path.join(src_dir, "*")
+    video_list = glob.glob(full_path + "." + ext)
+    repeated = 0
+    
+    while len(video_list) == 0 and repeated < 5: # max_level = 5
+        full_path = os.path.join(full_path, "*")
+        video_list = glob.glob(full_path + "." + ext)
 
+
+    if len(video_list) == 0 and repeated == 5:
+        print("No video with extension "+ext+" were found in "+src_dir)
+    else:
+        vid_list = sorted(vid_list)
+
+    '''
     for i, vid in enumerate(vid_list):
         run(i, vid)
     
@@ -132,4 +145,4 @@ if __name__ == '__main__':
         direction.append(idx)
 
     open('directionHMDB.txt', 'w').writelines(direction)
-
+    '''
