@@ -112,26 +112,26 @@ if __name__ == '__main__':
     for i, vid in enumerate(video_list):
         run(i, vid)
 
+    direction = []
     if args.g:
-        dic_final = {}
-        list_name_vid = map_class.keys()
-        list_class = map_class.values()
+        class_counter_x = {}
+        class_counter_y = {}
 
-        for vid in list_name_vid:
-            if first_data[vid] in dic_final:
-                if second_data[vid]==2:
-                    dic_final[first_data[vid]][0]+=1
-                else:
-                    dic_final[first_data[vid]][1]+=1        
+        for vid in map_class.keys():
+            video_class = map_class[vid]
+            if video_mov[vid] == 2: 
+                class_counter_x[video_class] = class_counter_x.get(video_class, 0) + 1
             else:
-                if second_data[vid]==2:
-                    dic_final[first_data[vid]]=[1,0]
-                else:
-                    dic_final[first_data[vid]]=[0,1]
-         direction = []
-    for i,vid in enumerate(list_class):
-        idx = '2' if dic_final[vid][0]>dic_final[vid][1] else '1'
-        direction.append(idx)
+                class_counter_y[video_class] = class_counter_y.get(video_class, 0) + 1
 
-    open('directionHMDB.txt', 'w').writelines(direction)
-    '''
+        classes = set(map_class.values())
+
+        for cl in classes:
+            idx = '2' if class_counter_x.get(cl, 0) > class_counter_y.get(cl,0) else '1'
+            direction.append("{} {}\n".format(cl,idx))
+
+    else:
+        direction = ["{} {}\n".format(k, v) for k, v in video_mov.items()]
+
+
+    open(output, 'w').writelines(direction)
