@@ -151,8 +151,10 @@ class dataset(data.Dataset):
                 self.name_pattern = 'img_%05d'+extension
             elif self.modality == 'rhythm':
                 self.name_pattern = 'visual_rhythm_%05d'+extension
-                # recover the direction by class
-                self.direction = [int(line.rstrip('\n')) for line in open(direction_path)]
+                if approach_VR == 3: # recover the direction by class
+                    self.direction = [int(line.rstrip('\n')) for line in open(direction_path)]
+                else:
+                    self.direction = {line.split()[0]: line.split()[1] for line in open(direction_path)}
             elif self.modality == 'flow':
                 self.name_pattern = 'flow_%s_%05d'+extension
             elif self.modality == 'hog':
@@ -203,6 +205,9 @@ class dataset(data.Dataset):
                                         1 + offsets[0]  #duration if self.phase == 'train' else  1 + offsets[0] 
                                         )
         elif self.modality == 'rhythm' or self.modality == 'history':
+            name = os.path.split()[1]
+            index = self.direction[name] if self.visual_rhythm_approach == 4 else self.visual_rhythm_approach
+            index = self.direction[target] if self.visual_rhythm_approach == 3 else index
             clip_input = read_single_segment(path,
                                         offsets,
                                         self.new_height,
@@ -211,7 +216,7 @@ class dataset(data.Dataset):
                                         self.is_color,
                                         self.name_pattern,
                                         self.modality,
-                                        self.direction[target] if self.visual_rhythm_approach==3 else self.visual_rhythm_approach #type of visual rhythm image
+                                        index
                                         )            
         elif self.modality == 'flow' or self.modality == 'hog':
             clip_input = read_multiple_segment(path,
