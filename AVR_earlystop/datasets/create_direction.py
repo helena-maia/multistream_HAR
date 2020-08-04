@@ -40,6 +40,7 @@ def run(ind, video):
 
     # Take first frame and find corners in it
     ret, old_frame = cap.read()
+    if not ret: print(video)
     old_gray = cv2.cvtColor(old_frame, cv2.COLOR_BGR2GRAY)
     p0 = cv2.goodFeaturesToTrack(old_gray, mask = None, **feature_params)
 
