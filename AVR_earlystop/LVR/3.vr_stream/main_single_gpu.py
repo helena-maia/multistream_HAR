@@ -265,7 +265,7 @@ def build_model(resume_epoch): #OK
     num_channels = 1
     model = models.__dict__[args.arch](pretrained=is_new, channels=num_channels, num_classes=num_classes)
     if not is_new:
-        path = os.path.join(args.resume,'%03d_checkpoint_rhythm_split_%s.pth.tar'%(resume_epoch,args.split))
+        path = os.path.join(args.resume_log,'checkpoints/%03d_checkpoint_rhythm_split_%s.pth.tar'%(resume_epoch,args.split))
         print(path)
         if os.path.isfile(path):    
             print('loading checkpoint {0:03d} ...'.format(resume_epoch))    
