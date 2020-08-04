@@ -39,7 +39,7 @@ parser.add_argument('-s', '--split', default=1, type=int, metavar='S',
 parser.add_argument('--architecture', '-a', metavar='MODALITY', default='inception_v3',
                     choices=["resnet152", "inception_v3"])
 parser.add_argument('--vr_approach', '-vra', default=3, type=int,
-                    metavar='N', help='visual rhythm approach (default: 3)')
+                    metavar='N', help='visual rhythm approach (choices: 1 - vertical, 2 - horizontal, 3 - AVR per class, 4 - AVR per video)(default: 3)')
 parser.add_argument('--settings', metavar='DIR', default='../datasets/settings',
                     help='path to dataset setting files (default: ../datasets/settings)')
 parser.add_argument('-w', action='store_true', help="Compute features for the whole dataset, if the flag is found")
@@ -124,14 +124,23 @@ def main():
     line_id = 1
     match_count = 0
     result_list = []
-    direction_path = os.path.join(args.settings, args.dataset, "direction.txt")
-    lines = [int(line.rstrip('\n')) for line in open(direction_path)]
+    
+    lines = []
+    if args.vr_approach == 3:
+        direction_path = os.path.join(args.settings, args.dataset, "direction.txt")
+        lines = [int(line.rstrip('\n')) for line in open(direction_path)]
+    elif args.vr_approach == 4:
+        direction_path = os.path.join(args.settings, args.dataset, "direction_video.txt")
+        lines = {line.split()[0]: int(line.split()[1]) for line in open(direction_path)}
 
     for line in test_list:
         line_info = line.split(" ")
         clip_path = os.path.join(data_dir, line_info[0])
         num_frames = int(line_info[1])
         input_video_label = int(line_info[2])
+        index = lines[input_video_label] if args.vr_approach == 3 else (lines[clip_path] if args.vr_approach == 4 else args.vr_approach)
+
+        print(index, clip_path)
 
         spatial_prediction = VideoSpatialPrediction(
                 args.modality,
@@ -141,7 +150,7 @@ def main():
                 start_frame,
                 num_frames,
                 num_samples,
-                args.vr_approach if args.vr_approach!=3 else lines[input_video_label],
+                index,
                 new_size = new_size,
                 ext = ext)
         avg_spatial_pred_fc8 = np.mean(spatial_prediction, axis=1)
