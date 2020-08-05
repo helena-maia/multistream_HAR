@@ -138,9 +138,9 @@ def main():
         clip_path = os.path.join(data_dir, line_info[0])
         num_frames = int(line_info[1])
         input_video_label = int(line_info[2])
-        index = lines[input_video_label] if args.vr_approach == 3 else (lines[clip_path] if args.vr_approach == 4 else args.vr_approach)
 
-        print(index, clip_path)
+        video_name = clip_path.split("/")[-1]
+        index = lines[input_video_label] if args.vr_approach == 3 else (lines[video_name] if args.vr_approach == 4 else args.vr_approach)
 
         spatial_prediction = VideoSpatialPrediction(
                 args.modality,
