@@ -44,9 +44,34 @@ def softmax(x):
 
     return z
 
+def logging(args):
+    args_dict = vars(args)
+    args_dict['hostname'] = os.uname()[1]
+
+    if 'VIRTUAL_ENV' in os.environ.keys(): 
+        args_dict['virtual_env'] = os.environ['VIRTUAL_ENV']
+    else: 
+        print("WARNING: No virtualenv activated")
+        args_dict['virtual_env'] = None
+
+    timestamp = time.time() 
+    full_path = os.path.join(args.o, str(timestamp))
+    if not os.path.isdir(full_path):
+        os.makedirs(full_path)
+
+    log_path = os.path.join(full_path, "args.json")
+    with open(log_path, 'w') as json_file:
+        json.dump(args_dict, json_file)
+
+    os.system('pip freeze > ' + os.path.join(full_path,'requirements.txt'))
+
+    print("Saving everything to directory %s." % (full_path))
+
+    return full_path
+
 def main():
     args = parser.parse_args()
-
+    output_path = logging(args)
     model_path = args.model_path
     data_dir = args.data_dir
  
@@ -109,7 +134,10 @@ def main():
     print(match_count)
     print(len(val_list))
     print("Accuracy is : %4.4f" % ((float(match_count)/len(val_list))))
-    np.save(args.dataset+"_rhythm_"+args.architecture+"_s"+str(args.split)+".npy", np.array(result))
+
+    npy_name = args.dataset+"_rhythm_"+args.architecture+"_s"+str(args.split)+".npy"
+    npy_path = os.path.join(output_path, npy_name)
+    np.save(npy_path, np.array(result))
 
 if __name__ == "__main__":
     main()
