@@ -79,6 +79,10 @@ parser.add_argument('--resume_log', metavar='PATH', default=None, type=str,
                     help='path to an existing log for non-zero start-epoch (default: None)')
 parser.add_argument('-es', action='store_true', 
                     help='Activate early stopping')
+parser.add_argument('--pretrain_weights','-pt', default=None, type=str, 
+	                help='path to the checkpoint from the pretraining on a different dataset. \
+	                (--start-epoch must be 0) (default: None)')
+
 
 os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"   
 os.environ["CUDA_VISIBLE_DEVICES"]="0"
@@ -114,7 +118,7 @@ def main():
 
     # create model
     print("Building model ... ")
-    exits_model, model = build_model(int(args.start_epoch))
+    exits_model, model = build_model(int(args.start_epoch), args.pretrain_weights)
     if not exits_model:
         return 
     else:
@@ -316,7 +320,7 @@ def logging(args):
         return full_path
 
     
-def build_model(resume_epoch):
+def build_model(resume_epoch, pretrain_path):
     is_new = (resume_epoch==0)
     found = True
     num_classes = 51 if args.dataset =='hmdb51' else 101
@@ -333,6 +337,21 @@ def build_model(resume_epoch):
         else:
             print('ERROR: No checkpoint found')
             found = False
+    elif pretrain_path:
+        print(pretrain_path)
+        if os.path.isfile(pretrain_path):
+            print('Transfer learning: loading checkpoint')
+            params = torch.load(pretrain_path)
+            print("Epoch: %d, Prec: %.2f"%(params['epoch'],params['best_prec1']))
+            model_dict = model.state_dict()
+            fc_state_dict = {k: v for k, v in model_dict.items() if 'fc_action' in k}
+            state_dict = {**params['state_dict'], **fc_state_dict} #replace fc_action layers to keep old values 
+            model.load_state_dict(state_dict)
+            print('loaded checkpoint')
+        else:
+            print('ERROR: No checkpoint found')
+            found = False
+
     model.cuda()
     return found, model
 
