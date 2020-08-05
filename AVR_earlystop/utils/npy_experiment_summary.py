@@ -3,7 +3,7 @@ import json
 import os
 import numpy as np
 
-npy_list = glob.glob("../test/NPYS_overfitting/*")
+npy_list = glob.glob("../test/NPYS100/*")
 header = []
 summary = []
 
