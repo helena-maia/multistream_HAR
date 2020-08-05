@@ -8,6 +8,7 @@ import cv2
 import math
 import random
 import time
+import json
 
 import torch
 import torch.nn as nn
@@ -34,6 +35,8 @@ parser.add_argument('-s', '--split', default=1, type=int, metavar='S',
                     help='which split of data to work on (default: 1)')
 parser.add_argument('--architecture', '-a', default='inception_v3',
                     choices=["resnet152", "inception_v3"])
+parser.add_argument('-o', metavar='DIR', default='NPYS/',
+                    help='path to save npy and log files (default: NPYS/)')
 parser.add_argument('-b', '--batch_size', default=2, type=int,
                     help='Batch size(default: 2)')
 
