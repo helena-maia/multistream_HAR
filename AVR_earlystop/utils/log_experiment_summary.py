@@ -3,15 +3,7 @@ import json
 import os
 import numpy as np
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-log_list = glob.glob("../LVR/3.vr_stream/log_es/*")
-=======
-log_list = glob.glob("../log_overfitting/*")
->>>>>>> 13f05e7e1b6a0464f656d1b1be3eb055909e4520
-=======
-log_list = glob.glob("../log_overfitting/*")
->>>>>>> 13f05e7e1b6a0464f656d1b1be3eb055909e4520
+log_list = glob.glob("../LVR/3.vr_stream/log_overfitting_lvr/*")
 header = []
 summary = []
 
@@ -41,15 +33,7 @@ for ll in log_list:
         summary += [header]
 
     timestamp = ll.split("/")[-1]
-<<<<<<< HEAD
-<<<<<<< HEAD
     data = [args_dict.get(k, None) for k in header[1:-2]]
-=======
-    data = [args_dict[k] for k in header[1:-2]]
->>>>>>> 13f05e7e1b6a0464f656d1b1be3eb055909e4520
-=======
-    data = [args_dict[k] for k in header[1:-2]]
->>>>>>> 13f05e7e1b6a0464f656d1b1be3eb055909e4520
 
     try:
         best_epoch = sorted([k for k in early_dict.keys() if k != "config"])[-8]
@@ -61,16 +45,4 @@ for ll in log_list:
 
     summary += [data]
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-summary = np.savetxt("log_es_lvr.csv", summary, fmt="%s", delimiter="\t")
-=======
-summary = np.savetxt("log_overfitting_summary.csv", summary, fmt="%s", delimiter="\t")
->>>>>>> 13f05e7e1b6a0464f656d1b1be3eb055909e4520
-=======
-summary = np.savetxt("log_overfitting_summary.csv", summary, fmt="%s", delimiter="\t")
->>>>>>> 13f05e7e1b6a0464f656d1b1be3eb055909e4520
-
-
-
-
+summary = np.savetxt("log_overfitting_lvr_summary.csv", summary, fmt="%s", delimiter="\t")
