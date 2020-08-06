@@ -4,7 +4,11 @@ import os
 import numpy as np
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 log_list = glob.glob("../LVR/3.vr_stream/log_es/*")
+=======
+log_list = glob.glob("../log_overfitting/*")
+>>>>>>> 13f05e7e1b6a0464f656d1b1be3eb055909e4520
 =======
 log_list = glob.glob("../log_overfitting/*")
 >>>>>>> 13f05e7e1b6a0464f656d1b1be3eb055909e4520
@@ -38,7 +42,11 @@ for ll in log_list:
 
     timestamp = ll.split("/")[-1]
 <<<<<<< HEAD
+<<<<<<< HEAD
     data = [args_dict.get(k, None) for k in header[1:-2]]
+=======
+    data = [args_dict[k] for k in header[1:-2]]
+>>>>>>> 13f05e7e1b6a0464f656d1b1be3eb055909e4520
 =======
     data = [args_dict[k] for k in header[1:-2]]
 >>>>>>> 13f05e7e1b6a0464f656d1b1be3eb055909e4520
@@ -54,7 +62,11 @@ for ll in log_list:
     summary += [data]
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 summary = np.savetxt("log_es_lvr.csv", summary, fmt="%s", delimiter="\t")
+=======
+summary = np.savetxt("log_overfitting_summary.csv", summary, fmt="%s", delimiter="\t")
+>>>>>>> 13f05e7e1b6a0464f656d1b1be3eb055909e4520
 =======
 summary = np.savetxt("log_overfitting_summary.csv", summary, fmt="%s", delimiter="\t")
 >>>>>>> 13f05e7e1b6a0464f656d1b1be3eb055909e4520
