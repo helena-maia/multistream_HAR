@@ -25,6 +25,7 @@ with open(args.es_json, 'r') as json_file:
             val_loss = es_dict[epoch]['val_loss']
 
             is_best = es(val_loss, e)
+            print(epoch, val_loss, is_best, es.best_score)
 
             if is_best:
                     best_epoch = e + 1
@@ -32,24 +33,31 @@ with open(args.es_json, 'r') as json_file:
             if es.early_stop:
                 break
 
-prec_path = os.path.join(args.precision_path, "{:03d}*.txt".format(best_epoch))
-prec_path = glob.glob(prec_path)
+if not es.early_stop:
+    print(-1, -1, -1) 
+else:
+    prec_path = os.path.join(args.precision_path, "{:03d}*.txt".format(best_epoch))
+    prec_path = glob.glob(prec_path)
 
-with open(prec_path[0], "r") as prec_file:
-    lines_ = prec_file.readlines()
+    if len(prec_path) != 1:
+        print(-1, -1, -1)
 
-    lines = [l for l in lines_ if 'Epoch:' in l]
-    last_line = lines[-1]
-    columns = last_line.split("\t")
-    column_p = columns[3].replace("\n","")
-    train_prec = column_p.split("(")[1]
-    train_prec = float(train_prec.split(")")[0])
+    else:
+        with open(prec_path[0], "r") as prec_file:
+            lines_ = prec_file.readlines()
 
-    lines = [l for l in lines_ if 'Validation:' in l]
-    last_line = lines[-1]
-    columns = last_line.split("\t")
-    column_p = columns[3].replace("\n","")
-    val_prec = column_p.split("(")[1]
-    val_prec = float(val_prec.split(")")[0])
+            lines = [l for l in lines_ if 'Epoch:' in l]
+            last_line = lines[-1]
+            columns = last_line.split("\t")
+            column_p = columns[3].replace("\n","")
+            train_prec = column_p.split("(")[1]
+            train_prec = float(train_prec.split(")")[0])
 
-    print(best_epoch, train_prec, val_prec)
+            lines = [l for l in lines_ if 'Validation:' in l]
+            last_line = lines[-1]
+            columns = last_line.split("\t")
+            column_p = columns[3].replace("\n","")
+            val_prec = column_p.split("(")[1]
+            val_prec = float(val_prec.split(")")[0])
+
+            print(best_epoch, train_prec, val_prec)
