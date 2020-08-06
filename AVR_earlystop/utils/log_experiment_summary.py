@@ -3,7 +3,7 @@ import json
 import os
 import numpy as np
 
-log_list = glob.glob("../log_overfitting/*")
+log_list = glob.glob("../LVR/3.vr_stream/log_es/*")
 header = []
 summary = []
 
@@ -33,7 +33,7 @@ for ll in log_list:
         summary += [header]
 
     timestamp = ll.split("/")[-1]
-    data = [args_dict[k] for k in header[1:-2]]
+    data = [args_dict.get(k, None) for k in header[1:-2]]
 
     try:
         best_epoch = sorted([k for k in early_dict.keys() if k != "config"])[-8]
@@ -45,7 +45,7 @@ for ll in log_list:
 
     summary += [data]
 
-summary = np.savetxt("log_overfitting_summary.csv", summary, fmt="%s", delimiter="\t")
+summary = np.savetxt("log_es_lvr.csv", summary, fmt="%s", delimiter="\t")
 
 
 
