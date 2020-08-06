@@ -3,7 +3,7 @@ import json
 import os
 import numpy as np
 
-npy_list = glob.glob("../test/NPYS100/*")
+npy_list = glob.glob("../test/NPYS_es/*")
 header = []
 summary = []
 
@@ -30,7 +30,7 @@ for npy_item in npy_list:
 
     summary += [data]
 
-summary = np.savetxt("npy_overfitting_summary.csv", summary, fmt="%s", delimiter="\t")
+summary = np.savetxt("npy_es_summary.csv", summary, fmt="%s", delimiter="\t")
 
 
 
