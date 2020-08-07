@@ -3,7 +3,7 @@ import json
 import os
 import numpy as np
 
-log_list = glob.glob("../log_retrain/*")
+log_list = glob.glob("../log_overfitting/*")
 header = []
 summary = []
 
@@ -45,4 +45,4 @@ for ll in log_list:
 
     summary += [data]
 
-summary = np.savetxt("log_retrain_summary.csv", summary, fmt="%s", delimiter="\t")
+summary = np.savetxt("log_overfitting_summary.csv", summary, fmt="%s", delimiter="\t")
