@@ -16,21 +16,21 @@ log+AF8-es	1596673878.7682085	hmdb51	AVR	2
 log+AF8-es	1596673668.0726128	ucf101	AVR	2
 log+AF8-es	1596679565.9411924	hmdb51	AVR	3
 log+AF8-es	1596679524.5038629	ucf101	AVR	3
-LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr		hmdb51	LVR0	1
-LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr		ucf101	LVR0	1
+LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr	1596913482.3621094	hmdb51	LVR0	1
+LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr	1596848629.776615	ucf101	LVR0	1
 LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr		hmdb51	LVR0	2
-LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr		ucf101	LVR0	2
+LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr	1596867694.2105064	ucf101	LVR0	2
 LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr		hmdb51	LVR0	3
-LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr		ucf101	LVR0	3
-LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr		hmdb51	LVR1	1
-LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr		ucf101	LVR1	1
-LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr		hmdb51	LVR1	2
-LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr		ucf101	LVR1	2
-LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr		hmdb51	LVR1	3
-LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr		ucf101	LVR1	3
-LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr		hmdb51	LVR2	1
-LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr		ucf101	LVR2	1
-LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr		hmdb51	LVR2	2
-LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr		ucf101	LVR2	2
-LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr		hmdb51	LVR2	3
-LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr		ucf101	LVR2	3
+LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr	1596893262.4416409	ucf101	LVR0	3
+LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr	1596900076.8729212	hmdb51	LVR1	1
+LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr	1596848938.5402875	ucf101	LVR1	1
+LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr	1596905612.4391477	hmdb51	LVR1	2
+LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr	1596865841.2872255	ucf101	LVR1	2
+LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr	1596909645.3378828	hmdb51	LVR1	3
+LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr	1596883499.4129121	ucf101	LVR1	3
+LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr	1596908276.3431783	hmdb51	LVR2	1
+LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr	1596849547.6741824	ucf101	LVR2	1
+LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr	1596913147.8761396	hmdb51	LVR2	2
+LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr	1596870020.8364606	ucf101	LVR2	2
+LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr	1596917866.0565891	hmdb51	LVR2	3
+LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr	1596890612.7245507	ucf101	LVR2	3
