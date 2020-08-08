@@ -1,36 +1,36 @@
-log_es	1593544215.4277725	hmdb51	RGB*	1
-log_es	1593543578.7071877	ucf101	RGB*	1
-log_es	1593833233.8919935	hmdb51	RGB*	2
-log_es	1593832736.6275618	ucf101	RGB*	2
-log_es	1593840762.040813	hmdb51	RGB*	3
-log_es	1593840488.671185	ucf101	RGB*	3
-log_es	1593558190.948042	hmdb51	OF	1
-log_es	1593547968.1252046	ucf101	OF	1
-log_es	1593895349.772952	hmdb51	OF	2
-log_es	1593895311.0357978	ucf101	OF	2
-log_es	1593894398.8085139	hmdb51	OF	3
-log_es	1593894358.2483032	ucf101	OF	3
-log_es	1596673537.5386634	hmdb51	AVR	1
-log_es	1596673461.0926356	ucf101	AVR	1
-log_es	1596673878.7682085	hmdb51	AVR	2
-log_es	1596673668.0726128	ucf101	AVR	2
-log_es	1596679565.9411924	hmdb51	AVR	3
-log_es	1596679524.5038629	ucf101	AVR	3
-LVR/3.vr_stream/log_es_lvr	1596656571.6633103	hmdb51	LVR0	1
-LVR/3.vr_stream/log_es_lvr	1596656397.7532244	ucf101	LVR0	1
-LVR/3.vr_stream/log_es_lvr	1596666291.0592582	hmdb51	LVR0	2
-LVR/3.vr_stream/log_es_lvr	1596666228.4382389	ucf101	LVR0	2
-LVR/3.vr_stream/log_es_lvr	1596669084.4594586	hmdb51	LVR0	3
-LVR/3.vr_stream/log_es_lvr	1596668153.6340828	ucf101	LVR0	3
-LVR/3.vr_stream/log_es_lvr	1596656892.5411677	hmdb51	LVR1	1
-LVR/3.vr_stream/log_es_lvr	1596656767.8999574	ucf101	LVR1	1
-LVR/3.vr_stream/log_es_lvr	1596666545.4915757	hmdb51	LVR1	2
-LVR/3.vr_stream/log_es_lvr	1596666506.129777	ucf101	LVR1	2
-LVR/3.vr_stream/log_es_lvr	1596669423.7353704	hmdb51	LVR1	3
-LVR/3.vr_stream/log_es_lvr	1596669334.908125	ucf101	LVR1	3
-LVR/3.vr_stream/log_es_lvr	1596666124.1802166	hmdb51	LVR2	1
-LVR/3.vr_stream/log_es_lvr	1596667677.2164185	ucf101	LVR2	1
-LVR/3.vr_stream/log_es_lvr	1596667790.9336762	hmdb51	LVR2	2
-LVR/3.vr_stream/log_es_lvr	1596691938.035014	ucf101	LVR2	2
-LVR/3.vr_stream/log_es_lvr	1596673329.693991	hmdb51	LVR2	3
-LVR/3.vr_stream/log_es_lvr	1596673267.7460594	ucf101	LVR2	3
+log+AF8-es	1593544215.4277725	hmdb51	RGB+ACo-	1
+log+AF8-es	1593543578.7071877	ucf101	RGB+ACo-	1
+log+AF8-es	1593833233.8919935	hmdb51	RGB+ACo-	2
+log+AF8-es	1593832736.6275618	ucf101	RGB+ACo-	2
+log+AF8-es	1593840762.040813	hmdb51	RGB+ACo-	3
+log+AF8-es	1593840488.671185	ucf101	RGB+ACo-	3
+log+AF8-es	1593558190.948042	hmdb51	OF	1
+log+AF8-es	1593547968.1252046	ucf101	OF	1
+log+AF8-es	1593895349.772952	hmdb51	OF	2
+log+AF8-es	1593895311.0357978	ucf101	OF	2
+log+AF8-es	1593894398.8085139	hmdb51	OF	3
+log+AF8-es	1593894358.2483032	ucf101	OF	3
+log+AF8-es	1596673537.5386634	hmdb51	AVR	1
+log+AF8-es	1596673461.0926356	ucf101	AVR	1
+log+AF8-es	1596673878.7682085	hmdb51	AVR	2
+log+AF8-es	1596673668.0726128	ucf101	AVR	2
+log+AF8-es	1596679565.9411924	hmdb51	AVR	3
+log+AF8-es	1596679524.5038629	ucf101	AVR	3
+LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr		hmdb51	LVR0	1
+LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr		ucf101	LVR0	1
+LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr		hmdb51	LVR0	2
+LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr		ucf101	LVR0	2
+LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr		hmdb51	LVR0	3
+LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr		ucf101	LVR0	3
+LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr		hmdb51	LVR1	1
+LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr		ucf101	LVR1	1
+LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr		hmdb51	LVR1	2
+LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr		ucf101	LVR1	2
+LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr		hmdb51	LVR1	3
+LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr		ucf101	LVR1	3
+LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr		hmdb51	LVR2	1
+LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr		ucf101	LVR2	1
+LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr		hmdb51	LVR2	2
+LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr		ucf101	LVR2	2
+LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr		hmdb51	LVR2	3
+LVR/3.vr+AF8-stream/log+AF8-es+AF8-lvr		ucf101	LVR2	3
