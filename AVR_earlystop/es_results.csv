@@ -699,41 +699,41 @@ LVR/3.vr_stream/log_es_lvr 1596848629.776615 ucf101 LVR0 1 0.20 4 9 82.234 89.43
 LVR/3.vr_stream/log_es_lvr 1596848629.776615 ucf101 LVR0 1 0.20 5 14 94.976 94.776
 LVR/3.vr_stream/log_es_lvr 1596848629.776615 ucf101 LVR0 1 0.20 6 14 94.976 94.776
 LVR/3.vr_stream/log_es_lvr 1596848629.776615 ucf101 LVR0 1 0.20 7 14 94.976 94.776
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 2 0.00 1
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 2 0.00 2
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 2 0.00 3
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 2 0.00 4
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 2 0.00 5
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 2 0.00 6
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 2 0.00 7
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 2 0.05 1
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 2 0.05 2
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 2 0.05 3
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 2 0.05 4
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 2 0.05 5
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 2 0.05 6
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 2 0.05 7
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 2 0.10 1
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 2 0.10 2
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 2 0.10 3
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 2 0.10 4
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 2 0.10 5
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 2 0.10 6
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 2 0.10 7
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 2 0.15 1
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 2 0.15 2
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 2 0.15 3
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 2 0.15 4
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 2 0.15 5
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 2 0.15 6
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 2 0.15 7
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 2 0.20 1
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 2 0.20 2
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 2 0.20 3
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 2 0.20 4
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 2 0.20 5
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 2 0.20 6
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 2 0.20 7
+LVR/3.vr_stream/log_es_lvr 1596917898.5346904 hmdb51 LVR0 2 0.00 1 1 2.196 5.735
+LVR/3.vr_stream/log_es_lvr 1596917898.5346904 hmdb51 LVR0 2 0.00 2 15 70.864 62.794
+LVR/3.vr_stream/log_es_lvr 1596917898.5346904 hmdb51 LVR0 2 0.00 3 15 70.864 62.794
+LVR/3.vr_stream/log_es_lvr 1596917898.5346904 hmdb51 LVR0 2 0.00 4 15 70.864 62.794
+LVR/3.vr_stream/log_es_lvr 1596917898.5346904 hmdb51 LVR0 2 0.00 5 15 70.864 62.794
+LVR/3.vr_stream/log_es_lvr 1596917898.5346904 hmdb51 LVR0 2 0.00 6 21 85.018 67.132
+LVR/3.vr_stream/log_es_lvr 1596917898.5346904 hmdb51 LVR0 2 0.00 7 21 85.018 67.132
+LVR/3.vr_stream/log_es_lvr 1596917898.5346904 hmdb51 LVR0 2 0.05 1 1 2.196 5.735
+LVR/3.vr_stream/log_es_lvr 1596917898.5346904 hmdb51 LVR0 2 0.05 2 15 70.864 62.794
+LVR/3.vr_stream/log_es_lvr 1596917898.5346904 hmdb51 LVR0 2 0.05 3 15 70.864 62.794
+LVR/3.vr_stream/log_es_lvr 1596917898.5346904 hmdb51 LVR0 2 0.05 4 15 70.864 62.794
+LVR/3.vr_stream/log_es_lvr 1596917898.5346904 hmdb51 LVR0 2 0.05 5 15 70.864 62.794
+LVR/3.vr_stream/log_es_lvr 1596917898.5346904 hmdb51 LVR0 2 0.05 6 15 70.864 62.794
+LVR/3.vr_stream/log_es_lvr 1596917898.5346904 hmdb51 LVR0 2 0.05 7 15 70.864 62.794
+LVR/3.vr_stream/log_es_lvr 1596917898.5346904 hmdb51 LVR0 2 0.10 1 1 2.196 5.735
+LVR/3.vr_stream/log_es_lvr 1596917898.5346904 hmdb51 LVR0 2 0.10 2 13 63.821 63.137
+LVR/3.vr_stream/log_es_lvr 1596917898.5346904 hmdb51 LVR0 2 0.10 3 13 63.821 63.137
+LVR/3.vr_stream/log_es_lvr 1596917898.5346904 hmdb51 LVR0 2 0.10 4 13 63.821 63.137
+LVR/3.vr_stream/log_es_lvr 1596917898.5346904 hmdb51 LVR0 2 0.10 5 13 63.821 63.137
+LVR/3.vr_stream/log_es_lvr 1596917898.5346904 hmdb51 LVR0 2 0.10 6 13 63.821 63.137
+LVR/3.vr_stream/log_es_lvr 1596917898.5346904 hmdb51 LVR0 2 0.10 7 13 63.821 63.137
+LVR/3.vr_stream/log_es_lvr 1596917898.5346904 hmdb51 LVR0 2 0.15 1 1 2.196 5.735
+LVR/3.vr_stream/log_es_lvr 1596917898.5346904 hmdb51 LVR0 2 0.15 2 14 67.239 62.328
+LVR/3.vr_stream/log_es_lvr 1596917898.5346904 hmdb51 LVR0 2 0.15 3 14 67.239 62.328
+LVR/3.vr_stream/log_es_lvr 1596917898.5346904 hmdb51 LVR0 2 0.15 4 14 67.239 62.328
+LVR/3.vr_stream/log_es_lvr 1596917898.5346904 hmdb51 LVR0 2 0.15 5 14 67.239 62.328
+LVR/3.vr_stream/log_es_lvr 1596917898.5346904 hmdb51 LVR0 2 0.15 6 14 67.239 62.328
+LVR/3.vr_stream/log_es_lvr 1596917898.5346904 hmdb51 LVR0 2 0.15 7 14 67.239 62.328
+LVR/3.vr_stream/log_es_lvr 1596917898.5346904 hmdb51 LVR0 2 0.20 1 1 2.196 5.735
+LVR/3.vr_stream/log_es_lvr 1596917898.5346904 hmdb51 LVR0 2 0.20 2 8 40.9 52.255
+LVR/3.vr_stream/log_es_lvr 1596917898.5346904 hmdb51 LVR0 2 0.20 3 11 55.546 60.123
+LVR/3.vr_stream/log_es_lvr 1596917898.5346904 hmdb51 LVR0 2 0.20 4 15 70.864 62.794
+LVR/3.vr_stream/log_es_lvr 1596917898.5346904 hmdb51 LVR0 2 0.20 5 15 70.864 62.794
+LVR/3.vr_stream/log_es_lvr 1596917898.5346904 hmdb51 LVR0 2 0.20 6 15 70.864 62.794
+LVR/3.vr_stream/log_es_lvr 1596917898.5346904 hmdb51 LVR0 2 0.20 7 15 70.864 62.794
 LVR/3.vr_stream/log_es_lvr 1596867694.2105064 ucf101 LVR0 2 0.00 1 10 84.122 92.301
 LVR/3.vr_stream/log_es_lvr 1596867694.2105064 ucf101 LVR0 2 0.00 2 16 95.804 96.206
 LVR/3.vr_stream/log_es_lvr 1596867694.2105064 ucf101 LVR0 2 0.00 3 22 98.433 97.121
@@ -769,41 +769,41 @@ LVR/3.vr_stream/log_es_lvr 1596867694.2105064 ucf101 LVR0 2 0.20 4 12 90.037 93.
 LVR/3.vr_stream/log_es_lvr 1596867694.2105064 ucf101 LVR0 2 0.20 5 12 90.037 93.464
 LVR/3.vr_stream/log_es_lvr 1596867694.2105064 ucf101 LVR0 2 0.20 6 12 90.037 93.464
 LVR/3.vr_stream/log_es_lvr 1596867694.2105064 ucf101 LVR0 2 0.20 7 12 90.037 93.464
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 3 0.00 1
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 3 0.00 2
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 3 0.00 3
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 3 0.00 4
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 3 0.00 5
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 3 0.00 6
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 3 0.00 7
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 3 0.05 1
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 3 0.05 2
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 3 0.05 3
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 3 0.05 4
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 3 0.05 5
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 3 0.05 6
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 3 0.05 7
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 3 0.10 1
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 3 0.10 2
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 3 0.10 3
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 3 0.10 4
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 3 0.10 5
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 3 0.10 6
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 3 0.10 7
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 3 0.15 1
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 3 0.15 2
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 3 0.15 3
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 3 0.15 4
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 3 0.15 5
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 3 0.15 6
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 3 0.15 7
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 3 0.20 1
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 3 0.20 2
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 3 0.20 3
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 3 0.20 4
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 3 0.20 5
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 3 0.20 6
-LVR/3.vr_stream/log_es_lvr hmdb51 LVR0 3 0.20 7
+LVR/3.vr_stream/log_es_lvr 1596924038.4235113 hmdb51 LVR0 3 0.00 1 9 53.489 57.328
+LVR/3.vr_stream/log_es_lvr 1596924038.4235113 hmdb51 LVR0 3 0.00 2 12 66.311 62.01
+LVR/3.vr_stream/log_es_lvr 1596924038.4235113 hmdb51 LVR0 3 0.00 3 12 66.311 62.01
+LVR/3.vr_stream/log_es_lvr 1596924038.4235113 hmdb51 LVR0 3 0.00 4 12 66.311 62.01
+LVR/3.vr_stream/log_es_lvr 1596924038.4235113 hmdb51 LVR0 3 0.00 5 18 82.139 63.652
+LVR/3.vr_stream/log_es_lvr 1596924038.4235113 hmdb51 LVR0 3 0.00 6 18 82.139 63.652
+LVR/3.vr_stream/log_es_lvr 1596924038.4235113 hmdb51 LVR0 3 0.00 7 18 82.139 63.652
+LVR/3.vr_stream/log_es_lvr 1596924038.4235113 hmdb51 LVR0 3 0.05 1 9 53.489 57.328
+LVR/3.vr_stream/log_es_lvr 1596924038.4235113 hmdb51 LVR0 3 0.05 2 11 61.361 63.799
+LVR/3.vr_stream/log_es_lvr 1596924038.4235113 hmdb51 LVR0 3 0.05 3 11 61.361 63.799
+LVR/3.vr_stream/log_es_lvr 1596924038.4235113 hmdb51 LVR0 3 0.05 4 11 61.361 63.799
+LVR/3.vr_stream/log_es_lvr 1596924038.4235113 hmdb51 LVR0 3 0.05 5 11 61.361 63.799
+LVR/3.vr_stream/log_es_lvr 1596924038.4235113 hmdb51 LVR0 3 0.05 6 11 61.361 63.799
+LVR/3.vr_stream/log_es_lvr 1596924038.4235113 hmdb51 LVR0 3 0.05 7 18 82.139 63.652
+LVR/3.vr_stream/log_es_lvr 1596924038.4235113 hmdb51 LVR0 3 0.10 1 8 49.007 50.76
+LVR/3.vr_stream/log_es_lvr 1596924038.4235113 hmdb51 LVR0 3 0.10 2 8 49.007 50.76
+LVR/3.vr_stream/log_es_lvr 1596924038.4235113 hmdb51 LVR0 3 0.10 3 11 61.361 63.799
+LVR/3.vr_stream/log_es_lvr 1596924038.4235113 hmdb51 LVR0 3 0.10 4 11 61.361 63.799
+LVR/3.vr_stream/log_es_lvr 1596924038.4235113 hmdb51 LVR0 3 0.10 5 11 61.361 63.799
+LVR/3.vr_stream/log_es_lvr 1596924038.4235113 hmdb51 LVR0 3 0.10 6 11 61.361 63.799
+LVR/3.vr_stream/log_es_lvr 1596924038.4235113 hmdb51 LVR0 3 0.10 7 18 82.139 63.652
+LVR/3.vr_stream/log_es_lvr 1596924038.4235113 hmdb51 LVR0 3 0.15 1 6 37.457 44.559
+LVR/3.vr_stream/log_es_lvr 1596924038.4235113 hmdb51 LVR0 3 0.15 2 8 49.007 50.76
+LVR/3.vr_stream/log_es_lvr 1596924038.4235113 hmdb51 LVR0 3 0.15 3 11 61.361 63.799
+LVR/3.vr_stream/log_es_lvr 1596924038.4235113 hmdb51 LVR0 3 0.15 4 11 61.361 63.799
+LVR/3.vr_stream/log_es_lvr 1596924038.4235113 hmdb51 LVR0 3 0.15 5 11 61.361 63.799
+LVR/3.vr_stream/log_es_lvr 1596924038.4235113 hmdb51 LVR0 3 0.15 6 11 61.361 63.799
+LVR/3.vr_stream/log_es_lvr 1596924038.4235113 hmdb51 LVR0 3 0.15 7 11 61.361 63.799
+LVR/3.vr_stream/log_es_lvr 1596924038.4235113 hmdb51 LVR0 3 0.20 1 6 37.457 44.559
+LVR/3.vr_stream/log_es_lvr 1596924038.4235113 hmdb51 LVR0 3 0.20 2 8 49.007 50.76
+LVR/3.vr_stream/log_es_lvr 1596924038.4235113 hmdb51 LVR0 3 0.20 3 11 61.361 63.799
+LVR/3.vr_stream/log_es_lvr 1596924038.4235113 hmdb51 LVR0 3 0.20 4 11 61.361 63.799
+LVR/3.vr_stream/log_es_lvr 1596924038.4235113 hmdb51 LVR0 3 0.20 5 11 61.361 63.799
+LVR/3.vr_stream/log_es_lvr 1596924038.4235113 hmdb51 LVR0 3 0.20 6 11 61.361 63.799
+LVR/3.vr_stream/log_es_lvr 1596924038.4235113 hmdb51 LVR0 3 0.20 7 11 61.361 63.799
 LVR/3.vr_stream/log_es_lvr 1596893262.4416409 ucf101 LVR0 3 0.00 1 17 97.368 95.597
 LVR/3.vr_stream/log_es_lvr 1596893262.4416409 ucf101 LVR0 3 0.00 2 17 97.368 95.597
 LVR/3.vr_stream/log_es_lvr 1596893262.4416409 ucf101 LVR0 3 0.00 3 17 97.368 95.597
