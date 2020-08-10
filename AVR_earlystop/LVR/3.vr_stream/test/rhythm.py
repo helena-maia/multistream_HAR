@@ -39,6 +39,11 @@ parser.add_argument('-o', metavar='DIR', default='NPYS/',
                     help='path to save npy and log files (default: NPYS/)')
 parser.add_argument('-b', '--batch_size', default=2, type=int,
                     help='Batch size(default: 2)')
+parser.add_argument('-w', action='store_true', help="Compute features for the whole dataset, if the flag is found")
+parser.add_argument('--settings', metavar='DIR', default='../datasets/settings',
+                    help='path to dataset setting files (default: ../datasets/settings)')
+
+
 
 def softmax(x):
     y = [math.exp(k) for k in x]
@@ -99,17 +104,18 @@ def main():
     model_time = model_end_time - model_start_time
     print("Action recognition model is loaded in %4.4f seconds." % (model_time))
 
-    val_file = "../dataset/settings/"+args.dataset+"/val_rgb_split%d.txt"%(args.split)
+    test_path = os.path.join(args.settings, args.dataset)
+    test_file = os.path.join(test_paalth, "dataset_list.txt") if args.w else os.path.join(test_path, "test_split%d.txt"%(args.split))
 
-    f_val = open(val_file, "r")
-    val_list = f_val.readlines()
-    print("we got %d test videos" % len(val_list))
+    f_test = open(test_file, "r")
+    test_list = f_test.readlines()
+    print("we got %d test videos" % len(test_list))
 
     line_id = 1
     match_count = 0
 
     result = []
-    for line in val_list:
+    for line in test_list:
         line_info = line.split(" ")
         clip_path = os.path.join(data_dir,line_info[0])
         num_frames = int(line_info[1])
@@ -128,15 +134,15 @@ def main():
 
         pred_index = np.argmax(avg_spatial_pred_fc8)
         
-        print("Rhythm split "+str(args.split)+", sample %d/%d: GT: %d, Prediction: %d ==> correct: %d" % (line_id, len(val_list), input_video_label, pred_index, match_count))
+        print("Rhythm split "+str(args.split)+", sample %d/%d: GT: %d, Prediction: %d ==> correct: %d" % (line_id, len(test_list), input_video_label, pred_index, match_count))
 
         if pred_index == input_video_label:
             match_count += 1
         line_id += 1
 
     print(match_count)
-    print(len(val_list))
-    print("Accuracy is : %4.4f" % ((float(match_count)/len(val_list))))
+    print(len(test_list))
+    print("Accuracy is : %4.4f" % ((float(match_count)/len(test_list))))
 
     npy_name = args.dataset+"_rhythm_"+args.architecture+"_s"+str(args.split)+".npy"
     npy_path = os.path.join(output_path, npy_name)
