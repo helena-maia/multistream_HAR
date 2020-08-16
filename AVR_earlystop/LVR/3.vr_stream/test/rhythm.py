@@ -69,7 +69,7 @@ def logging(args):
 
     log_path = os.path.join(full_path, "args.json")
     with open(log_path, 'w') as json_file:
-        json.dump(args_dict, json_file)
+        json.dump(args_dict, json_file, indent=4, sort_keys=True)
 
     os.system('pip freeze > ' + os.path.join(full_path,'requirements.txt'))
 
@@ -105,7 +105,7 @@ def main():
     print("Action recognition model is loaded in %4.4f seconds." % (model_time))
 
     test_path = os.path.join(args.settings, args.dataset)
-    test_file = os.path.join(test_paalth, "dataset_list.txt") if args.w else os.path.join(test_path, "test_split%d.txt"%(args.split))
+    test_file = os.path.join(test_path, "dataset_list.txt") if args.w else os.path.join(test_path, "test_split%d.txt"%(args.split))
 
     f_test = open(test_file, "r")
     test_list = f_test.readlines()

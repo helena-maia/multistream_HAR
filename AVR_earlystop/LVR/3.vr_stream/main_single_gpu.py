@@ -247,7 +247,7 @@ def logging(args):
         os.makedirs(full_path)
 
         with open(os.path.join(full_path,'args.json'), 'w') as json_file:
-            json.dump(args_dict, json_file)
+            json.dump(args_dict, json_file, indent=4, sort_keys=True)
 
         os.system('pip freeze > '+os.path.join(full_path,'requirements.txt'))
 
