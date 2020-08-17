@@ -83,10 +83,20 @@ if __name__ == '__main__':
 
     plt.ylim(bottom=-1., top=2*args.k)
     plt.xlim(left=0, right=100)
-    plt.yticks(np.arange(2*args.k), np.concatenate((k_hardest_label, k_easiest_label)), fontsize=22)
+    #plt.yticks(np.arange(2*args.k), np.concatenate((k_hardest_label, k_easiest_label)), fontsize=22)
+    plt.yticks([])
     plt.xticks(fontsize=22)
+    plt.vlines(np.arange(0,100,20), ymin=-1, ymax=2*args.k, linestyles='dashed', color='lightgray', zorder=-1)
+
     p1 = plt.barh(np.arange(args.k), k_hardest_acc*100., color='red')
     p2 = plt.barh(np.arange(args.k, 2*args.k), k_easiest_acc*100., color='blue')
+
+    for i in range(2*args.k): #, v in enumerate(k_hardest_acc*100):
+        if i < args.k:
+            plt.text(5, i-0.1 , k_hardest_label[i], color='black', fontsize=22)
+        else:
+            plt.text(5, i-0.1 , k_easiest_label[i-args.k], color='black', fontsize=22)
+
     plt.legend([p1,p2], ["Hardest", "Easiest"], loc="lower right", title=None, ncol=1, fontsize=22)
     #plt.show()
     
