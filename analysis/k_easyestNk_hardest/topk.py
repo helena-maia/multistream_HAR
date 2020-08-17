@@ -81,7 +81,7 @@ if __name__ == '__main__':
     k_easiest_label = class_ind[k_easiest][:,1]
     k_easiest_acc = accum_acc[k_easiest]
 
-    plt.ylim(bottom=0., top=2*args.k)
+    plt.ylim(bottom=-1., top=2*args.k)
     plt.xlim(left=0, right=100)
     plt.yticks(np.arange(2*args.k), np.concatenate((k_hardest_label, k_easiest_label)), fontsize=22)
     plt.xticks(fontsize=22)
