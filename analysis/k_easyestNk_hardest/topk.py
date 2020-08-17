@@ -93,11 +93,11 @@ if __name__ == '__main__':
 
     for i in range(2*args.k): #, v in enumerate(k_hardest_acc*100):
         if i < args.k:
-            plt.text(5, i-0.1 , k_hardest_label[i], color='black', fontsize=22)
+            plt.text(5, i-0.15 , k_hardest_label[i], color='black', fontsize=26)
         else:
-            plt.text(5, i-0.1 , k_easiest_label[i-args.k], color='black', fontsize=22)
+            plt.text(5, i-0.15 , k_easiest_label[i-args.k], color='black', fontsize=26)
 
-    plt.legend([p1,p2], ["Hardest", "Easiest"], loc="lower right", title=None, ncol=1, fontsize=22)
+    plt.legend([p1,p2], ["Hardest", "Easiest"], loc="lower right", title=None, ncol=1, fontsize=26)
     #plt.show()
     
     fig = plt.gcf()
