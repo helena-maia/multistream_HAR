@@ -69,7 +69,7 @@ if __name__ == '__main__':
 
     accum_acc /= 3
     indices = np.argsort(accum_acc)
-    
+
     class_path = os.path.join(args.settings, "%s/class_ind.txt" % (args.d))
     class_ind = np.loadtxt(class_path, dtype=str)
     k_hardest = indices[:args.k]
@@ -81,14 +81,14 @@ if __name__ == '__main__':
     k_easiest_label = class_ind[k_easiest][:,1]
     k_easiest_acc = accum_acc[k_easiest]
 
+
     plt.yticks(np.arange(2*args.k), np.concatenate((k_hardest_label, k_easiest_label)), fontsize=22)
     plt.xticks(fontsize=22)
     p1 = plt.barh(np.arange(args.k), k_hardest_acc*100., color='red')
     p2 = plt.barh(np.arange(args.k, 2*args.k), k_easiest_acc*100., color='blue')
     plt.legend([p1,p2], ["Hardest", "Easiest"], loc="lower right", title=None, ncol=1, fontsize=22)
     #plt.show()
-
+    
     fig = plt.gcf()
     fig.set_size_inches(10, 10)
     fig.savefig(args.o, dpi=100, bbox_inches='tight')
-
