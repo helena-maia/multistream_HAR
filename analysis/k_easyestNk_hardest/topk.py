@@ -39,11 +39,8 @@ def obtain_accuracies_per_class(data_complete, ground_truth, num_classes=101):
 
 def get_args():
     parser = argparse.ArgumentParser(description='')
-    parser.add_argument('npy_path', type=str,
+    parser.add_argument('npy_paths', type=str, nargs='+',
                         help='path to npy files (list)')
-    parser.add_argument('-s', default=1, type=int, metavar='S',
-                        help='which split of data to work on (default: 1): 1 | 2 | 3',
-                        choices=[1,2,3])
     parser.add_argument('-k', default=10, type=int,
                         help='top k')
     parser.add_argument('-d', default="ucf101", type=str, metavar='DATASET',
@@ -51,20 +48,27 @@ def get_args():
                         choices=["hmdb51","ucf101"])
     parser.add_argument('--settings', metavar='DIR', default='../datasets/settings_earlystop',
                         help='path to dataset setting files')
+    parser.add_argument('-o', default="img.eps", type=str,
+                        help='output')
 
     return parser.parse_args()
 
 
 if __name__ == '__main__':
     args = get_args()
-    test_path = os.path.join(args.settings, "%s/test_split%s.txt" % (args.d, args.s))
-    _, ts_labels = get_labels(test_path)
-    npy_data = np.load(args.npy_path)
     num_classes = 101 if args.d == "ucf101" else 51
-    acc_class, _ = obtain_accuracies_per_class(npy_data, ts_labels, num_classes)
+    accum_acc = np.zeros(num_classes, dtype=float)
 
-    indices = np.argsort(acc_class)
+    for s in range(1,4):
+        test_path = os.path.join(args.settings, "%s/test_split%s.txt" % (args.d, s))
+        _, ts_labels = get_labels(test_path)
+        npy_data = np.load(args.npy_paths[s-1])
+        acc_class, _ = obtain_accuracies_per_class(npy_data, ts_labels, num_classes)
 
+        accum_acc += acc_class
+
+    accum_acc /= 3
+    indices = np.argsort(accum_acc)
     
     class_path = os.path.join(args.settings, "%s/class_ind.txt" % (args.d))
     class_ind = np.loadtxt(class_path, dtype=str)
@@ -72,10 +76,10 @@ if __name__ == '__main__':
     k_easiest = indices[-args.k:]
     
     k_hardest_label = class_ind[k_hardest][:,1]
-    k_hardest_acc = acc_class[k_hardest]
+    k_hardest_acc = accum_acc[k_hardest]
 
     k_easiest_label = class_ind[k_easiest][:,1]
-    k_easiest_acc = acc_class[k_easiest]
+    k_easiest_acc = accum_acc[k_easiest]
 
     plt.yticks(np.arange(2*args.k), np.concatenate((k_hardest_label, k_easiest_label)), fontsize=22)
     plt.xticks(fontsize=22)
@@ -85,7 +89,6 @@ if __name__ == '__main__':
     #plt.show()
 
     fig = plt.gcf()
-    #fig.tight_layout()
     fig.set_size_inches(10, 10)
-    fig.savefig("img.eps", dpi=100, bbox_inches='tight')
+    fig.savefig(args.o, dpi=100, bbox_inches='tight')
 
