@@ -27,5 +27,5 @@ for d in u_datasets:
 		args = argparse.Namespace(d=d, m="individual", npy_paths=npy_paths,
                                   s=s, settings=settings)
 
-		_, _, prec = fusion(args2)
+		_, _, prec = fusion(args)
 		print(prec)
