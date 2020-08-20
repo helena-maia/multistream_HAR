@@ -1,4 +1,4 @@
-#from fusion import fusion, methods
+from fusion import fusion, methods
 import argparse
 import os
 import numpy as np
@@ -36,6 +36,11 @@ for c in comb:
 
 			args = argparse.Namespace(d=d, m=method, npy_paths=npy_paths, s=s, settings=settings)
 
+<<<<<<< HEAD
 			best_weight, _, prec = fusion(args)
 			output.append("{}\t{}\t{}\t{}\t{}\t{}".format(method, d, s, c.join(" + "), best_weight, prec))
 			print(output[-1])
+=======
+			_, _, prec = fusion(args)
+			print(prec)
+>>>>>>> 1ab49d5ea649222a325d899d5611cc4ecb7b0d76
