@@ -36,4 +36,11 @@ for s in range(1, 4):
 
 accum_compl[0] /= 3
 accum_compl[1] /= 3
-print(accum_compl)
+
+for k in range(2):
+    for i in range(6):
+        for j in range(6):
+            print("{:.2f}".format(accum_compl[k][i][j]*100), end=" & ")
+        print("\\\\\n")
+
+    print("\n\n")
