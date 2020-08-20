@@ -1,4 +1,4 @@
-#from fusion import fusion, methods
+from fusion import fusion, methods
 import argparse
 import os
 import numpy as np
