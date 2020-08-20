@@ -11,7 +11,7 @@ u_modalities = ["RGB", "FLOW", "AVR"]#, "LVR0", "LVR1", "LVR2"]
 u_datasets = ["ucf101", "hmdb51"]
 u_splits = [1, 2, 3]
 settings = "../../AVR_earlystop/datasets/settings_earlystop/"
-method = "weighted_avg"
+method = "choquet_fuzzy"
 
 n_modalities = len(u_modalities)
 comb = None
@@ -20,7 +20,7 @@ for r in range(2, n_modalities+1): # combinations of 2 or more modalities
     comb = itertools.chain(comb, c) if comb else c
 
 output = []
-for c in comb:		
+for c in comb:
 	for d in u_datasets:
 		npys2 = npys1[datasets == d]
 		splits = npys2[:, 3]
@@ -36,11 +36,7 @@ for c in comb:
 
 			args = argparse.Namespace(d=d, m=method, npy_paths=npy_paths, s=s, settings=settings)
 
-<<<<<<< HEAD
 			best_weight, _, prec = fusion(args)
-			output.append("{}\t{}\t{}\t{}\t{}\t{}".format(method, d, s, c.join(" + "), best_weight, prec))
+			output.append("{}\t{}\t{}\t{}\t{}\t{}".format(method, d, s, " + ".join(list(c)) , best_weight, prec))
 			print(output[-1])
-=======
-			_, _, prec = fusion(args)
-			print(prec)
->>>>>>> 1ab49d5ea649222a325d899d5611cc4ecb7b0d76
+

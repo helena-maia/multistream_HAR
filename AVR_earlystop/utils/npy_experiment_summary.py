@@ -3,7 +3,7 @@ import json
 import os
 import numpy as np
 
-npy_list = glob.glob("../test/NPYS_fusion/*")
+npy_list = glob.glob("../LVR/3.vr_stream/test/NPYS_fusion_lvr/*")
 header = []
 summary = []
 
@@ -30,7 +30,7 @@ for npy_item in npy_list:
 
     summary += [data]
 
-summary = np.savetxt("npy_fusion_summary.csv", summary, fmt="%s", delimiter="\t")
+summary = np.savetxt("npy_fusion_lvr__summary.csv", summary, fmt="%s", delimiter="\t")
 
 
 
