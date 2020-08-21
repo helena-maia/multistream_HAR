@@ -196,10 +196,10 @@ def SVM(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
 
     clf = SVC(random_state=42)
     parameters = {
-        'C': list(10.**np.arange(-5,6)),
-        'gamma': list(10.**np.arange(-10,11)),
+        'C': list(10.**np.arange(-4,5)),
+        'gamma': list(10.**np.arange(-4,5)),
         'kernel': ['rbf', 'linear'],
-        'decision_function_shape': ['ovr', 'ovo']
+        'decision_function_shape': ['ovr'] #, 'ovo']
     }
 
     scaler = StandardScaler()
