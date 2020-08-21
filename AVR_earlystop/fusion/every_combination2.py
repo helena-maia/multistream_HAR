@@ -11,7 +11,7 @@ u_modalities = ["RGB", "FLOW", "AVR", "LVR0", "LVR1", "LVR2"]
 u_datasets = ["ucf101", "hmdb51"]
 u_splits = [1]
 settings = "../../AVR_earlystop/datasets/settings_earlystop/"
-method = "choquet_fuzzy"
+method = "SVM"
 
 n_modalities = len(u_modalities)
 comb = None
@@ -37,6 +37,6 @@ for c in comb:
 
 			best_weight, _, prec = fusion(args)
 			print(d, s, " + ".join(list(c)))
-			with open("fusion_choquet.out", 'a') as f:
+			with open("fusion_svm.out", 'a') as f:
 				f.write("{}\t{}\t{}\t{}\t{}\t{}\n".format(method, d, s, " + ".join(list(c)) , best_weight, prec))
 

@@ -206,7 +206,7 @@ def SVM(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
     X_tr_ = scaler.fit_transform(X_tr_)
     X_ts_ = scaler.transform(X_ts_)
 
-    gs = GridSearchCV(clf, parameters, n_jobs=30, verbose=1, scoring='accuracy', cv=3)
+    gs = GridSearchCV(clf, parameters, n_jobs=45, verbose=1, scoring='accuracy', cv=3)
     gs.fit(X_tr_, y_tr_)
 
     best_clf = gs.best_estimator_
