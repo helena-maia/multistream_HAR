@@ -1,0 +1,239 @@
+weighted_avg	ucf101	1	RGB + FLOW	(2, 1)	0.9019296854348401
+weighted_avg	ucf101	2	RGB + FLOW	(2, 3)	0.919925013390466
+weighted_avg	ucf101	3	RGB + FLOW	(2, 1)	0.9107142857142857
+weighted_avg	hmdb51	1	RGB + FLOW	(7, 6)	0.6313725490196078
+weighted_avg	hmdb51	2	RGB + FLOW	(3, 2)	0.5954248366013072
+weighted_avg	hmdb51	3	RGB + FLOW	(9, 5)	0.5869281045751634
+weighted_avg	ucf101	1	RGB + AVR	(1, 1)	0.8699444885011896
+weighted_avg	ucf101	2	RGB + AVR	(1, 1)	0.8837707552222818
+weighted_avg	ucf101	3	RGB + AVR	(1, 1)	0.8833874458874459
+weighted_avg	hmdb51	1	RGB + AVR	(1, 1)	0.6
+weighted_avg	hmdb51	2	RGB + AVR	(7, 6)	0.5751633986928104
+weighted_avg	hmdb51	3	RGB + AVR	(5, 4)	0.5908496732026144
+weighted_avg	ucf101	1	RGB + LVR0	(1, 1)	0.8538197197991012
+weighted_avg	ucf101	2	RGB + LVR0	(1, 2)	0.7959292983395823
+weighted_avg	ucf101	3	RGB + LVR0	(1, 1)	0.8574134199134199
+weighted_avg	hmdb51	1	RGB + LVR0	(5, 4)	0.5843137254901961
+weighted_avg	hmdb51	2	RGB + LVR0	(3, 2)	0.5333333333333333
+weighted_avg	hmdb51	3	RGB + LVR0	(3, 2)	0.5424836601307189
+weighted_avg	ucf101	1	RGB + LVR1	(1, 1)	0.8786677240285488
+weighted_avg	ucf101	2	RGB + LVR1	(2, 3)	0.8693090519550081
+weighted_avg	ucf101	3	RGB + LVR1	(5, 4)	0.8731060606060606
+weighted_avg	hmdb51	1	RGB + LVR1	(3, 4)	0.5941176470588235
+weighted_avg	hmdb51	2	RGB + LVR1	(5, 8)	0.5516339869281046
+weighted_avg	hmdb51	3	RGB + LVR1	(5, 4)	0.5627450980392157
+weighted_avg	ucf101	1	RGB + LVR2	(1, 1)	0.8852762357916997
+weighted_avg	ucf101	2	RGB + LVR2	(1, 1)	0.8824317086234601
+weighted_avg	ucf101	3	RGB + LVR2	(1, 1)	0.8760822510822511
+weighted_avg	hmdb51	1	RGB + LVR2	(1, 2)	0.5437908496732026
+weighted_avg	hmdb51	2	RGB + LVR2	(3, 5)	0.5562091503267974
+weighted_avg	hmdb51	3	RGB + LVR2	(3, 5)	0.5679738562091503
+weighted_avg	ucf101	1	FLOW + AVR	(1, 3)	0.7224425059476606
+weighted_avg	ucf101	2	FLOW + AVR	(2, 1)	0.8826995179432244
+weighted_avg	ucf101	3	FLOW + AVR	(1, 1)	0.862012987012987
+weighted_avg	hmdb51	1	FLOW + AVR	(4, 5)	0.545751633986928
+weighted_avg	hmdb51	2	FLOW + AVR	(1, 3)	0.46143790849673205
+weighted_avg	hmdb51	3	FLOW + AVR	(9, 7)	0.5915032679738562
+weighted_avg	ucf101	1	FLOW + LVR0	(1, 1)	0.8482685699180544
+weighted_avg	ucf101	2	FLOW + LVR0	(1, 1)	0.8634172469201928
+weighted_avg	ucf101	3	FLOW + LVR0	(1, 1)	0.8766233766233766
+weighted_avg	hmdb51	1	FLOW + LVR0	(7, 5)	0.6300653594771242
+weighted_avg	hmdb51	2	FLOW + LVR0	(3, 2)	0.5888888888888889
+weighted_avg	hmdb51	3	FLOW + LVR0	(1, 1)	0.5228758169934641
+weighted_avg	ucf101	1	FLOW + LVR1	(1, 2)	0.8625429553264605
+weighted_avg	ucf101	2	FLOW + LVR1	(1, 1)	0.9057311194429566
+weighted_avg	ucf101	3	FLOW + LVR1	(2, 1)	0.9055735930735931
+weighted_avg	hmdb51	1	FLOW + LVR1	(1, 2)	0.5941176470588235
+weighted_avg	hmdb51	2	FLOW + LVR1	(1, 1)	0.6281045751633987
+weighted_avg	hmdb51	3	FLOW + LVR1	(5, 7)	0.596078431372549
+weighted_avg	ucf101	1	FLOW + LVR2	(3, 2)	0.908802537668517
+weighted_avg	ucf101	2	FLOW + LVR2	(1, 1)	0.9183181574718801
+weighted_avg	ucf101	3	FLOW + LVR2	(1, 1)	0.9101731601731602
+weighted_avg	hmdb51	1	FLOW + LVR2	(1, 2)	0.5607843137254902
+weighted_avg	hmdb51	2	FLOW + LVR2	(2, 3)	0.6098039215686275
+weighted_avg	hmdb51	3	FLOW + LVR2	(2, 3)	0.6026143790849673
+weighted_avg	ucf101	1	AVR + LVR0	(1, 1)	0.7657943431139308
+weighted_avg	ucf101	2	AVR + LVR0	(1, 1)	0.7787895018746652
+weighted_avg	ucf101	3	AVR + LVR0	(1, 1)	0.7895021645021645
+weighted_avg	hmdb51	1	AVR + LVR0	(3, 2)	0.5065359477124183
+weighted_avg	hmdb51	2	AVR + LVR0	(1, 1)	0.4895424836601307
+weighted_avg	hmdb51	3	AVR + LVR0	(6, 5)	0.4954248366013072
+weighted_avg	ucf101	1	AVR + LVR1	(1, 1)	0.8429817605075337
+weighted_avg	ucf101	2	AVR + LVR1	(1, 1)	0.8524370648098554
+weighted_avg	ucf101	3	AVR + LVR1	(2, 3)	0.8414502164502164
+weighted_avg	hmdb51	1	AVR + LVR1	(7, 9)	0.5901960784313726
+weighted_avg	hmdb51	2	AVR + LVR1	(1, 1)	0.5686274509803921
+weighted_avg	hmdb51	3	AVR + LVR1	(1, 1)	0.5633986928104575
+weighted_avg	ucf101	1	AVR + LVR2	(5, 2)	0.7657943431139308
+weighted_avg	ucf101	2	AVR + LVR2	(1, 1)	0.8497589716122121
+weighted_avg	ucf101	3	AVR + LVR2	(1, 1)	0.8430735930735931
+weighted_avg	hmdb51	1	AVR + LVR2	(1, 2)	0.5405228758169934
+weighted_avg	hmdb51	2	AVR + LVR2	(1, 2)	0.5751633986928104
+weighted_avg	hmdb51	3	AVR + LVR2	(1, 3)	0.5718954248366013
+weighted_avg	ucf101	1	LVR0 + LVR1	(1, 1)	0.8070314565159926
+weighted_avg	ucf101	2	LVR0 + LVR1	(1, 2)	0.8264595607927155
+weighted_avg	ucf101	3	LVR0 + LVR1	(1, 1)	0.8014069264069265
+weighted_avg	hmdb51	1	LVR0 + LVR1	(2, 3)	0.5529411764705883
+weighted_avg	hmdb51	2	LVR0 + LVR1	(5, 4)	0.49411764705882355
+weighted_avg	hmdb51	3	LVR0 + LVR1	(3, 2)	0.4699346405228758
+weighted_avg	ucf101	1	LVR0 + LVR2	(1, 1)	0.8194554586307163
+weighted_avg	ucf101	2	LVR0 + LVR2	(1, 1)	0.823513658275308
+weighted_avg	ucf101	3	LVR0 + LVR2	(1, 1)	0.8260281385281385
+weighted_avg	hmdb51	1	LVR0 + LVR2	(2, 3)	0.5562091503267974
+weighted_avg	hmdb51	2	LVR0 + LVR2	(1, 3)	0.515032679738562
+weighted_avg	hmdb51	3	LVR0 + LVR2	(2, 3)	0.534640522875817
+weighted_avg	ucf101	1	LVR1 + LVR2	(1, 1)	0.8395453343906952
+weighted_avg	ucf101	2	LVR1 + LVR2	(1, 1)	0.852169255490091
+weighted_avg	ucf101	3	LVR1 + LVR2	(1, 1)	0.8403679653679653
+weighted_avg	hmdb51	1	LVR1 + LVR2	(1, 6)	0.4915032679738562
+weighted_avg	hmdb51	2	LVR1 + LVR2	(3, 5)	0.5496732026143791
+weighted_avg	hmdb51	3	LVR1 + LVR2	(1, 3)	0.5300653594771242
+weighted_avg	ucf101	1	RGB + FLOW + AVR	(1, 1, 1)	0.9117102828443034
+weighted_avg	ucf101	2	RGB + FLOW + AVR	(1, 1, 1)	0.9260846277450455
+weighted_avg	ucf101	3	RGB + FLOW + AVR	(2, 1, 1)	0.9223484848484849
+weighted_avg	hmdb51	1	RGB + FLOW + AVR	(6, 1, 6)	0.6222222222222222
+weighted_avg	hmdb51	2	RGB + FLOW + AVR	(5, 3, 7)	0.615686274509804
+weighted_avg	hmdb51	3	RGB + FLOW + AVR	(7, 4, 8)	0.6228758169934641
+weighted_avg	ucf101	1	RGB + FLOW + LVR0	(1, 1, 1)	0.9109172614327253
+weighted_avg	ucf101	2	RGB + FLOW + LVR0	(1, 2, 2)	0.9068023567220139
+weighted_avg	ucf101	3	RGB + FLOW + LVR0	(1, 1, 1)	0.9239718614718615
+weighted_avg	hmdb51	1	RGB + FLOW + LVR0	(3, 2, 2)	0.6627450980392157
+weighted_avg	hmdb51	2	RGB + FLOW + LVR0	(4, 4, 5)	0.6045751633986928
+weighted_avg	hmdb51	3	RGB + FLOW + LVR0	(9, 4, 9)	0.5640522875816993
+weighted_avg	ucf101	1	RGB + FLOW + LVR1	(1, 1, 2)	0.8995506212001058
+weighted_avg	ucf101	2	RGB + FLOW + LVR1	(1, 1, 1)	0.922335297268345
+weighted_avg	ucf101	3	RGB + FLOW + LVR1	(1, 1, 1)	0.9193722943722944
+weighted_avg	hmdb51	1	RGB + FLOW + LVR1	(6, 4, 5)	0.64640522875817
+weighted_avg	hmdb51	2	RGB + FLOW + LVR1	(3, 5, 6)	0.6372549019607843
+weighted_avg	hmdb51	3	RGB + FLOW + LVR1	(6, 1, 4)	0.5771241830065359
+weighted_avg	ucf101	1	RGB + FLOW + LVR2	(1, 1, 1)	0.9204335183716627
+weighted_avg	ucf101	2	RGB + FLOW + LVR2	(1, 1, 1)	0.9287627209426889
+weighted_avg	ucf101	3	RGB + FLOW + LVR2	(1, 1, 1)	0.9304653679653679
+weighted_avg	hmdb51	1	RGB + FLOW + LVR2	(1, 1, 3)	0.5843137254901961
+weighted_avg	hmdb51	2	RGB + FLOW + LVR2	(1, 3, 4)	0.6300653594771242
+weighted_avg	hmdb51	3	RGB + FLOW + LVR2	(2, 1, 5)	0.5843137254901961
+weighted_avg	ucf101	1	RGB + AVR + LVR0	(1, 1, 1)	0.8844832143801216
+weighted_avg	ucf101	2	RGB + AVR + LVR0	(1, 1, 1)	0.8843063738618104
+weighted_avg	ucf101	3	RGB + AVR + LVR0	(1, 1, 1)	0.8925865800865801
+weighted_avg	hmdb51	1	RGB + AVR + LVR0	(3, 5, 3)	0.6209150326797386
+weighted_avg	hmdb51	2	RGB + AVR + LVR0	(2, 3, 2)	0.5908496732026144
+weighted_avg	hmdb51	3	RGB + AVR + LVR0	(3, 4, 4)	0.5823529411764706
+weighted_avg	ucf101	1	RGB + AVR + LVR1	(1, 1, 1)	0.9040444091990484
+weighted_avg	ucf101	2	RGB + AVR + LVR1	(1, 1, 1)	0.8998393144081414
+weighted_avg	ucf101	3	RGB + AVR + LVR1	(2, 1, 1)	0.8996212121212122
+weighted_avg	hmdb51	1	RGB + AVR + LVR1	(2, 6, 3)	0.5980392156862745
+weighted_avg	hmdb51	2	RGB + AVR + LVR1	(1, 3, 3)	0.6026143790849673
+weighted_avg	hmdb51	3	RGB + AVR + LVR1	(3, 4, 2)	0.6169934640522876
+weighted_avg	ucf101	1	RGB + AVR + LVR2	(1, 1, 1)	0.8984932593180016
+weighted_avg	ucf101	2	RGB + AVR + LVR2	(1, 1, 1)	0.9046598821638993
+weighted_avg	ucf101	3	RGB + AVR + LVR2	(1, 1, 1)	0.9071969696969697
+weighted_avg	hmdb51	1	RGB + AVR + LVR2	(1, 2, 7)	0.5477124183006536
+weighted_avg	hmdb51	2	RGB + AVR + LVR2	(1, 1, 1)	0.6313725490196078
+weighted_avg	hmdb51	3	RGB + AVR + LVR2	(1, 2, 3)	0.6228758169934641
+weighted_avg	ucf101	1	RGB + LVR0 + LVR1	(1, 1, 1)	0.880518107322231
+weighted_avg	ucf101	2	RGB + LVR0 + LVR1	(2, 1, 4)	0.870112479914301
+weighted_avg	ucf101	3	RGB + LVR0 + LVR1	(1, 1, 1)	0.8793290043290043
+weighted_avg	hmdb51	1	RGB + LVR0 + LVR1	(6, 7, 5)	0.6169934640522876
+weighted_avg	hmdb51	2	RGB + LVR0 + LVR1	(2, 1, 1)	0.5666666666666667
+weighted_avg	hmdb51	3	RGB + LVR0 + LVR1	(4, 3, 4)	0.5699346405228758
+weighted_avg	ucf101	1	RGB + LVR0 + LVR2	(1, 1, 1)	0.8844832143801216
+weighted_avg	ucf101	2	RGB + LVR0 + LVR2	(1, 1, 2)	0.8722549544724156
+weighted_avg	ucf101	3	RGB + LVR0 + LVR2	(1, 1, 1)	0.8820346320346321
+weighted_avg	hmdb51	1	RGB + LVR0 + LVR2	(1, 1, 3)	0.5745098039215686
+weighted_avg	hmdb51	2	RGB + LVR0 + LVR2	(1, 3, 4)	0.5594771241830065
+weighted_avg	hmdb51	3	RGB + LVR0 + LVR2	(3, 6, 7)	0.5666666666666667
+weighted_avg	ucf101	1	RGB + LVR1 + LVR2	(1, 1, 1)	0.8908273856727466
+weighted_avg	ucf101	2	RGB + LVR1 + LVR2	(1, 1, 2)	0.8840385645420461
+weighted_avg	ucf101	3	RGB + LVR1 + LVR2	(1, 1, 4)	0.8463203463203464
+weighted_avg	hmdb51	1	RGB + LVR1 + LVR2	(1, 1, 5)	0.5379084967320261
+weighted_avg	hmdb51	2	RGB + LVR1 + LVR2	(1, 3, 6)	0.5568627450980392
+weighted_avg	hmdb51	3	RGB + LVR1 + LVR2	(3, 2, 8)	0.5738562091503268
+weighted_avg	ucf101	1	FLOW + AVR + LVR0	(1, 1, 1)	0.8628072957969866
+weighted_avg	ucf101	2	FLOW + AVR + LVR0	(1, 1, 1)	0.887252276379218
+weighted_avg	ucf101	3	FLOW + AVR + LVR0	(1, 1, 1)	0.8931277056277056
+weighted_avg	hmdb51	1	FLOW + AVR + LVR0	(2, 5, 3)	0.5797385620915033
+weighted_avg	hmdb51	2	FLOW + AVR + LVR0	(4, 8, 9)	0.5679738562091503
+weighted_avg	hmdb51	3	FLOW + AVR + LVR0	(1, 3, 3)	0.5379084967320261
+weighted_avg	ucf101	1	FLOW + AVR + LVR1	(1, 1, 1)	0.8998149616706318
+weighted_avg	ucf101	2	FLOW + AVR + LVR1	(1, 1, 1)	0.9164434922335297
+weighted_avg	ucf101	3	FLOW + AVR + LVR1	(1, 1, 1)	0.9050324675324676
+weighted_avg	hmdb51	1	FLOW + AVR + LVR1	(1, 5, 7)	0.6143790849673203
+weighted_avg	hmdb51	2	FLOW + AVR + LVR1	(5, 7, 6)	0.64640522875817
+weighted_avg	hmdb51	3	FLOW + AVR + LVR1	(1, 2, 2)	0.6254901960784314
+weighted_avg	ucf101	1	FLOW + AVR + LVR2	(1, 1, 1)	0.893735130848533
+weighted_avg	ucf101	2	FLOW + AVR + LVR2	(1, 1, 1)	0.9172469201928227
+weighted_avg	ucf101	3	FLOW + AVR + LVR2	(1, 1, 1)	0.9158549783549783
+weighted_avg	hmdb51	1	FLOW + AVR + LVR2	(1, 1, 7)	0.5287581699346405
+weighted_avg	hmdb51	2	FLOW + AVR + LVR2	(1, 2, 2)	0.6313725490196078
+weighted_avg	hmdb51	3	FLOW + AVR + LVR2	(2, 3, 5)	0.6450980392156863
+weighted_avg	ucf101	1	FLOW + LVR0 + LVR1	(1, 1, 1)	0.8961141950832673
+weighted_avg	ucf101	2	FLOW + LVR0 + LVR1	(1, 1, 1)	0.903588644884842
+weighted_avg	ucf101	3	FLOW + LVR0 + LVR1	(1, 1, 1)	0.8958333333333334
+weighted_avg	hmdb51	1	FLOW + LVR0 + LVR1	(4, 5, 8)	0.6163398692810458
+weighted_avg	hmdb51	2	FLOW + LVR0 + LVR1	(7, 4, 7)	0.6372549019607843
+weighted_avg	hmdb51	3	FLOW + LVR0 + LVR1	(5, 6, 5)	0.5699346405228758
+weighted_avg	ucf101	1	FLOW + LVR0 + LVR2	(1, 1, 1)	0.893735130848533
+weighted_avg	ucf101	2	FLOW + LVR0 + LVR2	(1, 1, 1)	0.915104445634708
+weighted_avg	ucf101	3	FLOW + LVR0 + LVR2	(1, 1, 1)	0.9126082251082251
+weighted_avg	hmdb51	1	FLOW + LVR0 + LVR2	(2, 1, 3)	0.6326797385620915
+weighted_avg	hmdb51	2	FLOW + LVR0 + LVR2	(6, 3, 7)	0.642483660130719
+weighted_avg	hmdb51	3	FLOW + LVR0 + LVR2	(1, 3, 5)	0.5666666666666667
+weighted_avg	ucf101	1	FLOW + LVR1 + LVR2	(1, 1, 1)	0.908538197197991
+weighted_avg	ucf101	2	FLOW + LVR1 + LVR2	(1, 1, 1)	0.9185859667916444
+weighted_avg	ucf101	3	FLOW + LVR1 + LVR2	(1, 1, 1)	0.9158549783549783
+weighted_avg	hmdb51	1	FLOW + LVR1 + LVR2	(3, 2, 7)	0.5928104575163399
+weighted_avg	hmdb51	2	FLOW + LVR1 + LVR2	(3, 3, 7)	0.6078431372549019
+weighted_avg	hmdb51	3	FLOW + LVR1 + LVR2	(2, 3, 8)	0.5784313725490197
+weighted_avg	ucf101	1	AVR + LVR0 + LVR1	(1, 1, 1)	0.8675654242664552
+weighted_avg	ucf101	2	AVR + LVR0 + LVR1	(1, 1, 1)	0.8698446705945367
+weighted_avg	ucf101	3	AVR + LVR0 + LVR1	(1, 1, 1)	0.8630952380952381
+weighted_avg	hmdb51	1	AVR + LVR0 + LVR1	(5, 4, 9)	0.6189542483660131
+weighted_avg	hmdb51	2	AVR + LVR0 + LVR1	(6, 2, 9)	0.5928104575163399
+weighted_avg	hmdb51	3	AVR + LVR0 + LVR1	(5, 5, 2)	0.5418300653594771
+weighted_avg	ucf101	1	AVR + LVR0 + LVR2	(1, 1, 1)	0.8633359767380386
+weighted_avg	ucf101	2	AVR + LVR0 + LVR2	(1, 1, 1)	0.871719335832887
+weighted_avg	ucf101	3	AVR + LVR0 + LVR2	(1, 1, 1)	0.8777056277056277
+weighted_avg	hmdb51	1	AVR + LVR0 + LVR2	(3, 2, 4)	0.611764705882353
+weighted_avg	hmdb51	2	AVR + LVR0 + LVR2	(4, 2, 5)	0.6104575163398693
+weighted_avg	hmdb51	3	AVR + LVR0 + LVR2	(1, 2, 2)	0.581045751633987
+weighted_avg	ucf101	1	AVR + LVR1 + LVR2	(1, 1, 1)	0.8823684906159133
+weighted_avg	ucf101	2	AVR + LVR1 + LVR2	(1, 1, 1)	0.8845741831815748
+weighted_avg	ucf101	3	AVR + LVR1 + LVR2	(1, 1, 1)	0.8747294372294372
+weighted_avg	hmdb51	1	AVR + LVR1 + LVR2	(2, 1, 6)	0.5555555555555556
+weighted_avg	hmdb51	2	AVR + LVR1 + LVR2	(3, 1, 2)	0.6032679738562091
+weighted_avg	hmdb51	3	AVR + LVR1 + LVR2	(4, 3, 9)	0.6065359477124183
+weighted_avg	ucf101	1	LVR0 + LVR1 + LVR2	(1, 1, 1)	0.8591065292096219
+weighted_avg	ucf101	2	LVR0 + LVR1 + LVR2	(1, 1, 2)	0.8615425816818425
+weighted_avg	ucf101	3	LVR0 + LVR1 + LVR2	(1, 1, 1)	0.8612012987012987
+weighted_avg	hmdb51	1	LVR0 + LVR1 + LVR2	(4, 6, 9)	0.5954248366013072
+weighted_avg	hmdb51	2	LVR0 + LVR1 + LVR2	(2, 3, 6)	0.5647058823529412
+weighted_avg	hmdb51	3	LVR0 + LVR1 + LVR2	(4, 5, 6)	0.5712418300653594
+weighted_avg	ucf101	1	RGB + FLOW + AVR + LVR0	(1, 1, 1, 1)	0.9111816019032514
+weighted_avg	ucf101	2	RGB + FLOW + AVR + LVR0	(1, 1, 1, 1)	0.9292983395822174
+weighted_avg	ucf101	3	RGB + FLOW + AVR + LVR0	(1, 1, 1, 1)	0.9258658008658008
+weighted_avg	hmdb51	1	RGB + FLOW + AVR + LVR0	(4, 3, 6, 5)	0.673202614379085
+weighted_avg	hmdb51	2	RGB + FLOW + AVR + LVR0	(3, 5, 7, 6)	0.64640522875817
+weighted_avg	hmdb51	3	RGB + FLOW + AVR + LVR0	(3, 1, 2, 5)	0.561437908496732
+weighted_avg	ucf101	1	RGB + FLOW + AVR + LVR1	(1, 1, 1, 1)	0.922283901665345
+weighted_avg	ucf101	2	RGB + FLOW + AVR + LVR1	(1, 1, 1, 1)	0.9333154793786824
+weighted_avg	ucf101	3	RGB + FLOW + AVR + LVR1	(1, 1, 1, 1)	0.9261363636363636
+weighted_avg	hmdb51	1	RGB + FLOW + AVR + LVR1	(3, 1, 7, 6)	0.634640522875817
+weighted_avg	hmdb51	2	RGB + FLOW + AVR + LVR1	(1, 3, 8, 6)	0.6254901960784314
+weighted_avg	hmdb51	3	RGB + FLOW + AVR + LVR1	(7, 1, 9, 5)	0.6313725490196078
+weighted_avg	ucf101	1	RGB + FLOW + AVR + LVR2	(1, 1, 1, 1)	0.922548242135871
+weighted_avg	ucf101	2	RGB + FLOW + AVR + LVR2	(1, 1, 1, 1)	0.9335832886984468
+weighted_avg	ucf101	3	RGB + FLOW + AVR + LVR2	(1, 1, 1, 1)	0.9337121212121212
+weighted_avg	hmdb51	1	RGB + FLOW + AVR + LVR2	(1, 1, 5, 8)	0.596078431372549
+weighted_avg	hmdb51	2	RGB + FLOW + AVR + LVR2	(3, 1, 5, 4)	0.6405228758169934
+weighted_avg	hmdb51	3	RGB + FLOW + AVR + LVR2	(3, 1, 6, 9)	0.6359477124183006
+weighted_avg	ucf101	1	RGB + FLOW + LVR0 + LVR1	(1, 1, 1, 1)	0.9193761564895585
+weighted_avg	ucf101	2	RGB + FLOW + LVR0 + LVR1	(1, 1, 1, 1)	0.9247455811462238
+weighted_avg	ucf101	3	RGB + FLOW + LVR0 + LVR1	(1, 1, 1, 1)	0.9204545454545454
+weighted_avg	hmdb51	1	RGB + FLOW + LVR0 + LVR1	(5, 4, 3, 4)	0.6692810457516339
+weighted_avg	hmdb51	2	RGB + FLOW + LVR0 + LVR1	(2, 5, 3, 6)	0.634640522875817
+weighted_avg	hmdb51	3	RGB + FLOW + LVR0 + LVR1	(4, 6, 5, 3)	0.6189542483660131
+weighted_avg	ucf101	1	RGB + FLOW + LVR0 + LVR2	(1, 1, 1, 1)	0.9193761564895585
+weighted_avg	ucf101	2	RGB + FLOW + LVR0 + LVR2	(1, 1, 1, 1)	0.9263524370648099
+weighted_avg	ucf101	3	RGB + FLOW + LVR0 + LVR2	(1, 1, 1, 1)	0.9299242424242424
+weighted_avg	hmdb51	1	RGB + FLOW + LVR0 + LVR2	(1, 1, 1, 3)	0.6189542483660131
+weighted_avg	hmdb51	2	RGB + FLOW + LVR0 + LVR2	(1, 2, 2, 4)	0.6274509803921569
