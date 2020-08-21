@@ -11,6 +11,8 @@ u_datasets = ["ucf101", "hmdb51"]
 u_splits = [1, 2, 3]
 settings = "../../AVR_earlystop/datasets/settings_earlystop/"
 
+print("here")
+
 for d in u_datasets:
 	npys2 = npys1[datasets == d]
 	splits = npys2[:, 3]
@@ -28,4 +30,4 @@ for d in u_datasets:
                                   s=s, settings=settings)
 
 		_, _, prec = fusion(args)
-		print(prec)
+		print(d, s, prec)

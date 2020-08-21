@@ -7,15 +7,15 @@ import itertools
 npys1 = np.loadtxt("npy_list.csv", dtype=str)
 datasets = npys1[:, 5]
 
-u_modalities = ["RGB", "FLOW", "AVR"]#, "LVR0", "LVR1", "LVR2"]
+u_modalities = ["RGB", "FLOW", "AVR", "LVR0", "LVR1", "LVR2"]
 u_datasets = ["ucf101", "hmdb51"]
 u_splits = [1, 2, 3]
 settings = "../../AVR_earlystop/datasets/settings_earlystop/"
-method = "choquet_fuzzy"
+method = "weighted_avg"
 
 n_modalities = len(u_modalities)
 comb = None
-for r in range(2, n_modalities+1): # combinations of 2 or more modalities
+for r in range(6, n_modalities+1): # combinations of 2 or more modalities
     c = itertools.combinations(u_modalities, r=r)
     comb = itertools.chain(comb, c) if comb else c
 
