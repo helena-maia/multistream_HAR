@@ -38,5 +38,5 @@ for c in comb:
 			best_weight, _, prec = fusion(args)
 			print(d, s, " + ".join(list(c)))
 			with open("fusion_choquet.out", 'a') as f:
-				f.write("{}\t{}\t{}\t{}\t{}\t{}".format(method, d, s, " + ".join(list(c)) , best_weight, prec))
+				f.write("{}\t{}\t{}\t{}\t{}\t{}\n".format(method, d, s, " + ".join(list(c)) , best_weight, prec))
 
