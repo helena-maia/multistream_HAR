@@ -1,0 +1,100 @@
+choquet_fuzzy	ucf101	1	RGB + FLOW	(3, 1)	0.9069521543748348
+choquet_fuzzy	hmdb51	1	RGB + FLOW	(7, 2)	0.6320261437908496
+choquet_fuzzy	ucf101	1	RGB + AVR	(1, 1)	0.8625429553264605
+choquet_fuzzy	hmdb51	1	RGB + AVR	(6, 5)	0.5934640522875817
+choquet_fuzzy	ucf101	1	RGB + LVR0	(1, 1)	0.8556701030927835
+choquet_fuzzy	hmdb51	1	RGB + LVR0	(8, 1)	0.5875816993464053
+choquet_fuzzy	ucf101	1	RGB + LVR1	(1, 1)	0.8736452550885541
+choquet_fuzzy	hmdb51	1	RGB + LVR1	(1, 2)	0.5849673202614379
+choquet_fuzzy	ucf101	1	RGB + LVR2	(1, 2)	0.8651863600317209
+choquet_fuzzy	hmdb51	1	RGB + LVR2	(1, 7)	0.5464052287581699
+choquet_fuzzy	ucf101	1	FLOW + AVR	(1, 3)	0.7853555379328575
+choquet_fuzzy	hmdb51	1	FLOW + AVR	(1, 4)	0.5379084967320261
+choquet_fuzzy	ucf101	1	FLOW + LVR0	(1, 9)	0.774781919111816
+choquet_fuzzy	hmdb51	1	FLOW + LVR0	(1, 2)	0.5973856209150327
+choquet_fuzzy	ucf101	1	FLOW + LVR1	(1, 3)	0.8823684906159133
+choquet_fuzzy	hmdb51	1	FLOW + LVR1	(1, 8)	0.6098039215686275
+choquet_fuzzy	ucf101	1	FLOW + LVR2	(1, 2)	0.8884483214380121
+choquet_fuzzy	hmdb51	1	FLOW + LVR2	(1, 5)	0.6026143790849673
+choquet_fuzzy	ucf101	1	AVR + LVR0	(2, 1)	0.7581284694686756
+choquet_fuzzy	hmdb51	1	AVR + LVR0	(4, 3)	0.5215686274509804
+choquet_fuzzy	ucf101	1	AVR + LVR1	(1, 1)	0.8316151202749141
+choquet_fuzzy	hmdb51	1	AVR + LVR1	(4, 5)	0.5764705882352941
+choquet_fuzzy	ucf101	1	AVR + LVR2	(1, 1)	0.8228918847475548
+choquet_fuzzy	hmdb51	1	AVR + LVR2	(1, 6)	0.545751633986928
+choquet_fuzzy	ucf101	1	LVR0 + LVR1	(1, 1)	0.788791964049696
+choquet_fuzzy	hmdb51	1	LVR0 + LVR1	(1, 3)	0.5359477124183006
+choquet_fuzzy	ucf101	1	LVR0 + LVR2	(1, 1)	0.8070314565159926
+choquet_fuzzy	hmdb51	1	LVR0 + LVR2	(1, 8)	0.5477124183006536
+choquet_fuzzy	ucf101	1	LVR1 + LVR2	(1, 1)	0.8310864393338621
+choquet_fuzzy	hmdb51	1	LVR1 + LVR2	(1, 7)	0.5424836601307189
+choquet_fuzzy	ucf101	1	RGB + FLOW + AVR	(1, 1, 1)	0.9040444091990484
+choquet_fuzzy	hmdb51	1	RGB + FLOW + AVR	(8, 1, 4)	0.6470588235294118
+choquet_fuzzy	ucf101	1	RGB + FLOW + LVR0	(1, 1, 1)	0.8971715569653714
+choquet_fuzzy	hmdb51	1	RGB + FLOW + LVR0	(7, 1, 3)	0.6392156862745098
+choquet_fuzzy	ucf101	1	RGB + FLOW + LVR1	(1, 1, 1)	0.8963785355537933
+choquet_fuzzy	hmdb51	1	RGB + FLOW + LVR1	(3, 1, 7)	0.6411764705882353
+choquet_fuzzy	ucf101	1	RGB + FLOW + LVR2	(1, 1, 3)	0.9058947924927306
+choquet_fuzzy	hmdb51	1	RGB + FLOW + LVR2	(1, 1, 7)	0.6052287581699346
+choquet_fuzzy	ucf101	1	RGB + AVR + LVR0	(1, 1, 1)	0.8620142743854085
+choquet_fuzzy	hmdb51	1	RGB + AVR + LVR0	(3, 1, 2)	0.6078431372549019
+choquet_fuzzy	ucf101	1	RGB + AVR + LVR1	(1, 1, 1)	0.8821041501453872
+choquet_fuzzy	hmdb51	1	RGB + AVR + LVR1	(3, 2, 9)	0.6209150326797386
+choquet_fuzzy	ucf101	1	RGB + AVR + LVR2	(1, 1, 1)	0.8844832143801216
+choquet_fuzzy	hmdb51	1	RGB + AVR + LVR2	(1, 1, 9)	0.5758169934640522
+choquet_fuzzy	ucf101	1	RGB + LVR0 + LVR1	(1, 1, 1)	0.8691514670896114
+choquet_fuzzy	hmdb51	1	RGB + LVR0 + LVR1	(2, 2, 1)	0.6052287581699346
+choquet_fuzzy	ucf101	1	RGB + LVR0 + LVR2	(1, 1, 1)	0.873380914618028
+choquet_fuzzy	hmdb51	1	RGB + LVR0 + LVR2	(1, 1, 8)	0.5751633986928104
+choquet_fuzzy	ucf101	1	RGB + LVR1 + LVR2	(1, 1, 1)	0.8784033835580227
+choquet_fuzzy	hmdb51	1	RGB + LVR1 + LVR2	(1, 1, 8)	0.5836601307189543
+choquet_fuzzy	ucf101	1	FLOW + AVR + LVR0	(1, 1, 5)	0.8369019296854349
+choquet_fuzzy	hmdb51	1	FLOW + AVR + LVR0	(1, 7, 6)	0.5980392156862745
+choquet_fuzzy	ucf101	1	FLOW + AVR + LVR1	(1, 1, 1)	0.8828971715569653
+choquet_fuzzy	hmdb51	1	FLOW + AVR + LVR1	(2, 7, 9)	0.642483660130719
+choquet_fuzzy	ucf101	1	FLOW + AVR + LVR2	(1, 1, 1)	0.8897700237906423
+choquet_fuzzy	hmdb51	1	FLOW + AVR + LVR2	(1, 1, 5)	0.6013071895424836
+choquet_fuzzy	ucf101	1	FLOW + LVR0 + LVR1	(1, 1, 1)	0.8688871266190854
+choquet_fuzzy	hmdb51	1	FLOW + LVR0 + LVR1	(3, 1, 5)	0.6143790849673203
+choquet_fuzzy	ucf101	1	FLOW + LVR0 + LVR2	(1, 1, 1)	0.8768173407348665
+choquet_fuzzy	hmdb51	1	FLOW + LVR0 + LVR2	(1, 1, 7)	0.6104575163398693
+choquet_fuzzy	ucf101	1	FLOW + LVR1 + LVR2	(1, 1, 1)	0.8865979381443299
+choquet_fuzzy	hmdb51	1	FLOW + LVR1 + LVR2	(1, 1, 9)	0.6
+choquet_fuzzy	ucf101	1	AVR + LVR0 + LVR1	(1, 1, 1)	0.8371662701559609
+choquet_fuzzy	hmdb51	1	AVR + LVR0 + LVR1	(4, 1, 4)	0.5915032679738562
+choquet_fuzzy	ucf101	1	AVR + LVR0 + LVR2	(1, 1, 1)	0.83055775839281
+choquet_fuzzy	hmdb51	1	AVR + LVR0 + LVR2	(1, 1, 7)	0.5686274509803921
+choquet_fuzzy	ucf101	1	AVR + LVR1 + LVR2	(1, 1, 1)	0.8583135077980438
+choquet_fuzzy	hmdb51	1	AVR + LVR1 + LVR2	(1, 2, 6)	0.5777777777777777
+choquet_fuzzy	ucf101	1	LVR0 + LVR1 + LVR2	(1, 1, 1)	0.8406026962727994
+choquet_fuzzy	hmdb51	1	LVR0 + LVR1 + LVR2	(1, 1, 9)	0.5647058823529412
+choquet_fuzzy	ucf101	1	RGB + FLOW + AVR + LVR0	(1, 1, 1, 7)	0.8794607454401269
+choquet_fuzzy	hmdb51	1	RGB + FLOW + AVR + LVR0	(5, 1, 5, 5)	0.6477124183006536
+choquet_fuzzy	ucf101	1	RGB + FLOW + AVR + LVR1	(1, 1, 1, 1)	0.8966428760243194
+choquet_fuzzy	hmdb51	1	RGB + FLOW + AVR + LVR1	(1, 1, 1, 5)	0.6620915032679738
+choquet_fuzzy	ucf101	1	RGB + FLOW + AVR + LVR2	(1, 1, 1, 1)	0.9053661115516786
+choquet_fuzzy	hmdb51	1	RGB + FLOW + AVR + LVR2	(1, 1, 1, 9)	0.6065359477124183
+choquet_fuzzy	ucf101	1	RGB + FLOW + LVR0 + LVR1	(1, 1, 1, 1)	0.8934707903780069
+choquet_fuzzy	hmdb51	1	RGB + FLOW + LVR0 + LVR1	(5, 1, 6, 3)	0.6392156862745098
+choquet_fuzzy	ucf101	1	RGB + FLOW + LVR0 + LVR2	(1, 1, 1, 1)	0.8966428760243194
+choquet_fuzzy	hmdb51	1	RGB + FLOW + LVR0 + LVR2	(1, 1, 1, 7)	0.611764705882353
+choquet_fuzzy	ucf101	1	RGB + FLOW + LVR1 + LVR2	(1, 1, 1, 1)	0.8995506212001058
+choquet_fuzzy	hmdb51	1	RGB + FLOW + LVR1 + LVR2	(1, 1, 4, 9)	0.6235294117647059
+choquet_fuzzy	ucf101	1	RGB + AVR + LVR0 + LVR1	(1, 1, 1, 1)	0.8842188739095955
+choquet_fuzzy	hmdb51	1	RGB + AVR + LVR0 + LVR1	(3, 4, 1, 1)	0.6366013071895424
+choquet_fuzzy	ucf101	1	RGB + AVR + LVR0 + LVR2	(1, 1, 1, 1)	0.8760243193232884
+choquet_fuzzy	hmdb51	1	RGB + AVR + LVR0 + LVR2	(1, 3, 1, 7)	0.6019607843137255
+choquet_fuzzy	ucf101	1	RGB + AVR + LVR1 + LVR2	(1, 1, 1, 1)	0.8860692572032778
+choquet_fuzzy	hmdb51	1	RGB + AVR + LVR1 + LVR2	(1, 1, 2, 6)	0.6058823529411764
+choquet_fuzzy	ucf101	1	RGB + LVR0 + LVR1 + LVR2	(1, 1, 1, 1)	0.8781390430874967
+choquet_fuzzy	hmdb51	1	RGB + LVR0 + LVR1 + LVR2	(1, 1, 1, 8)	0.5947712418300654
+choquet_fuzzy	ucf101	1	FLOW + AVR + LVR0 + LVR1	(1, 1, 1, 1)	0.8754956383822363
+choquet_fuzzy	hmdb51	1	FLOW + AVR + LVR0 + LVR1	(1, 9, 1, 8)	0.6287581699346405
+choquet_fuzzy	ucf101	1	FLOW + AVR + LVR0 + LVR2	(1, 1, 1, 1)	0.8799894263811789
+choquet_fuzzy	hmdb51	1	FLOW + AVR + LVR0 + LVR2	(1, 2, 1, 4)	0.6261437908496732
+choquet_fuzzy	ucf101	1	FLOW + AVR + LVR1 + LVR2	(1, 1, 1, 1)	0.8831615120274914
+choquet_fuzzy	hmdb51	1	FLOW + AVR + LVR1 + LVR2	(1, 1, 3, 9)	0.6150326797385621
+choquet_fuzzy	ucf101	1	FLOW + LVR0 + LVR1 + LVR2	(1, 1, 1, 1)	0.8747026169706582
+choquet_fuzzy	hmdb51	1	FLOW + LVR0 + LVR1 + LVR2	(1, 1, 1, 6)	0.6098039215686275
+choquet_fuzzy	ucf101	1	AVR + LVR0 + LVR1 + LVR2	(1, 1, 1, 1)	0.8572561459159397
+choquet_fuzzy	hmdb51	1	AVR + LVR0 + LVR1 + LVR2	(1, 1, 1, 7)	0.5908496732026144

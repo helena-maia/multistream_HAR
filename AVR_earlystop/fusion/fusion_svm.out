@@ -1,0 +1,114 @@
+SVM	ucf101	1	RGB + FLOW	{'C': 0.01, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.9172614327253502
+SVM	hmdb51	1	RGB + FLOW	{'C': 10.0, 'decision_function_shape': 'ovr', 'gamma': 0.01, 'kernel': 'rbf'}	0.6359477124183006
+SVM	ucf101	1	RGB + AVR	{'C': 0.01, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.8855405762622257
+SVM	hmdb51	1	RGB + AVR	{'C': 100.0, 'decision_function_shape': 'ovr', 'gamma': 0.01, 'kernel': 'rbf'}	0.5699346405228758
+SVM	ucf101	1	RGB + LVR0	{'C': 0.001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.859370869680148
+SVM	hmdb51	1	RGB + LVR0	{'C': 0.1, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.5450980392156862
+SVM	ucf101	1	RGB + LVR1	{'C': 0.01, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.8720592122653978
+SVM	hmdb51	1	RGB + LVR1	{'C': 0.1, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.5647058823529412
+SVM	ucf101	1	RGB + LVR2	{'C': 0.01, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.8707375099127677
+SVM	hmdb51	1	RGB + LVR2	{'C': 100.0, 'decision_function_shape': 'ovr', 'gamma': 0.01, 'kernel': 'rbf'}	0.534640522875817
+SVM	ucf101	1	FLOW + AVR	{'C': 0.01, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.824213587100185
+SVM	hmdb51	1	FLOW + AVR	{'C': 100.0, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'rbf'}	0.5588235294117647
+SVM	ucf101	1	FLOW + LVR0	{'C': 0.1, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.8324081416864922
+SVM	hmdb51	1	FLOW + LVR0	{'C': 100.0, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'rbf'}	0.6078431372549019
+SVM	ucf101	1	FLOW + LVR1	{'C': 0.01, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.8889770023790642
+SVM	hmdb51	1	FLOW + LVR1	{'C': 0.1, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.5947712418300654
+SVM	ucf101	1	FLOW + LVR2	{'C': 0.01, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.8794607454401269
+SVM	hmdb51	1	FLOW + LVR2	{'C': 0.1, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.5718954248366013
+SVM	ucf101	1	AVR + LVR0	{'C': 0.01, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.7800687285223368
+SVM	hmdb51	1	AVR + LVR0	{'C': 10.0, 'decision_function_shape': 'ovr', 'gamma': 0.01, 'kernel': 'rbf'}	0.5045751633986928
+SVM	ucf101	1	AVR + LVR1	{'C': 0.1, 'decision_function_shape': 'ovr', 'gamma': 0.01, 'kernel': 'rbf'}	0.8178694158075601
+SVM	hmdb51	1	AVR + LVR1	{'C': 10.0, 'decision_function_shape': 'ovr', 'gamma': 0.01, 'kernel': 'rbf'}	0.5738562091503268
+SVM	ucf101	1	AVR + LVR2	{'C': 1.0, 'decision_function_shape': 'ovr', 'gamma': 0.01, 'kernel': 'rbf'}	0.8215701823949246
+SVM	hmdb51	1	AVR + LVR2	{'C': 0.1, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.5294117647058824
+SVM	ucf101	1	LVR0 + LVR1	{'C': 0.001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.8017446471054719
+SVM	hmdb51	1	LVR0 + LVR1	{'C': 0.1, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.5222222222222223
+SVM	ucf101	1	LVR0 + LVR2	{'C': 0.001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.8183980967486122
+SVM	hmdb51	1	LVR0 + LVR2	{'C': 10.0, 'decision_function_shape': 'ovr', 'gamma': 0.01, 'kernel': 'rbf'}	0.5065359477124183
+SVM	ucf101	1	LVR1 + LVR2	{'C': 0.1, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.8329368226275443
+SVM	hmdb51	1	LVR1 + LVR2	{'C': 0.1, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.5359477124183006
+SVM	ucf101	1	RGB + FLOW + AVR	{'C': 0.01, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.9209621993127147
+SVM	hmdb51	1	RGB + FLOW + AVR	{'C': 100.0, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'rbf'}	0.6503267973856209
+SVM	ucf101	1	RGB + FLOW + LVR0	{'C': 0.001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.9132963256674597
+SVM	hmdb51	1	RGB + FLOW + LVR0	{'C': 10.0, 'decision_function_shape': 'ovr', 'gamma': 0.001, 'kernel': 'rbf'}	0.6529411764705882
+SVM	ucf101	1	RGB + FLOW + LVR1	{'C': 0.001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.9169970922548242
+SVM	hmdb51	1	RGB + FLOW + LVR1	{'C': 100.0, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'rbf'}	0.6457516339869281
+SVM	ucf101	1	RGB + FLOW + LVR2	{'C': 0.001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.9183187946074544
+SVM	hmdb51	1	RGB + FLOW + LVR2	{'C': 10.0, 'decision_function_shape': 'ovr', 'gamma': 0.001, 'kernel': 'rbf'}	0.6274509803921569
+SVM	ucf101	1	RGB + AVR + LVR0	{'C': 0.001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.9008723235527359
+SVM	hmdb51	1	RGB + AVR + LVR0	{'C': 100.0, 'decision_function_shape': 'ovr', 'gamma': 0.01, 'kernel': 'rbf'}	0.6333333333333333
+SVM	ucf101	1	RGB + AVR + LVR1	{'C': 0.001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.9029870473169442
+SVM	hmdb51	1	RGB + AVR + LVR1	{'C': 10.0, 'decision_function_shape': 'ovr', 'gamma': 0.01, 'kernel': 'rbf'}	0.6372549019607843
+SVM	ucf101	1	RGB + AVR + LVR2	{'C': 0.001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.8987575997885277
+SVM	hmdb51	1	RGB + AVR + LVR2	{'C': 0.1, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.5901960784313726
+SVM	ucf101	1	RGB + LVR0 + LVR1	{'C': 0.1, 'decision_function_shape': 'ovr', 'gamma': 0.001, 'kernel': 'rbf'}	0.880782447792757
+SVM	hmdb51	1	RGB + LVR0 + LVR1	{'C': 10.0, 'decision_function_shape': 'ovr', 'gamma': 0.001, 'kernel': 'rbf'}	0.6026143790849673
+SVM	ucf101	1	RGB + LVR0 + LVR2	{'C': 0.001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.887390959555908
+SVM	hmdb51	1	RGB + LVR0 + LVR2	{'C': 0.1, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.5830065359477125
+SVM	ucf101	1	RGB + LVR1 + LVR2	{'C': 0.001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.8818398096748612
+SVM	hmdb51	1	RGB + LVR1 + LVR2	{'C': 0.1, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.5803921568627451
+SVM	ucf101	1	FLOW + AVR + LVR0	{'C': 0.01, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.8786677240285488
+SVM	hmdb51	1	FLOW + AVR + LVR0	{'C': 0.01, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.6496732026143791
+SVM	ucf101	1	FLOW + AVR + LVR1	{'C': 0.001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.8998149616706318
+SVM	hmdb51	1	FLOW + AVR + LVR1	{'C': 100.0, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'rbf'}	0.6549019607843137
+SVM	ucf101	1	FLOW + AVR + LVR2	{'C': 0.01, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.8958498546127412
+SVM	hmdb51	1	FLOW + AVR + LVR2	{'C': 100.0, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'rbf'}	0.6274509803921569
+SVM	ucf101	1	FLOW + LVR0 + LVR1	{'C': 0.001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.893735130848533
+SVM	hmdb51	1	FLOW + LVR0 + LVR1	{'C': 100.0, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'rbf'}	0.634640522875817
+SVM	ucf101	1	FLOW + LVR0 + LVR2	{'C': 0.001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.8929421094369548
+SVM	hmdb51	1	FLOW + LVR0 + LVR2	{'C': 0.1, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.6379084967320261
+SVM	ucf101	1	FLOW + LVR1 + LVR2	{'C': 0.001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.9043087496695744
+SVM	hmdb51	1	FLOW + LVR1 + LVR2	{'C': 0.01, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.6215686274509804
+SVM	ucf101	1	AVR + LVR0 + LVR1	{'C': 0.001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.8688871266190854
+SVM	hmdb51	1	AVR + LVR0 + LVR1	{'C': 10.0, 'decision_function_shape': 'ovr', 'gamma': 0.01, 'kernel': 'rbf'}	0.6183006535947713
+SVM	ucf101	1	AVR + LVR0 + LVR2	{'C': 0.001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.8673010837959292
+SVM	hmdb51	1	AVR + LVR0 + LVR2	{'C': 10.0, 'decision_function_shape': 'ovr', 'gamma': 0.01, 'kernel': 'rbf'}	0.611764705882353
+SVM	ucf101	1	AVR + LVR1 + LVR2	{'C': 0.001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.8778747026169706
+SVM	hmdb51	1	AVR + LVR1 + LVR2	{'C': 100.0, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'rbf'}	0.6071895424836601
+SVM	ucf101	1	LVR0 + LVR1 + LVR2	{'C': 0.001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.8551414221517314
+SVM	hmdb51	1	LVR0 + LVR1 + LVR2	{'C': 10.0, 'decision_function_shape': 'ovr', 'gamma': 0.01, 'kernel': 'rbf'}	0.5758169934640522
+SVM	ucf101	1	RGB + FLOW + AVR + LVR0	{'C': 0.001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.9238699444885012
+SVM	hmdb51	1	RGB + FLOW + AVR + LVR0	{'C': 0.1, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.6777777777777778
+SVM	ucf101	1	RGB + FLOW + AVR + LVR1	{'C': 0.001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.9320644990748084
+SVM	hmdb51	1	RGB + FLOW + AVR + LVR1	{'C': 0.1, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.6725490196078432
+SVM	ucf101	1	RGB + FLOW + AVR + LVR2	{'C': 0.001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.9262490087232356
+SVM	hmdb51	1	RGB + FLOW + AVR + LVR2	{'C': 0.1, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.6503267973856209
+SVM	ucf101	1	RGB + FLOW + LVR0 + LVR1	{'C': 0.001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.9175257731958762
+SVM	hmdb51	1	RGB + FLOW + LVR0 + LVR1	{'C': 100.0, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'rbf'}	0.6522875816993464
+SVM	ucf101	1	RGB + FLOW + LVR0 + LVR2	{'C': 0.001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.9214908802537668
+SVM	hmdb51	1	RGB + FLOW + LVR0 + LVR2	{'C': 10.0, 'decision_function_shape': 'ovr', 'gamma': 0.01, 'kernel': 'rbf'}	0.661437908496732
+SVM	ucf101	1	RGB + FLOW + LVR1 + LVR2	{'C': 0.001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.9236056040179752
+SVM	hmdb51	1	RGB + FLOW + LVR1 + LVR2	{'C': 100.0, 'decision_function_shape': 'ovr', 'gamma': 0.001, 'kernel': 'rbf'}	0.642483660130719
+SVM	ucf101	1	RGB + AVR + LVR0 + LVR1	{'C': 0.001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.9122389637853555
+SVM	hmdb51	1	RGB + AVR + LVR0 + LVR1	{'C': 0.1, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.6549019607843137
+SVM	ucf101	1	RGB + AVR + LVR0 + LVR2	{'C': 0.001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.9066878139043087
+SVM	hmdb51	1	RGB + AVR + LVR0 + LVR2	{'C': 100.0, 'decision_function_shape': 'ovr', 'gamma': 0.001, 'kernel': 'rbf'}	0.6529411764705882
+SVM	ucf101	1	RGB + AVR + LVR1 + LVR2	{'C': 0.001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.908273856727465
+SVM	hmdb51	1	RGB + AVR + LVR1 + LVR2	{'C': 0.1, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.6366013071895424
+SVM	ucf101	1	RGB + LVR0 + LVR1 + LVR2	{'C': 0.0001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.8924134284959028
+SVM	hmdb51	1	RGB + LVR0 + LVR1 + LVR2	{'C': 0.1, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.6137254901960785
+SVM	ucf101	1	FLOW + AVR + LVR0 + LVR1	{'C': 0.001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.9095955590800952
+SVM	hmdb51	1	FLOW + AVR + LVR0 + LVR1	{'C': 100.0, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'rbf'}	0.6725490196078432
+SVM	ucf101	1	FLOW + AVR + LVR0 + LVR2	{'C': 0.001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.9064234734337827
+SVM	hmdb51	1	FLOW + AVR + LVR0 + LVR2	{'C': 100.0, 'decision_function_shape': 'ovr', 'gamma': 0.001, 'kernel': 'rbf'}	0.681045751633987
+SVM	ucf101	1	FLOW + AVR + LVR1 + LVR2	{'C': 0.001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.9167327517842981
+SVM	hmdb51	1	FLOW + AVR + LVR1 + LVR2	{'C': 0.01, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.6640522875816993
+SVM	ucf101	1	FLOW + LVR0 + LVR1 + LVR2	{'C': 0.001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.9053661115516786
+SVM	hmdb51	1	FLOW + LVR0 + LVR1 + LVR2	{'C': 100.0, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'rbf'}	0.6405228758169934
+SVM	ucf101	1	AVR + LVR0 + LVR1 + LVR2	{'C': 0.0001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.8836901929685435
+SVM	hmdb51	1	AVR + LVR0 + LVR1 + LVR2	{'C': 100.0, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'rbf'}	0.6457516339869281
+SVM	ucf101	1	RGB + FLOW + AVR + LVR0 + LVR1	{'C': 0.0001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.9283637324874439
+SVM	hmdb51	1	RGB + FLOW + AVR + LVR0 + LVR1	{'C': 10.0, 'decision_function_shape': 'ovr', 'gamma': 0.001, 'kernel': 'rbf'}	0.6986928104575163
+SVM	ucf101	1	RGB + FLOW + AVR + LVR0 + LVR2	{'C': 0.0001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.9236056040179752
+SVM	hmdb51	1	RGB + FLOW + AVR + LVR0 + LVR2	{'C': 0.1, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.6915032679738562
+SVM	ucf101	1	RGB + FLOW + AVR + LVR1 + LVR2	{'C': 0.001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.9331218609569125
+SVM	hmdb51	1	RGB + FLOW + AVR + LVR1 + LVR2	{'C': 0.1, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.6758169934640523
+SVM	ucf101	1	RGB + FLOW + LVR0 + LVR1 + LVR2	{'C': 0.0001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.9233412635474492
+SVM	hmdb51	1	RGB + FLOW + LVR0 + LVR1 + LVR2	{'C': 10.0, 'decision_function_shape': 'ovr', 'gamma': 0.001, 'kernel': 'rbf'}	0.6679738562091503
+SVM	ucf101	1	RGB + AVR + LVR0 + LVR1 + LVR2	{'C': 0.0001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.9130319851969336
+SVM	hmdb51	1	RGB + AVR + LVR0 + LVR1 + LVR2	{'C': 100.0, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'rbf'}	0.6673202614379085
+SVM	ucf101	1	FLOW + AVR + LVR0 + LVR1 + LVR2	{'C': 0.0001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.9146180280200898
+SVM	hmdb51	1	FLOW + AVR + LVR0 + LVR1 + LVR2	{'C': 10.0, 'decision_function_shape': 'ovr', 'gamma': 0.001, 'kernel': 'rbf'}	0.7
+SVM	ucf101	1	RGB + FLOW + AVR + LVR0 + LVR1 + LVR2	{'C': 0.0001, 'decision_function_shape': 'ovr', 'gamma': 0.0001, 'kernel': 'linear'}	0.9267776896642876
+SVM	hmdb51	1	RGB + FLOW + AVR + LVR0 + LVR1 + LVR2	{'C': 10.0, 'decision_function_shape': 'ovr', 'gamma': 0.001, 'kernel': 'rbf'}	0.7124183006535948
