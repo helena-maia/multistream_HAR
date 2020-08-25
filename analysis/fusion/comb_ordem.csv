@@ -1,0 +1,57 @@
+1 &  RGB + FLOW \\
+2 &  RGB + AVR \\
+3 &  RGB + LVR0 \\
+4 &  RGB + LVR1 \\
+5 &  RGB + LVR2 \\
+6 &  FLOW + AVR \\
+7 &  FLOW + LVR0 \\
+8 &  FLOW + LVR1 \\
+9 &  FLOW + LVR2 \\
+10 &  AVR + LVR0 \\
+11 &  AVR + LVR1 \\
+12 &  AVR + LVR2 \\
+13 &  LVR0 + LVR1 \\
+14 &  LVR0 + LVR2 \\
+15 &  LVR1 + LVR2 \\
+16 &  RGB + FLOW + AVR \\
+17 &  RGB + FLOW + LVR0 \\
+18 &  RGB + FLOW + LVR1 \\
+19 &  RGB + FLOW + LVR2 \\
+20 &  RGB + AVR + LVR0 \\
+21 &  RGB + AVR + LVR1 \\
+22 &  RGB + AVR + LVR2 \\
+23 &  RGB + LVR0 + LVR1 \\
+24 &  RGB + LVR0 + LVR2 \\
+25 &  RGB + LVR1 + LVR2 \\
+26 &  FLOW + AVR + LVR0 \\
+27 &  FLOW + AVR + LVR1 \\
+28 &  FLOW + AVR + LVR2 \\
+29 &  FLOW + LVR0 + LVR1 \\
+30 &  FLOW + LVR0 + LVR2 \\
+31 &  FLOW + LVR1 + LVR2 \\
+32 &  AVR + LVR0 + LVR1 \\
+33 &  AVR + LVR0 + LVR2 \\
+34 &  AVR + LVR1 + LVR2 \\
+35 &  LVR0 + LVR1 + LVR2 \\
+36 &  RGB + FLOW + AVR + LVR0 \\
+37 &  RGB + FLOW + AVR + LVR1 \\
+38 &  RGB + FLOW + AVR + LVR2 \\
+39 &  RGB + FLOW + LVR0 + LVR1 \\
+40 &  RGB + FLOW + LVR0 + LVR2 \\
+41 &  RGB + FLOW + LVR1 + LVR2 \\
+42 &  RGB + AVR + LVR0 + LVR1 \\
+43 &  RGB + AVR + LVR0 + LVR2 \\
+44 &  RGB + AVR + LVR1 + LVR2 \\
+45 &  RGB + LVR0 + LVR1 + LVR2 \\
+46 &  FLOW + AVR + LVR0 + LVR1 \\
+47 &  FLOW + AVR + LVR0 + LVR2 \\
+48 &  FLOW + AVR + LVR1 + LVR2 \\
+49 &  FLOW + LVR0 + LVR1 + LVR2 \\
+50 &  AVR + LVR0 + LVR1 + LVR2 \\
+51 &  RGB + FLOW + AVR + LVR0 + LVR1 \\
+52 &  RGB + FLOW + AVR + LVR0 + LVR2 \\
+53 &  RGB + FLOW + AVR + LVR1 + LVR2 \\
+54 &  RGB + FLOW + LVR0 + LVR1 + LVR2 \\
+55 &  RGB + AVR + LVR0 + LVR1 + LVR2 \\
+56 &  FLOW + AVR + LVR0 + LVR1 + LVR2 \\
+57 &  RGB + FLOW + AVR + LVR0 + LVR1 + LVR2 
