@@ -37,7 +37,7 @@ def obtain_accuracies_per_class(data_complete, ground_truth, num_classes=101):
     return match_count / class_count, conf_matrix
 
 def class_acc(dataset, settings, npy_paths):
-	num_classes = 101 if dataset == "ucf101" else 51
+    num_classes = 101 if dataset == "ucf101" else 51
     accum_acc = np.zeros(num_classes, dtype=float)
 
     for s in range(1,4):
@@ -45,8 +45,6 @@ def class_acc(dataset, settings, npy_paths):
         _, ts_labels = get_labels(test_path)
         npy_data = np.load(npy_paths[s-1])
         acc_class, _ = obtain_accuracies_per_class(npy_data, ts_labels, num_classes)
-
-        conf_matrix = conf_matrix.astype('float') / conf_matrix.sum(axis=1)[:, np.newaxis] #row normalization
 
         accum_acc += acc_class
 
