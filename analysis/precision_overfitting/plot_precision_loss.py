@@ -55,7 +55,7 @@ plt.ylim(bottom=0., top=top)
 plt.xlim(left=0, right=max_epochs+1)
 plt.hlines(np.arange(0,top,step), xmin=0, xmax=max_epochs+1, linestyles='dashed', color='lightgray')
 
-plt.ylabel('Precision', fontsize=12)
+plt.ylabel('Accuracy', fontsize=12)
 plt.xlabel('Number of epochs', fontsize=12)
 plt.xticks(np.arange(0, max_epochs+1, 25))
 

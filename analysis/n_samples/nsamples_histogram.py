@@ -48,11 +48,11 @@ def plot(path_file, output):
     colors = plt.get_cmap('Dark2').colors
     plt.hlines(avg_hist.mean(), xmin=-5, xmax=105, linestyles='solid', color=colors[1])
     plt.hlines(np.arange(20, max_nsamples, 20), xmin=-5, xmax=105, linestyles='dashed', color='lightgray', zorder=-1)
-    plt.xticks(np.arange(0, 100, 10))
+    plt.xticks(np.arange(0, 101, 10))
     yticks = np.arange(0, max_nsamples, 20)
     yticks = np.append(yticks, avg_hist.mean())
     plt.yticks(yticks)
-    plt.xlim(-5,105)
+    plt.xlim(-2,102)
     plt.ylim(0,max_nsamples)
     plt.xlabel("Classes", fontsize=12)
     plt.ylabel("Number of samples", fontsize=12)
