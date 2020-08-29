@@ -208,32 +208,3 @@ weighted_avg	ucf101	3	LVR0 + LVR1 + LVR2	(1, 1, 1)	0.8612012987012987
 weighted_avg	hmdb51	1	LVR0 + LVR1 + LVR2	(4, 6, 9)	0.5954248366013072
 weighted_avg	hmdb51	2	LVR0 + LVR1 + LVR2	(2, 3, 6)	0.5647058823529412
 weighted_avg	hmdb51	3	LVR0 + LVR1 + LVR2	(4, 5, 6)	0.5712418300653594
-weighted_avg	ucf101	1	RGB + FLOW + AVR + LVR0	(1, 1, 1, 1)	0.9111816019032514
-weighted_avg	ucf101	2	RGB + FLOW + AVR + LVR0	(1, 1, 1, 1)	0.9292983395822174
-weighted_avg	ucf101	3	RGB + FLOW + AVR + LVR0	(1, 1, 1, 1)	0.9258658008658008
-weighted_avg	hmdb51	1	RGB + FLOW + AVR + LVR0	(4, 3, 6, 5)	0.673202614379085
-weighted_avg	hmdb51	2	RGB + FLOW + AVR + LVR0	(3, 5, 7, 6)	0.64640522875817
-weighted_avg	hmdb51	3	RGB + FLOW + AVR + LVR0	(3, 1, 2, 5)	0.561437908496732
-weighted_avg	ucf101	1	RGB + FLOW + AVR + LVR1	(1, 1, 1, 1)	0.922283901665345
-weighted_avg	ucf101	2	RGB + FLOW + AVR + LVR1	(1, 1, 1, 1)	0.9333154793786824
-weighted_avg	ucf101	3	RGB + FLOW + AVR + LVR1	(1, 1, 1, 1)	0.9261363636363636
-weighted_avg	hmdb51	1	RGB + FLOW + AVR + LVR1	(3, 1, 7, 6)	0.634640522875817
-weighted_avg	hmdb51	2	RGB + FLOW + AVR + LVR1	(1, 3, 8, 6)	0.6254901960784314
-weighted_avg	hmdb51	3	RGB + FLOW + AVR + LVR1	(7, 1, 9, 5)	0.6313725490196078
-weighted_avg	ucf101	1	RGB + FLOW + AVR + LVR2	(1, 1, 1, 1)	0.922548242135871
-weighted_avg	ucf101	2	RGB + FLOW + AVR + LVR2	(1, 1, 1, 1)	0.9335832886984468
-weighted_avg	ucf101	3	RGB + FLOW + AVR + LVR2	(1, 1, 1, 1)	0.9337121212121212
-weighted_avg	hmdb51	1	RGB + FLOW + AVR + LVR2	(1, 1, 5, 8)	0.596078431372549
-weighted_avg	hmdb51	2	RGB + FLOW + AVR + LVR2	(3, 1, 5, 4)	0.6405228758169934
-weighted_avg	hmdb51	3	RGB + FLOW + AVR + LVR2	(3, 1, 6, 9)	0.6359477124183006
-weighted_avg	ucf101	1	RGB + FLOW + LVR0 + LVR1	(1, 1, 1, 1)	0.9193761564895585
-weighted_avg	ucf101	2	RGB + FLOW + LVR0 + LVR1	(1, 1, 1, 1)	0.9247455811462238
-weighted_avg	ucf101	3	RGB + FLOW + LVR0 + LVR1	(1, 1, 1, 1)	0.9204545454545454
-weighted_avg	hmdb51	1	RGB + FLOW + LVR0 + LVR1	(5, 4, 3, 4)	0.6692810457516339
-weighted_avg	hmdb51	2	RGB + FLOW + LVR0 + LVR1	(2, 5, 3, 6)	0.634640522875817
-weighted_avg	hmdb51	3	RGB + FLOW + LVR0 + LVR1	(4, 6, 5, 3)	0.6189542483660131
-weighted_avg	ucf101	1	RGB + FLOW + LVR0 + LVR2	(1, 1, 1, 1)	0.9193761564895585
-weighted_avg	ucf101	2	RGB + FLOW + LVR0 + LVR2	(1, 1, 1, 1)	0.9263524370648099
-weighted_avg	ucf101	3	RGB + FLOW + LVR0 + LVR2	(1, 1, 1, 1)	0.9299242424242424
-weighted_avg	hmdb51	1	RGB + FLOW + LVR0 + LVR2	(1, 1, 1, 3)	0.6189542483660131
-weighted_avg	hmdb51	2	RGB + FLOW + LVR0 + LVR2	(1, 2, 2, 4)	0.6274509803921569

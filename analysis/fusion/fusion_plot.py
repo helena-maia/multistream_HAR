@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-data = np.loadtxt("fusion_hmdb.csv", dtype=str, delimiter="\t")
+data = np.loadtxt("fusion_ucf.csv", dtype=str, delimiter="\t")
 
 labels = data[0,1:]
 labels = np.delete(labels, 2, axis=0)
@@ -16,7 +16,7 @@ plt.xlim(left=0, right=58)
 plt.hlines(np.arange(50,100,5), xmin=0, xmax=58, linestyles='dashed', color='lightgray')
 plt.vlines(np.array([15,35,50,56]), ymin=45, ymax=100, linestyles='solid', color='lightgray')
 plt.xticks(np.array([15,35,50,56]), fontsize=12)
-plt.ylabel('Precision', fontsize=12)
+plt.ylabel('Accuracy', fontsize=12)
 plt.xlabel('Combination', fontsize=12)
 
 p = []
