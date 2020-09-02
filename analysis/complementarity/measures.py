@@ -69,7 +69,7 @@ def get_labels(path_file):
 
 def complementarity(a, b, c, d):
     comp12 = b / (b + d)
-    comp21 = b / (c + d)
+    comp21 = c / (c + d)
     harm_mean = (2 * comp12 * comp21) / (comp12 + comp21)
 
     return comp12, comp21, harm_mean
