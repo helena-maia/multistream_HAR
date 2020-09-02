@@ -46,7 +46,7 @@ accum_kappa[1] /= 3
 for k in range(2):
     for i in range(6):
         for j in range(6):
-            print("{:.4f}".format(accum_compl[k][i][j]), end=" & ")
+            print("{:.3f}".format(accum_compl[k][i][j]), end=" & ")
         print("\\\\\n")
 
     print("\n\n")
@@ -55,7 +55,7 @@ for k in range(2):
 for k in range(2):
     for i in range(6):
         for j in range(6):
-            print("{:.4f}".format(accum_kappa[k][i][j]), end=" & ")
+            print("{:.3f}".format(accum_kappa[k][i][j]), end=" & ")
         print("\\\\\n")
 
     print("\n\n")
