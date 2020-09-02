@@ -1,6 +1,6 @@
 import numpy as np
 import os
-from complementarity import complementarity
+from measures import measures
 
 npy_list = np.loadtxt("npy_list.csv", dtype=str)
 splits = npy_list[:, 3]
@@ -10,6 +10,7 @@ u_datasets = ["ucf101", "hmdb51"]
 settings = "../../AVR_earlystop/datasets/settings_earlystop/"
 
 accum_compl = [np.zeros((6,6), dtype=float), np.zeros((6,6), dtype=float)]
+accum_kappa = [np.zeros((6,6), dtype=float), np.zeros((6,6), dtype=float)]
 
 for s in range(1, 4):
 	npys = npy_list[splits == str(s)]
@@ -30,17 +31,30 @@ for s in range(1, 4):
 				npy_path_1 = os.path.join(row1[0], row1[1], row1[2])
 				npy_path_2 = os.path.join(row2[0], row2[1], row2[2])
 
-				comp12, comp21, harm_mean = complementarity(npy_path_1, npy_path_2, test_path)
-				accum_compl[i][j,k] += comp12
-				accum_compl[i][k,j] += comp21
+				comp12, comp21, harm_mean, kappa = measures(npy_path_1, npy_path_2, test_path)
+				accum_compl[i][j, k] += comp12
+				accum_compl[i][k, j] += comp21
+
+				accum_kappa[i][j, k] += kappa
 
 accum_compl[0] /= 3
 accum_compl[1] /= 3
+accum_kappa[0] /= 3
+accum_kappa[1] /= 3
 
 for k in range(2):
     for i in range(6):
         for j in range(6):
-            print("{:.2f}".format(accum_compl[k][i][j]*100), end=" & ")
+            print("{:.2f}".format(accum_compl[k][i][j]), end=" & ")
+        print("\\\\\n")
+
+    print("\n\n")
+
+
+for k in range(2):
+    for i in range(6):
+        for j in range(6):
+            print("{:.2f}".format(accum_kappa[k][i][j]), end=" & ")
         print("\\\\\n")
 
     print("\n\n")

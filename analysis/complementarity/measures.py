@@ -67,26 +67,46 @@ def get_labels(path_file):
 
     return name_list, label_list
 
-def complementarity(npy_path_1, npy_path_2, test_path):
+def complementarity(a, b, c, d):
+    comp12 = b / (b + d)
+    comp21 = b / (c + d)
+    harm_mean = (2 * comp12 * comp21) / (comp12 + comp21)
+
+    return comp12, comp21, harm_mean
+
+def kappa(a, b, c, d):
+    m = a + b + c + d
+    theta1 = (a + d) / m
+    theta2 = (((a + b) * (a + c)) + ((d + b) * (d + c))) / (m**2)
+
+    k = (theta1 - theta2) / (1. - theta2)
+
+    return k
+
+
+##         hit1   miss1
+##  hit 2    a      b
+##  miss 2   c      d
+
+def measures(npy_path_1, npy_path_2, test_path):
     _, ts_labels = get_labels(test_path)
     data1 = np.load(npy_path_1)
     data2 = np.load(npy_path_2)
     hm, acc1, acc2 = hit_miss(data1, data2, ts_labels)
     
-    a, b, c, d = hm.flatten()
+    a, b, c, d = hm.flatten().astype(float)
     
-    comp12 = 1. - (d / (b+d))
-    comp21 = 1. - (d / (c+d))
-    harm_mean = (2*comp12*comp21) / (comp12+comp21)
+    comp12, comp21, harm_mean = complementarity(a, b, c, d)
+    k = kappa(a, b, c, d)
 
-    return comp12, comp21, harm_mean
+    return comp12, comp21, harm_mean, k
 
 def main():
     args = parser.parse_args()
 
     test_path = os.path.join(args.settings, "%s/test_split%s.txt" % (args.d, args.split))
 
-    print(complementarity(args.npy1, args.npy2, test_path))
+    print(measures(args.npy1, args.npy2, test_path))
 
 
 if __name__ == '__main__':
