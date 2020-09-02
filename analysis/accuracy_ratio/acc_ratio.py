@@ -9,8 +9,14 @@ datasets = npy_list[:, 5]
 u_modalities = ["RGB", "FLOW", "AVR", "LVR0", "LVR1", "LVR2"]
 u_datasets = ["ucf101", "hmdb51"]
 settings = "../../AVR_earlystop/datasets/settings_earlystop/"
+colors = plt.get_cmap('Set1').colors
+markers = ['o','x','d','+','v','s']
+
 
 for i, d in enumerate(u_datasets):
+    class_path = os.path.join(settings, "%s/class_ind.txt" % (d))
+    class_ind = np.loadtxt(class_path, dtype=str)
+
     class_acc_list = []
     npy_d = npy_list[datasets == d]
     modalities = npy_d[:,4]
@@ -25,43 +31,24 @@ for i, d in enumerate(u_datasets):
 
     class_acc_list = np.array(class_acc_list)
 
+    class_acc_list = class_acc_list[:,51:]
+    class_ind = class_ind[51:,1]
+    print(class_ind.shape)
+
+    plt.ylim(bottom=0., top=101.)
+    plt.xlim(left=-1, right=class_acc_list.shape[1])
+    plt.vlines(np.arange(0,class_acc_list.shape[1]), ymin=0, ymax=100, linestyles='dashed', color='lightgray', zorder=-1)
+    plt.ylabel('Recall', fontsize=12)
+    #plt.xlabel('Class', fontsize=12)
+    plt.xticks(np.arange(0,class_acc_list.shape[1]), class_ind, rotation='vertical')
+    plt.yticks(np.arange(0,100,20))
+
     p = []
     for k in range(6):
-        p = plt.scatter(np.arange(0,class_acc_list.shape[1]), class_acc_list[k])
+        p.append(plt.scatter(np.arange(0, class_acc_list.shape[1]), class_acc_list[k]*100.0, color=colors[k], marker=markers[k]))
 
+    fig = plt.gcf()
+    fig.set_size_inches(20,9)
     plt.legend(p, u_modalities)
-    plt.savefig("plot{}.eps".format(i))
-
-    '''
-    print(class_acc_list[:,0])
-    sort_mod = np.argsort(class_acc_list, axis=0)
-    mean = np.mean(class_acc_list, axis=0)
-    dev = np.std(class_acc_list, axis=0)
-    class_acc_list = -np.power(class_acc_list - mean, 2.)
-    class_acc_list = class_acc_list / (2. * np.power(dev, 2.))
-    class_acc_list = 1. - np.exp(class_acc_list)
-
-
-    for i in range(sort_mod.shape[1]):
-        max, min = sort_mod[5][i], sort_mod[0][i]
-        print(i, max, class_acc_list[max][i], min, class_acc_list[min][i]) 
-        if max in [2,3,4,5]: 
-        print("{}: {} {:.2f} - {} {:.2f}".format(i, u_modalities[max], class_acc_list[max][i], u_modalities[min], class_acc_list[min][i]))
-    '''
-
-    '''
-    for i in range(sort_mod.shape[1]):
-        max1, max2 = sort_mod[5][i], sort_mod[4][i]
-        min1, min2 = sort_mod[0][i], sort_mod[1][i]
-        max_ratio = 1. - class_acc_list[max2][i] / class_acc_list[max1][i]
-        min_ratio = class_acc_list[min1][i] / class_acc_list[min2][i]
-
-        if max_ratio < 0.2: print(max1, max2, i)
-        if min_ratio < 0.2: print(min1, min2, i)
-    '''
-
-
-
-
-
-
+    fig.savefig("plot{}.eps".format(i), dpi=100, bbox_inches='tight')
+    fig.clear()
