@@ -101,6 +101,38 @@ def pairwise_measures(npy_path_1, npy_path_2, test_path):
 
     return comp12, comp21, harm_mean, k
 
+
+def interrater(npy_paths, test_path):
+    _, ts_labels = get_labels(test_path)
+    n_s = len(ts_labels) # number of samples
+    m = len(npy_paths) # number of classifiers
+    data = []
+
+    def pNacc(data, ground_truth):
+        y_pred = np.argmax(data, axis=1)
+        p = (y_pred == ground_truth).astype(int)
+        acc = p.sum() / len(ground_truth)
+
+        return p, acc
+
+    p_xk = np.zeros(n_s)
+    p_ = 0
+
+    for npy_path in npy_paths:
+        data = np.load(npy_path)
+
+        p, acc = pNacc(data, ts_labels)
+        p_xk += p
+        p_ += acc
+
+    p_ /= m
+
+    num = np.sum(p_xk * (m - p_xk)) / m
+    den = n_s * (m - 1.) * p_ * (1. - p_)
+    it = 1. - (num / den)
+
+    return it
+
 def main():
     args = parser.parse_args()
 
