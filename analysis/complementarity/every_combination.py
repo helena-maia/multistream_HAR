@@ -19,24 +19,24 @@ for r in range(2, n_modalities+1): # combinations of 2 or more modalities
 
 for d in u_datasets:
     npys2 = npys1[u_datasets == d]
-        splits = npys2[:, 3]
+    splits = npys2[:, 3]
 
-        for c in comb:
-                print(c, end=" ")
-                accum_it = 0.
+    for c in comb:
+            print(c, end=" ")
+            accum_it = 0.
 
-                for s in u_splits:
-                        test_path = os.path.join(settings, "%s/test_split%s.txt" % (d, s))
-                        npys3 = npys2[splits == str(s)]
-                        modalities = npys3[:, 4]
+            for s in u_splits:
+                test_path = os.path.join(settings, "%s/test_split%s.txt" % (d, s))
+                npys3 = npys2[splits == str(s)]
+                modalities = npys3[:, 4]
 
-                        npy_paths = []
-                        for m in c:
-                                n = npys3[modalities == m][0]
-                                npy_paths.append(os.path.join(n[0], n[1], n[2]))
+                npy_paths = []
+                for m in c:
+                    n = npys3[modalities == m][0]
+                    npy_paths.append(os.path.join(n[0], n[1], n[2]))
+            
+                it = interrater(npy_paths, test_path)
+                accum_it += it
 
-                    
-                        it = interrater(npy_paths, test_path)
-                        accum_it += it
-
-                print(accum_it)
+            accum_it /= 3.
+            print(accum_it)
