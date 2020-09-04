@@ -31,7 +31,7 @@ for i, d in enumerate(u_datasets):
     class_acc_list = np.array(class_acc_list)
 
     max = np.max(class_acc_list, axis=0)
-    asort = (np.argsort(max)[::-1])[:51]
+    asort = (np.argsort(max)[::-1])[51:]
     class_acc_list = np.array([class_acc_list[:,ind] for ind in asort]).transpose()
     class_ind = np.array([class_ind[ind] for ind in asort])[:,1]
 
@@ -53,6 +53,7 @@ for i, d in enumerate(u_datasets):
 
     fig = plt.gcf()
     fig.set_size_inches(20,9)
-    plt.legend(p, u_modalities)
+    modalities_legend = ["RGB*", "OF", "AVR", "LVR0", "LVR1", "LVR2"]
+    plt.legend(p, modalities_legend)
     fig.savefig("plot{}.eps".format(i), dpi=100, bbox_inches='tight')
     fig.clear()

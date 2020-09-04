@@ -18,9 +18,9 @@ for r in range(2, n_modalities+1): # combinations of 2 or more modalities
     comb = itertools.chain(comb, c) if comb else c
 
 for c in comb:
-    print(c)
+    print(c, end="\t")
     for d in u_datasets:
-        npys2 = npys1[u_datasets == d]
+        npys2 = npys1[datasets == d]
         splits = npys2[:, 3]
 
         accum_it = 0.
@@ -34,9 +34,11 @@ for c in comb:
             for m in c:
                 n = npys3[modalities == m][0]
                 npy_paths.append(os.path.join(n[0], n[1], n[2]))
-        
+
             it = interrater(npy_paths, test_path)
             accum_it += it
 
         accum_it /= 3.
-        print(accum_it)
+        print(accum_it, end="\t")
+
+    print()
