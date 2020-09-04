@@ -26,9 +26,10 @@ for d in u_datasets:
             accum_it = 0.
 
             for s in u_splits:
-                test_path = os.path.join(settings, "%s/test_split%s.txt" % (d, s))
                 npys3 = npys2[splits == str(s)]
                 modalities = npys3[:, 4]
+
+                test_path = os.path.join(settings, "%s/test_split%s.txt" % (d, s))
 
                 npy_paths = []
                 for m in c:
