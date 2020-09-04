@@ -88,7 +88,7 @@ def kappa(a, b, c, d):
 ##  hit 2    a      b
 ##  miss 2   c      d
 
-def measures(npy_path_1, npy_path_2, test_path):
+def pairwise_measures(npy_path_1, npy_path_2, test_path):
     _, ts_labels = get_labels(test_path)
     data1 = np.load(npy_path_1)
     data2 = np.load(npy_path_2)
@@ -106,7 +106,7 @@ def main():
 
     test_path = os.path.join(args.settings, "%s/test_split%s.txt" % (args.d, args.split))
 
-    print(measures(args.npy1, args.npy2, test_path))
+    print(pairwise_measures(args.npy1, args.npy2, test_path))
 
 
 if __name__ == '__main__':

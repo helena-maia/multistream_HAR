@@ -1,6 +1,6 @@
 import numpy as np
 import os
-from measures import measures
+from measures import pairwise_measures
 
 npy_list = np.loadtxt("npy_list.csv", dtype=str)
 splits = npy_list[:, 3]
@@ -31,7 +31,7 @@ for s in range(1, 4):
 				npy_path_1 = os.path.join(row1[0], row1[1], row1[2])
 				npy_path_2 = os.path.join(row2[0], row2[1], row2[2])
 
-				comp12, comp21, harm_mean, kappa = measures(npy_path_1, npy_path_2, test_path)
+				comp12, comp21, harm_mean, kappa = pairwise_measures(npy_path_1, npy_path_2, test_path)
 				accum_compl[i][j, k] += comp12
 				accum_compl[i][k, j] += comp21
 
