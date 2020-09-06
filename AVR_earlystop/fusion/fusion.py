@@ -234,7 +234,7 @@ def fixed_SVM(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts, C, gamma, kernel, decision_fun
     y_pred = clf.predict(X_ts_)
     prec = precision_score(y_ts, y_pred, average ='micro')
 
-    return ypred, prec
+    return y_pred, prec
 
 
 def get_args():

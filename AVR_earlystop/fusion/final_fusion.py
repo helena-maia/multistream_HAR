@@ -28,6 +28,8 @@ for d in u_datasets:
     splits = npys2[:, 3]
 
     for s in u_splits:
+    	print("svm_"+d+"_"+str(s)+".npy")
+    	
         npys3 = npys2[splits == str(s)]
         modalities = npys3[:, 4]
 
