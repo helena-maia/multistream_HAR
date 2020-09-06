@@ -62,7 +62,10 @@ for d in u_datasets:
         X_tr, X_vl, X_ts = np.array(X_tr), np.array(X_vl), np.array(X_ts)
         y_tr, y_vl, y_ts = np.array(tr_labels), np.array(vl_labels), np.array(ts_labels)
 
-        y_pred, prec = fixed_SVM(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts)
+        c, k = parameters[d][s-1]['C'], parameters[d][s-1]['kernel']
+        g, m = parameters[d][s-1]['gamma'], parameters[d][s-1]['ms']
+
+        y_pred, prec = fixed_SVM(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts, C=c, gamma=g, kernel=k, decision_function_shape=m)
 
         np.save("svm_"+d+"_"+str(s)+".npy", y_pred)
 
