@@ -69,6 +69,7 @@ for d in u_datasets:
 
         y_pred, prec = fixed_SVM(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts, C=c, gamma=g, kernel=k, decision_function_shape=m)
 
+        print(prec)
         np.save("svm_"+d+"_"+str(s)+".npy", y_pred)
 
 
