@@ -218,6 +218,24 @@ def SVM(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts):
 
     return (best_param, best_score, prec)
 
+def fixed_SVM(X_tr, X_vl, X_ts, y_tr, y_vl, y_ts, C, gamma, kernel, decision_function_shape):
+    X_tr_ = np.array([np.concatenate((X1,X2),axis=0) for X1, X2 in zip(X_tr, X_vl)])
+    X_tr_ = np.concatenate((X_tr_), axis=1)
+    y_tr_ = np.concatenate((y_tr, y_vl), axis=0)
+
+    X_ts_ = np.concatenate((X_ts), axis=1)
+
+    clf = SVC(random_state=42, C=C, gamma=gamma, kernel=kernel, decision_function_shape=decision_function_shape)
+    scaler = StandardScaler()
+    X_tr_ = scaler.fit_transform(X_tr_)
+    X_ts_ = scaler.transform(X_ts_)
+
+    clf.fit(X_tr_, y_tr_)
+    y_pred = clf.predict(X_ts_)
+    prec = precision_score(y_ts, y_pred, average ='micro')
+
+    return ypred, prec
+
 
 def get_args():
     parser = argparse.ArgumentParser(description='PyTorch Three-Stream Action Recognition - Fusion')

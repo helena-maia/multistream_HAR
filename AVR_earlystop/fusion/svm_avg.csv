@@ -1,0 +1,41 @@
+RGB* + OF + AVR + LVR1 & 1 & (0.001, ovr, linear) & 93.21 \\
+& 2 & (0.001, ovr, linear) & 93.41 \\
+& 3 & (0.001, ovr, linear) & 92.48 \\
+& & Avg & 93.03 \\
+RGB* + OF + AVR + LVR0 + LVR1 + LVR2 & 1 & (0.0001, ovr, linear)  & 92.68 \\
+& 2 & (0.001, ovr, linear) & 93.44 \\
+& 3 & (0.001, ovr, linear) & 93.15 \\
+& & Avg& 93.09 \\
+RGB* + OF + AVR + LVR0 + LVR2 & 1 & (0.0001, ovr, linear) & 92.36 \\
+& 2 & (0.001, ovr, linear) & 93.65 \\
+& 3 & (0.001, ovr, linear) & 93.7 \\
+& & Avg & 93.24 \\
+RGB* + OF + AVR + LVR2 & 1 & (0.001, ovr, linear) & 92.62 \\
+& 2 & (0.001, ovr, linear) & 93.36 \\
+& 3 & (0.01, ovr, linear) & 93.86 \\
+& & Avg & 93.28 \\
+RGB* + OF + AVR + LVR1 + LVR2 & 1 & (0.001, ovr, linear) & 93.31 \\
+& 2 & (0.001, ovr, linear) & 93.57 \\
+& 3 & (0.001, ovr, linear) & 93.29 \\
+& & Avg & 93.39 \\
+
+RGB* + OF + AVR + LVR1 + LVR2 & 1 & (0.1, ovr, linear) & 67.58 \\
+& 2 & (100.0, ovr, 0.0001, rbf) & 68.1 \\
+& 3 & (10.0, ovr, 0.001, rbf) & 69.41 \\
+& & Avg & 68.37 \\
+RGB* + OF + AVR + LVR0 + LVR1 & 1 & (10.0, ovr, 0.001, rbf) & 69.87 \\
+& 2 & (0.01, ovr, linear) & 68.95 \\
+& 3 & (10.0, ovr, 0.001, rbf) & 68.17 \\
+& & Avg & 69 \\
+RGB* + OF + AVR + LVR0 + LVR2 & 1 & (0.1, ovr, linear) & 69.15 \\
+& 2 & (100.0, ovr, rbf, 0.001) & 68.95 \\
+& 3 & (0.01, ovr, linear) & 69.15 \\
+& & Avg & 69.08 \\
+OF + AVR + LVR0 + LVR1 + LVR2 & 1 & (10.0, ovr, 0.001, rbf) ,70 \\
+& 2 & (0.01, ovr, linear) & 68.95 \\
+& 3 & (0.01, ovr, linear) & 68.3 \\
+& & Avg & 69.08 \\
+RGB* + OF + AVR + LVR0 + LVR1 + LVR2 & 1 & (10.0, ovr, 0.001, rbf) ,71.24 \\
+& 2 & (0.1, ovr, linear) & 69.02 \\
+& 3 & (0.01, ovr, linear) & 69.67 \\
+& & Avg & 69.98
