@@ -41,7 +41,7 @@ for d in u_datasets:
         train_path = split_path%("train")
         val_path = split_path%("val")
         test_path = split_path%("test")
-        dataset_path = os.path.join(args.settings, "%s/dataset_list.txt" % (args.d))
+        dataset_path = os.path.join(settings, "%s/dataset_list.txt" % (d))
 
         ds_keys, ds_labels = get_labels(dataset_path)
         tr_keys, tr_labels = get_labels(train_path)
