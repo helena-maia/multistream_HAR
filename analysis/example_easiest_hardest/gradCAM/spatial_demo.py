@@ -168,9 +168,9 @@ def main():
     print(len(test_list))
     print("Accuracy is: %4.4f" % (float(match_count)/len(test_list)))
 
-    npy_name = args.dataset+"_"+args.modality+"_"+args.architecture+"_s"+str(args.split)+".npy"
-    npy_path = os.path.join(output_path, npy_name)
-    np.save(npy_path, np.array(result_list))
+    #npy_name = args.dataset+"_"+args.modality+"_"+args.architecture+"_s"+str(args.split)+".npy"
+    #npy_path = os.path.join(output_path, npy_name)
+    #np.save(npy_path, np.array(result_list))
 
 if __name__ == "__main__":
     main()

@@ -24,6 +24,18 @@ import torchvision.models as models
 sys.path.insert(0, "../")
 import video_transforms
 
+sys.path.insert(0, "grad-cam-pytorch-master/")
+from grad_cam import GradCAM
+
+def save_gradcam(filename, gcam, raw_image, paper_cmap=False):
+    gcam = gcam.cpu().numpy()
+    cmap = cm.jet_r(gcam)[..., :3] * 255.0
+    if paper_cmap:
+        alpha = gcam[..., None]
+        gcam = alpha * cmap + (1 - alpha) * raw_image
+    else:
+        gcam = (cmap.astype(np.float) + raw_image.astype(np.float)) / 2
+    cv2.imwrite(filename, np.uint8(gcam))
 
 def VideoSpatialPrediction(
         mode,
@@ -37,6 +49,8 @@ def VideoSpatialPrediction(
         new_size = 299,
         ext = ".jpg"
         ):
+
+    gc = GradCAM(model=net)
 
     if num_frames == 0:
         imglist = os.listdir(vid_name)
@@ -119,8 +133,11 @@ def VideoSpatialPrediction(
         input_data = rgb_np[span,:,:,:]
         imgDataTensor = torch.from_numpy(input_data).type(torch.FloatTensor).cuda()
         imgDataVar = torch.autograd.Variable(imgDataTensor)
-        output = net(imgDataVar)
-        result = output.data.cpu().numpy()
-        prediction[:, span] = np.transpose(result)
+
+        probs, ids = gc.forward(imgDataVar)
+        ids_ = torch.LongTensor([[target]] * len(imgDataVar)).to(torch.device("cuda"))
+        gc.backward(ids=ids_)
+        regions = gc.generate(target_layer="Mixed_7c")
+        save_gradcam(vid_name.split("/")[-1]+".png", gcam=regions[0, 0], raw_image = rgb_1[:,:,:,0])
 
     return prediction
