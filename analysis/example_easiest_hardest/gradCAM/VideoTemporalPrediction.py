@@ -121,20 +121,18 @@ def VideoTemporalPrediction(
         flow_list.append(np.expand_dims(cur_img_tensor.numpy(), 0))
         
     flow_np = np.concatenate(flow_list,axis=0)
-    batch_size = 15
     prediction = np.zeros((num_categories,flow.shape[3]))
-    num_batches = int(math.ceil(float(flow.shape[3])/batch_size))
 
-    print(flow_np.shape, flow.shape, flow_1.shape)
+    index = 50
+    input_data = flow_np[index:index+1,:,:,:]
+    imgDataTensor = torch.from_numpy(input_data).type(torch.FloatTensor).cuda()
+    imgDataVar = torch.autograd.Variable(imgDataTensor)
 
-    # for bb in range(num_batches):
-    #     span = range(batch_size*bb, min(flow.shape[3],batch_size*(bb+1)))
-
-    #     input_data = flow_np[span,:,:,:]
-    #     imgDataTensor = torch.from_numpy(input_data).type(torch.FloatTensor).cuda()
-    #     imgDataVar = torch.autograd.Variable(imgDataTensor)
-    #     output = net(imgDataVar)
-    #     result = output.data.cpu().numpy()
-    #     prediction[:, span] = np.transpose(result)
+    probs, ids = gc.forward(imgDataVar)
+    ids_ = torch.LongTensor([[target]] * len(imgDataVar)).to(torch.device("cuda"))
+    gc.backward(ids=ids_)
+    regions = gc.generate(target_layer="Mixed_7c")
+    print(regions.shape)
+    #save_gradcam(vid_name.split("/")[-1]+".png", gcam=regions[0, 0], raw_image = rgb[:,:,:,index])
 
     return prediction
