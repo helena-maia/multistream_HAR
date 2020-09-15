@@ -128,10 +128,8 @@ def VideoSpatialPrediction(
     rgb_np = np.concatenate(rgb_list,axis=0)
     prediction = np.zeros((num_categories,rgb.shape[3]))
 
-    index = 10
-    index2 = index*10
-    print(rgb_1.shape, rgb_np.shape)
-    input_data = rgb_np[index2:index2+1,:,:,:]
+    index = 50
+    input_data = rgb_np[index:index+1,:,:,:]
     imgDataTensor = torch.from_numpy(input_data).type(torch.FloatTensor).cuda()
     imgDataVar = torch.autograd.Variable(imgDataTensor)
 
@@ -139,6 +137,6 @@ def VideoSpatialPrediction(
     ids_ = torch.LongTensor([[target]] * len(imgDataVar)).to(torch.device("cuda"))
     gc.backward(ids=ids_)
     regions = gc.generate(target_layer="Mixed_7c")
-    save_gradcam(vid_name.split("/")[-1]+".png", gcam=regions[0, 0], raw_image = rgb_1[:,:,:,index])
+    save_gradcam(vid_name.split("/")[-1]+".png", gcam=regions[0, 0], raw_image = rgb[:,:,:,index])
 
     return prediction
