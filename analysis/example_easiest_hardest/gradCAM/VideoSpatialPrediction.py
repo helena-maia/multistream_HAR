@@ -26,6 +26,7 @@ import video_transforms
 
 sys.path.insert(0, "grad-cam-pytorch-master/")
 from grad_cam import GradCAM
+import matplotlib.cm as cm
 
 def save_gradcam(filename, gcam, raw_image, paper_cmap=False):
     gcam = gcam.cpu().numpy()
@@ -35,11 +36,13 @@ def save_gradcam(filename, gcam, raw_image, paper_cmap=False):
         gcam = alpha * cmap + (1 - alpha) * raw_image
     else:
         gcam = (cmap.astype(np.float) + raw_image.astype(np.float)) / 2
+    cv2.imwrite("img_"+filename, raw_image)
     cv2.imwrite(filename, np.uint8(gcam))
 
 def VideoSpatialPrediction(
         mode,
         vid_name,
+        target,
         net,
         num_categories,
         start_frame=0,
@@ -81,7 +84,7 @@ def VideoSpatialPrediction(
     dims = (width,height,deep,num_samples)
     rgb = np.zeros(shape=dims, dtype=np.float64)
     rgb_flip = np.zeros(shape=dims, dtype=np.float64)
-   
+
     for i in range(num_samples):
         if mode == 'rhythm':
             img_file = os.path.join(vid_name, 'visual_rhythm_{0:05d}{1}'.format(index, ext))
@@ -89,8 +92,8 @@ def VideoSpatialPrediction(
             img = cv2.imread(img_file, cv2.IMREAD_GRAYSCALE)   
             img = cv2.resize(img, dims[1::-1])
             rgb[:,:,0,i] = img
-            rgb_flip[:,:,0,i] = img[:,::-1]    
-        else:        
+            rgb_flip[:,:,0,i] = img[:,::-1]
+        else:
             img_file = os.path.join(vid_name, 'img_{0:05d}{1}'.format(i*step+1, ext))
             img = cv2.imread(img_file, cv2.IMREAD_UNCHANGED)
             img = cv2.resize(img, dims[1::-1])
@@ -121,23 +124,21 @@ def VideoSpatialPrediction(
         cur_img = rgb[:,:,:,c_index]
         cur_img_tensor = test_transform(cur_img)
         rgb_list.append(np.expand_dims(cur_img_tensor.numpy(), 0))
-        
+
     rgb_np = np.concatenate(rgb_list,axis=0)
-    batch_size = 10
     prediction = np.zeros((num_categories,rgb.shape[3]))
-    num_batches = int(math.ceil(float(rgb.shape[3])/batch_size))
 
-    for bb in range(num_batches):
-        span = range(batch_size*bb, min(rgb.shape[3],batch_size*(bb+1)))
-        
-        input_data = rgb_np[span,:,:,:]
-        imgDataTensor = torch.from_numpy(input_data).type(torch.FloatTensor).cuda()
-        imgDataVar = torch.autograd.Variable(imgDataTensor)
+    index = 10
+    index2 = index*10
+    print(rgb_1.shape, rgb_np.shape)
+    input_data = rgb_np[index2:index2+1,:,:,:]
+    imgDataTensor = torch.from_numpy(input_data).type(torch.FloatTensor).cuda()
+    imgDataVar = torch.autograd.Variable(imgDataTensor)
 
-        probs, ids = gc.forward(imgDataVar)
-        ids_ = torch.LongTensor([[target]] * len(imgDataVar)).to(torch.device("cuda"))
-        gc.backward(ids=ids_)
-        regions = gc.generate(target_layer="Mixed_7c")
-        save_gradcam(vid_name.split("/")[-1]+".png", gcam=regions[0, 0], raw_image = rgb_1[:,:,:,0])
+    probs, ids = gc.forward(imgDataVar)
+    ids_ = torch.LongTensor([[target]] * len(imgDataVar)).to(torch.device("cuda"))
+    gc.backward(ids=ids_)
+    regions = gc.generate(target_layer="Mixed_7c")
+    save_gradcam(vid_name.split("/")[-1]+".png", gcam=regions[0, 0], raw_image = rgb_1[:,:,:,index])
 
     return prediction

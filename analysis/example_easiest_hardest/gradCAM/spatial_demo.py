@@ -145,6 +145,7 @@ def main():
         spatial_prediction = VideoSpatialPrediction(
                 args.modality,
                 clip_path,
+                input_video_label,
                 spatial_net,
                 num_categories,
                 start_frame,
