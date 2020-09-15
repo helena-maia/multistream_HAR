@@ -1,0 +1,12 @@
+v_PlayingGuitar_g01_c01 249 62
+v_Nunchucks_g01_c01 264 55
+v_Billiards_g01_c01 273 11
+v_PizzaTossing_g01_c03 132 57
+v_Billiards_g01_c01 273 11
+v_PlayingViolin_g01_c01 185 66
+v_VolleyballSpiking_g01_c02 209 96
+v_Nunchucks_g01_c01 264 55
+v_Billiards_g01_c01 273 11
+v_Nunchucks_g01_c04 229 55
+v_Billiards_g01_c01 273 11
+v_HandstandWalking_g01_c02 103 37

@@ -1,0 +1,2 @@
+v_PlayingGuitar_g01_c01 249 62
+v_Nunchucks_g01_c01 264 55
