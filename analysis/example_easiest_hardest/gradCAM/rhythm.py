@@ -122,6 +122,7 @@ def main():
         input_video_label = int(line_info[2])
         spatial_prediction = VideoSpatialPrediction(
                 clip_path,
+                input_video_label,
                 spatial_net,
                 num_categories,
                 num_samples,

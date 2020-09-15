@@ -24,15 +24,32 @@ import torchvision.models as models
 sys.path.insert(0, "../../")
 import video_transforms
 
+sys.path.insert(0, "grad-cam-pytorch-master/")
+from grad_cam import GradCAM
+import matplotlib.cm as cm
+
+def save_gradcam(filename, gcam, raw_image, paper_cmap=False):
+    gcam = gcam.cpu().numpy()
+    cmap = cm.jet_r(gcam)[..., :3] * 255.0
+    if paper_cmap:
+        alpha = gcam[..., None]
+        gcam = alpha * cmap + (1 - alpha) * raw_image
+    else:
+        gcam = (cmap.astype(np.float) + raw_image.astype(np.float)) / 2
+    cv2.imwrite("img_"+filename, raw_image)
+    cv2.imwrite(filename, np.uint8(gcam))
 
 def VideoSpatialPrediction(
         vid_name,
+        target,
         net,
         num_categories,
         num_samples=25,
         new_size = 299,
         batch_size = 2
         ):
+
+    gc = GradCAM(model=net)
 
     clip_mean = [0.5]*num_samples
     clip_std = [0.226]*num_samples
@@ -65,17 +82,17 @@ def VideoSpatialPrediction(
         rgb_list.append(np.expand_dims(cur_img_tensor.numpy(), 0))
         
     rgb_np = np.concatenate(rgb_list,axis=0)
-
     prediction = np.zeros((num_categories,rgb.shape[3]))
-    num_batches = int(math.ceil(float(rgb.shape[3])/batch_size))
 
-    for bb in range(num_batches):
-        span = range(batch_size*bb, min(rgb.shape[3],batch_size*(bb+1)))
-        input_data = rgb_np[span,:,:,:]
-        imgDataTensor = torch.from_numpy(input_data).type(torch.FloatTensor).cuda()
-        imgDataVar = torch.autograd.Variable(imgDataTensor)
-        output = net(imgDataVar)
-        result = output.data.cpu().numpy()
-        prediction[:, span] = np.transpose(result)
+    index = 50
+    input_data = rgb_np[index:index+1,:,:,:]
+    imgDataTensor = torch.from_numpy(input_data).type(torch.FloatTensor).cuda()
+    imgDataVar = torch.autograd.Variable(imgDataTensor)
+
+    probs, ids = gc.forward(imgDataVar)
+    ids_ = torch.LongTensor([[target]] * len(imgDataVar)).to(torch.device("cuda"))
+    gc.backward(ids=ids_)
+    regions = gc.generate(target_layer="Mixed_7c")
+    save_gradcam(vid_name.split("/")[-1]+".png", gcam=regions[0, 0], raw_image = rgb[:,:,:,index])
 
     return prediction

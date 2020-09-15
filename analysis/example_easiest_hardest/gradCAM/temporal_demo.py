@@ -124,6 +124,7 @@ def main():
         temporal_prediction = VideoTemporalPrediction(
                 args.modality,
                 clip_path,
+                input_video_label,
                 temporal_net,
                 num_categories,
                 start_frame,
