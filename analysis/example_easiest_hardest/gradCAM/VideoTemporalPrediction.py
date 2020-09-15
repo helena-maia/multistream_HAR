@@ -125,6 +125,9 @@ def VideoTemporalPrediction(
 
     index = 50
     input_data = flow_np[index:index+1,:,:,:]
+    raw_image_x = flow[:,:,[0,2,4,6,8],index]
+    raw_image_y = flow[:,:,[1,3,5,7,9],index]
+    print(raw_image_x.shape, raw_image_y.shape)
     imgDataTensor = torch.from_numpy(input_data).type(torch.FloatTensor).cuda()
     imgDataVar = torch.autograd.Variable(imgDataTensor)
 
