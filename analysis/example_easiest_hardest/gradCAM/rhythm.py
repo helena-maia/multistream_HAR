@@ -19,9 +19,9 @@ import torch.utils.data
 import torchvision.transforms as transforms
 import torchvision.datasets as datasets
 
-sys.path.insert(0, "../")
+sys.path.insert(0, "../../../AVR_earlystop")
 import models
-from VideoSpatialPrediction import VideoSpatialPrediction_LVR
+from VideoSpatialPrediction_LVR import VideoSpatialPrediction
 
 os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"   
 os.environ["CUDA_VISIBLE_DEVICES"]="0"

@@ -20,7 +20,7 @@ import torch.utils.data
 import torchvision.transforms as transforms
 import torchvision.datasets as datasets
 
-sys.path.insert(0, "../")
+sys.path.insert(0, "../../../AVR_earlystop")
 import models
 from VideoTemporalPrediction import VideoTemporalPrediction
 
