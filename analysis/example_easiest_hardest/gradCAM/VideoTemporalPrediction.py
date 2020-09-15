@@ -132,7 +132,7 @@ def VideoTemporalPrediction(
     ids_ = torch.LongTensor([[target]] * len(imgDataVar)).to(torch.device("cuda"))
     gc.backward(ids=ids_)
     regions = gc.generate(target_layer="Mixed_7c")
-    save_gradcam(vid_name.split("/")[-1]+"_x.png", gcam=regions[0, 0], raw_image = rgb[:,:,4:5,index])
-    save_gradcam(vid_name.split("/")[-1]+"_y.png", gcam=regions[0, 0], raw_image = rgb[:,:,5:6,index])
+    save_gradcam(vid_name.split("/")[-1]+"_x.png", gcam=regions[0, 0], raw_image = flow[:,:,4:5,index])
+    save_gradcam(vid_name.split("/")[-1]+"_y.png", gcam=regions[0, 0], raw_image = flow[:,:,5:6,index])
 
     return prediction
